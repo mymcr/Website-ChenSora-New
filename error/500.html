@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <!-- Ganti judul sesuai dengan kode error -->
+    <title>500 - Error Internal Server</title>
+    <meta name="description" content="Oops! Terjadi kesalahan pada halaman ini. Silakan kembali ke halaman utama.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for animations and background */
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            /* Mencegah scrollbar muncul karena awan bergerak */
+        }
+        
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.9;
+            filter: blur(2px);
+            animation: move-cloud linear infinite;
+        }
+        
+        .cloud:before,
+        .cloud:after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .cloud-1 {
+            width: 150px;
+            height: 45px;
+            top: 10%;
+            animation-duration: 45s;
+        }
+        
+        .cloud-1:before {
+            width: 75px;
+            height: 75px;
+            top: -30px;
+            left: 20px;
+        }
+        
+        .cloud-1:after {
+            width: 90px;
+            height: 90px;
+            top: -45px;
+            right: 15px;
+        }
+        
+        .cloud-2 {
+            width: 100px;
+            height: 30px;
+            top: 25%;
+            animation-duration: 60s;
+            animation-delay: -10s;
+        }
+        
+        .cloud-2:before {
+            width: 50px;
+            height: 50px;
+            top: -20px;
+            left: 10px;
+        }
+        
+        .cloud-2:after {
+            width: 60px;
+            height: 60px;
+            top: -30px;
+            right: 10px;
+        }
+        
+        .cloud-3 {
+            width: 200px;
+            height: 60px;
+            top: 70%;
+            animation-duration: 35s;
+            animation-delay: -25s;
+        }
+        
+        .cloud-3:before {
+            width: 100px;
+            height: 100px;
+            top: -40px;
+            left: 30px;
+        }
+        
+        .cloud-3:after {
+            width: 120px;
+            height: 120px;
+            top: -60px;
+            right: 20px;
+        }
+        
+        @keyframes move-cloud {
+            0% {
+                transform: translateX(-250px);
+            }
+            100% {
+                transform: translateX(100vw);
+            }
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-b from-sky-400 to-sky-600 text-white min-h-screen flex items-center justify-center p-4 relative">
+
+    <!-- Animated Clouds -->
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+
+    <!-- Main Content -->
+    <main class="text-center z-10">
+        <div class="bg-white/20 backdrop-blur-md p-8 sm:p-12 rounded-2xl shadow-2xl border border-white/30">
+
+            <!-- ================================================================== -->
+            <!-- GANTI KONTEN DI BAWAH INI SESUAI DENGAN KODE ERROR ANDA -->
+            <!-- ================================================================== -->
+
+
+            <h1 class="text-8xl sm:text-9xl font-black text-white drop-shadow-lg float-animation">500</h1>
+            <h2 class="text-2xl sm:text-4xl font-bold mt-4">Error Internal Server</h2>
+            <p class="mt-4 max-w-md mx-auto text-sky-100">
+                Terjadi masalah di server kami. Tim kami sedang menanganinya.
+            </p>
+
+            <div class="mt-8">
+                <a href="https://home.chensora.co.id" class="inline-block bg-white text-sky-600 font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-sky-100 focus:outline-none focus:ring-4 focus:ring-sky-200 transition-all duration-300 transform hover:scale-105">
+                    Kembali ke Beranda
+                </a>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

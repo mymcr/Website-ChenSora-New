@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linktree Klon - Nama Anda</title>
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Lucide Icons for social media icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      /* Apply the Inter font to the whole page */
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-br from-sky-100 to-blue-200 min-h-screen flex items-center justify-center p-4"
+  >
+    <!-- Main Content Card -->
+    <div class="w-full max-w-md mx-auto">
+      <div
+        class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-8 text-center"
+      >
+        <!-- Profile Picture -->
+        <div class="flex justify-center -mt-20">
+          <img
+            src="https://placehold.co/128x128/38bdf8/ffffff?text=Foto"
+            alt="Foto Profil"
+            class="w-28 h-28 rounded-full border-4 border-white shadow-md object-cover"
+            onerror="this.onerror=null;this.src='https://placehold.co/128x128/e0e0e0/333333?text=Error';"
+          />
+        </div>
+
+        <!-- Profile Info -->
+        <div class="mt-4">
+          <h1 class="text-2xl font-bold text-gray-800">Nama Anda</h1>
+          <p class="text-sky-600 font-medium">@usernameanda</p>
+          <p class="text-gray-600 mt-2 text-sm max-w-xs mx-auto">
+            Ini adalah bio singkat Anda. Jelaskan siapa Anda atau apa yang Anda
+            lakukan dalam beberapa kata.
+          </p>
+        </div>
+
+        <!-- Links Section -->
+        <div class="mt-8 space-y-4">
+          <!-- Link 1 -->
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-sky-500 text-white font-semibold py-3 px-5 rounded-lg shadow-md hover:bg-sky-600 transition-all duration-300 transform hover:scale-105"
+          >
+            Website Pribadi
+          </a>
+
+          <!-- Link 2 -->
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-sky-500 text-white font-semibold py-3 px-5 rounded-lg shadow-md hover:bg-sky-600 transition-all duration-300 transform hover:scale-105"
+          >
+            Toko Online Saya
+          </a>
+
+          <!-- Link 3 -->
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-sky-500 text-white font-semibold py-3 px-5 rounded-lg shadow-md hover:bg-sky-600 transition-all duration-300 transform hover:scale-105"
+          >
+            Channel YouTube
+          </a>
+
+          <!-- Link 4 -->
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-sky-500 text-white font-semibold py-3 px-5 rounded-lg shadow-md hover:bg-sky-600 transition-all duration-300 transform hover:scale-105"
+          >
+            Portfolio Proyek
+          </a>
+
+          <!-- Link 5 -->
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-sky-500 text-white font-semibold py-3 px-5 rounded-lg shadow-md hover:bg-sky-600 transition-all duration-300 transform hover:scale-105"
+          >
+            Hubungi Saya di WhatsApp
+          </a>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div class="mt-8 flex justify-center space-x-6">
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-500 hover:text-sky-500 transition-colors duration-300"
+          >
+            <i data-lucide="twitter" class="w-6 h-6"></i>
+          </a>
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-500 hover:text-sky-500 transition-colors duration-300"
+          >
+            <i data-lucide="instagram" class="w-6 h-6"></i>
+          </a>
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-500 hover:text-sky-500 transition-colors duration-300"
+          >
+            <i data-lucide="github" class="w-6 h-6"></i>
+          </a>
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-500 hover:text-sky-500 transition-colors duration-300"
+          >
+            <i data-lucide="linkedin" class="w-6 h-6"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer Branding -->
+      <footer class="text-center mt-6">
+        <p class="text-xs text-gray-500">Dibuat dengan ❤️</p>
+      </footer>
+    </div>
+
+    <script>
+      // Initialize Lucide Icons
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

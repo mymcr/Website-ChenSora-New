@@ -1,0 +1,3289 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Chensora</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes slideOutRight {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+      .toast-in {
+        animation: slideInRight 0.5s forwards;
+      }
+      .toast-out {
+        animation: slideOutRight 0.5s forwards;
+      }
+      .sortable {
+        cursor: pointer;
+        position: relative;
+        padding-right: 1.5em;
+      }
+      .sortable::after {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        content: "\f0dc";
+        position: absolute;
+        right: 0.5em;
+        color: #cbd5e1;
+      }
+      .sortable.asc::after {
+        content: "\f0de";
+        color: #3b82f6;
+      }
+      .sortable.desc::after {
+        content: "\f0dd";
+        color: #3b82f6;
+      }
+      .pagination-btn {
+        min-width: 2.5rem; /* 40px */
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <div id="app-container">
+      <!-- Login Form Container -->
+      <div
+        id="login-container"
+        class="flex items-center justify-center min-h-screen px-4"
+      >
+        <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
+          <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-900">Dashboard Chensora</h1>
+            <p class="text-gray-500 mt-2">Silakan masuk untuk melanjutkan</p>
+          </div>
+          <form id="login-form">
+            <div class="mb-4">
+              <label
+                for="email"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                placeholder="contoh@email.com"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label
+                for="password"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Password</label
+              >
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <div class="flex items-center mb-6">
+              <input
+                id="show-password-checkbox"
+                type="checkbox"
+                class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <label
+                for="show-password-checkbox"
+                class="ml-2 block text-sm text-gray-700"
+                >Tampilkan Password</label
+              >
+            </div>
+            <div
+              id="error-message"
+              class="text-red-500 text-sm text-center mb-4 h-5"
+            ></div>
+            <button
+              id="login-button"
+              type="submit"
+              class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-md mt-2 flex items-center justify-center"
+            >
+              Masuk
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Dashboard View Container -->
+      <div id="dashboard-container" class="hidden">
+        <div class="relative min-h-screen md:flex">
+          <div
+            id="sidebar-overlay"
+            class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden md:hidden"
+          ></div>
+          <aside
+            id="sidebar"
+            class="bg-white text-gray-800 w-64 fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-200 ease-in-out z-30 flex flex-col shadow-lg"
+          >
+            <div
+              class="flex items-center justify-between p-6 text-center border-b"
+            >
+              <h2 class="text-2xl font-bold text-blue-900">Chensora</h2>
+              <button
+                id="close-sidebar-btn"
+                class="md:hidden text-gray-600 hover:text-gray-800"
+              >
+                <i class="fas fa-times text-xl"></i>
+              </button>
+            </div>
+            <nav class="mt-6 flex-1">
+              <a
+                href="#dashboard"
+                id="nav-dashboard"
+                class="nav-link flex items-center px-6 py-3 text-gray-700 bg-gray-200"
+              >
+                <i class="fas fa-tachometer-alt w-6 text-center"></i>
+                <span class="mx-3">Dashboard</span>
+              </a>
+              <a
+                href="#reseller"
+                id="nav-reseller"
+                class="nav-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-200"
+              >
+                <i class="fas fa-users w-6 text-center"></i>
+                <span class="mx-3">Reseller</span>
+              </a>
+              <a
+                href="#web-reseller"
+                id="nav-web-reseller"
+                class="nav-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-200"
+              >
+                <i class="fas fa-globe w-6 text-center"></i>
+                <span class="mx-3">Web-Reseller</span>
+              </a>
+              <a
+                href="#acara"
+                id="nav-acara"
+                class="nav-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-200"
+              >
+                <i class="fas fa-calendar-alt w-6 text-center"></i>
+                <span class="mx-3">Acara</span>
+              </a>
+              <a
+                href="#influencer"
+                id="nav-influencer"
+                class="nav-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-200"
+              >
+                <i class="fas fa-video w-6 text-center"></i>
+                <span class="mx-3">Video Influencer</span>
+              </a>
+              <a
+                href="#doctor"
+                id="nav-doctor"
+                class="nav-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-200"
+              >
+                <i class="fas fa-user-doctor w-6 text-center"></i>
+                <span class="mx-3">Video Dokter</span>
+              </a>
+              <a
+                href="#trash"
+                id="nav-trash"
+                class="nav-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-200"
+              >
+                <i class="fas fa-trash-alt w-6 text-center"></i>
+                <span class="mx-3">Sampah</span>
+              </a>
+            </nav>
+            <div class="p-6 border-t">
+              <button
+                id="logout-btn"
+                class="w-full flex items-center justify-center bg-red-500 text-white font-bold py-2 rounded-lg hover:bg-red-600 transition-colors duration-300"
+              >
+                <i class="fas fa-sign-out-alt w-5 mr-2"></i>
+                <span>Keluar</span>
+              </button>
+            </div>
+          </aside>
+          <main class="flex-1 flex flex-col overflow-hidden">
+            <div id="page-dashboard" class="page-content flex flex-col h-full">
+              <header
+                class="flex justify-between items-center p-6 bg-white border-b flex-shrink-0"
+              >
+                <div class="flex items-center">
+                  <button
+                    class="open-sidebar-btn text-gray-600 focus:outline-none md:hidden mr-4"
+                  >
+                    <i class="fas fa-bars text-xl"></i>
+                  </button>
+                  <h1 class="text-xl md:text-2xl font-semibold text-gray-800">
+                    Dashboard Utama
+                  </h1>
+                </div>
+              </header>
+              <main class="flex-1 p-4 md:p-6 overflow-y-auto">
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
+                >
+                  <!-- Card Total Reseller -->
+                  <div
+                    class="bg-white p-6 rounded-lg shadow-md flex items-center"
+                  >
+                    <div
+                      class="bg-blue-100 text-blue-600 rounded-full p-3 mr-4"
+                    >
+                      <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <div>
+                      <p class="text-sm text-gray-500">Total Reseller</p>
+                      <p
+                        id="total-resellers"
+                        class="text-2xl font-bold text-gray-800"
+                      >
+                        <i class="fas fa-spinner fa-spin"></i>
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Card Total Web Reseller -->
+                  <div
+                    class="bg-white p-6 rounded-lg shadow-md flex items-center"
+                  >
+                    <div
+                      class="bg-green-100 text-green-600 rounded-full p-3 mr-4"
+                    >
+                      <i class="fas fa-globe text-2xl"></i>
+                    </div>
+                    <div>
+                      <p class="text-sm text-gray-500">Total Web Reseller</p>
+                      <p
+                        id="total-web-resellers"
+                        class="text-2xl font-bold text-gray-800"
+                      >
+                        <i class="fas fa-spinner fa-spin"></i>
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Card Video Yorokobi -->
+                  <div
+                    class="bg-white p-6 rounded-lg shadow-md flex items-center"
+                  >
+                    <div
+                      class="bg-purple-100 text-purple-600 rounded-full p-3 mr-4"
+                    >
+                      <i class="fas fa-video text-2xl"></i>
+                    </div>
+                    <div>
+                      <p class="text-sm text-gray-500">Video Yorokobi</p>
+                      <p
+                        id="total-videos-yorokobi"
+                        class="text-2xl font-bold text-gray-800"
+                      >
+                        <i class="fas fa-spinner fa-spin"></i>
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Card Video Pyon Pyon -->
+                  <div
+                    class="bg-white p-6 rounded-lg shadow-md flex items-center"
+                  >
+                    <div
+                      class="bg-pink-100 text-pink-600 rounded-full p-3 mr-4"
+                    >
+                      <i class="fas fa-video text-2xl"></i>
+                    </div>
+                    <div>
+                      <p class="text-sm text-gray-500">Video Pyon Pyon</p>
+                      <p
+                        id="total-videos-pyonpyon"
+                        class="text-2xl font-bold text-gray-800"
+                      >
+                        <i class="fas fa-spinner fa-spin"></i>
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Card Video Kakkoi -->
+                  <div
+                    class="bg-white p-6 rounded-lg shadow-md flex items-center"
+                  >
+                    <div
+                      class="bg-yellow-100 text-yellow-600 rounded-full p-3 mr-4"
+                    >
+                      <i class="fas fa-video text-2xl"></i>
+                    </div>
+                    <div>
+                      <p class="text-sm text-gray-500">Video Kakkoi</p>
+                      <p
+                        id="total-videos-kakkoi"
+                        class="text-2xl font-bold text-gray-800"
+                      >
+                        <i class="fas fa-spinner fa-spin"></i>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Chart Container -->
+                <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+                  <h2 class="text-xl font-semibold text-gray-800 mb-4">
+                    Distribusi Reseller Berdasarkan Provinsi
+                  </h2>
+                  <div class="relative h-96">
+                    <canvas id="resellerChart"></canvas>
+                  </div>
+                </div>
+              </main>
+            </div>
+
+            <div id="page-reseller" class="page-content hidden flex-col h-full">
+              <header
+                class="flex justify-between items-center p-6 bg-white border-b flex-shrink-0"
+              >
+                <div class="flex items-center">
+                  <button
+                    class="open-sidebar-btn text-gray-600 focus:outline-none md:hidden mr-4"
+                  >
+                    <i class="fas fa-bars text-xl"></i>
+                  </button>
+                  <h1 class="text-xl md:text-2xl font-semibold text-gray-800">
+                    Manajemen Reseller
+                  </h1>
+                </div>
+              </header>
+              <main class="flex-1 p-4 md:p-6 overflow-y-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <div
+                    class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4"
+                  >
+                    <div class="relative w-full sm:w-auto flex-grow">
+                      <input
+                        type="text"
+                        id="search-reseller"
+                        class="w-full pl-10 pr-4 py-2 border rounded-lg"
+                        placeholder="Cari reseller..."
+                      />
+                      <i
+                        class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                      ></i>
+                    </div>
+                    <button
+                      id="add-reseller-btn"
+                      class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto flex-shrink-0"
+                    >
+                      Tambah Reseller
+                    </button>
+                  </div>
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                          <th
+                            scope="col"
+                            class="px-6 py-3 sortable"
+                            data-sort="nama"
+                          >
+                            Nama
+                          </th>
+                          <th
+                            scope="col"
+                            class="px-6 py-3 sortable"
+                            data-sort="provinsi"
+                          >
+                            Provinsi
+                          </th>
+                          <th
+                            scope="col"
+                            class="px-6 py-3 sortable"
+                            data-sort="kota"
+                          >
+                            Kota
+                          </th>
+                          <th scope="col" class="px-6 py-3">No. HP</th>
+                          <th scope="col" class="px-6 py-3 text-center">
+                            Aksi
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="reseller-list"></tbody>
+                    </table>
+                  </div>
+                  <div
+                    id="reseller-pagination"
+                    class="mt-4 flex justify-between items-center flex-wrap gap-2"
+                  ></div>
+                </div>
+              </main>
+            </div>
+
+            <!-- Reseller Detail Page -->
+            <div
+              id="page-reseller-detail"
+              class="page-content hidden flex-col h-full"
+            >
+              <header
+                class="flex justify-between items-center p-6 bg-white border-b flex-shrink-0"
+              >
+                <div class="flex items-center">
+                  <button
+                    id="back-to-resellers-btn"
+                    class="text-gray-600 hover:text-blue-600 mr-4"
+                  >
+                    <i class="fas fa-arrow-left text-xl"></i>
+                  </button>
+                  <h1
+                    id="reseller-detail-name"
+                    class="text-xl md:text-2xl font-semibold text-gray-800"
+                  >
+                    Detail Reseller
+                  </h1>
+                </div>
+              </header>
+              <main class="flex-1 p-4 md:p-6 overflow-y-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  <!-- Info Section -->
+                  <div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-md">
+                    <h2
+                      class="text-lg font-semibold text-gray-800 border-b pb-2 mb-4"
+                    >
+                      Informasi Kontak
+                    </h2>
+                    <div class="space-y-3">
+                      <div>
+                        <p class="text-sm text-gray-500">Provinsi</p>
+                        <p
+                          id="reseller-detail-provinsi"
+                          class="font-medium text-gray-800"
+                        ></p>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-500">Kota</p>
+                        <p
+                          id="reseller-detail-kota"
+                          class="font-medium text-gray-800"
+                        ></p>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-500">Nomor HP</p>
+                        <p
+                          id="reseller-detail-nomor"
+                          class="font-medium text-gray-800"
+                        ></p>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-500">Alamat</p>
+                        <p
+                          id="reseller-detail-alamat"
+                          class="font-medium text-gray-800 whitespace-pre-wrap"
+                        ></p>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-500">Link Gmaps</p>
+                        <a
+                          id="reseller-detail-gmaps-link"
+                          href="#"
+                          target="_blank"
+                          class="font-medium text-blue-600 hover:underline"
+                          >Lihat di Peta</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Map and Web Resellers -->
+                  <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                      <h2
+                        class="text-lg font-semibold text-gray-800 border-b pb-2 mb-4"
+                      >
+                        Lokasi Peta
+                      </h2>
+                      <div
+                        id="reseller-detail-map-container"
+                        class="aspect-video w-full rounded-lg overflow-hidden bg-gray-200 flex items-center justify-center"
+                      >
+                        <!-- iFrame will be injected here -->
+                        <p class="text-gray-500">Peta akan dimuat di sini...</p>
+                      </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                      <h2
+                        class="text-lg font-semibold text-gray-800 border-b pb-2 mb-4"
+                      >
+                        Web Reseller Terkait
+                      </h2>
+                      <div
+                        id="reseller-detail-weblist-container"
+                        class="overflow-x-auto"
+                      >
+                        <!-- Web reseller table will be injected here -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </main>
+            </div>
+
+            <div
+              id="page-web-reseller"
+              class="page-content hidden flex-col h-full"
+            >
+              <header
+                class="flex justify-between items-center p-6 bg-white border-b flex-shrink-0"
+              >
+                <div class="flex items-center">
+                  <button
+                    class="open-sidebar-btn text-gray-600 focus:outline-none md:hidden mr-4"
+                  >
+                    <i class="fas fa-bars text-xl"></i>
+                  </button>
+                  <h1 class="text-xl md:text-2xl font-semibold text-gray-800">
+                    Manajemen Web-Reseller
+                  </h1>
+                </div>
+              </header>
+              <main class="flex-1 p-4 md:p-6 overflow-y-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <div
+                    class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4"
+                  >
+                    <div class="relative w-full sm:w-auto flex-grow">
+                      <input
+                        type="text"
+                        id="search-web-reseller"
+                        class="w-full pl-10 pr-4 py-2 border rounded-lg"
+                        placeholder="Cari domain..."
+                      />
+                      <i
+                        class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                      ></i>
+                    </div>
+                    <button
+                      id="add-web-reseller-btn"
+                      class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto flex-shrink-0"
+                    >
+                      Tambah Web-Reseller
+                    </button>
+                  </div>
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                          <th scope="col" class="px-6 py-3">Domain</th>
+                          <th scope="col" class="px-6 py-3">Nomor HP</th>
+                          <th scope="col" class="px-6 py-3">Produk</th>
+                          <th scope="col" class="px-6 py-3 text-center">
+                            Aksi
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="web-reseller-list"></tbody>
+                    </table>
+                  </div>
+                  <div
+                    id="web-reseller-pagination"
+                    class="mt-4 flex justify-between items-center flex-wrap gap-2"
+                  ></div>
+                </div>
+              </main>
+            </div>
+
+            <div id="page-acara" class="page-content hidden flex-col h-full">
+              <header
+                class="flex justify-between items-center p-6 bg-white border-b flex-shrink-0"
+              >
+                <div class="flex items-center">
+                  <button
+                    class="open-sidebar-btn text-gray-600 focus:outline-none md:hidden mr-4"
+                  >
+                    <i class="fas fa-bars text-xl"></i>
+                  </button>
+                  <h1 class="text-xl md:text-2xl font-semibold text-gray-800">
+                    Manajemen Acara
+                  </h1>
+                </div>
+              </header>
+              <main class="flex-1 p-4 md:p-6 overflow-y-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <div
+                    class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4"
+                  >
+                    <div class="relative w-full sm:w-auto flex-grow">
+                      <input
+                        type="text"
+                        id="search-acara"
+                        class="w-full pl-10 pr-4 py-2 border rounded-lg"
+                        placeholder="Cari judul acara..."
+                      />
+                      <i
+                        class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                      ></i>
+                    </div>
+                    <button
+                      id="add-acara-btn"
+                      class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto flex-shrink-0"
+                    >
+                      Tambah Acara
+                    </button>
+                  </div>
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                          <th scope="col" class="px-6 py-3">Waktu</th>
+                          <th scope="col" class="px-6 py-3">Judul Acara</th>
+                          <th scope="col" class="px-6 py-3">Tanggal</th>
+                          <th scope="col" class="px-6 py-3">Lokasi</th>
+                          <th scope="col" class="px-6 py-3 text-center">
+                            Aksi
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="acara-list"></tbody>
+                    </table>
+                  </div>
+                  <div
+                    id="acara-pagination"
+                    class="mt-4 flex justify-between items-center flex-wrap gap-2"
+                  ></div>
+                </div>
+              </main>
+            </div>
+
+            <div
+              id="page-influencer"
+              class="page-content hidden flex-col h-full"
+            >
+              <header
+                class="flex justify-between items-center p-6 bg-white border-b flex-shrink-0"
+              >
+                <div class="flex items-center">
+                  <button
+                    class="open-sidebar-btn text-gray-600 focus:outline-none md:hidden mr-4"
+                  >
+                    <i class="fas fa-bars text-xl"></i>
+                  </button>
+                  <h1 class="text-xl md:text-2xl font-semibold text-gray-800">
+                    Manajemen Video Influencer
+                  </h1>
+                </div>
+              </header>
+              <main class="flex-1 p-4 md:p-6 overflow-y-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <div class="border-b border-gray-200 mb-4">
+                    <nav
+                      class="-mb-px flex space-x-4 sm:space-x-8 overflow-x-auto no-scrollbar"
+                      id="influencer-product-tabs"
+                    >
+                      <button
+                        data-product="yorokobi"
+                        class="influencer-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-blue-500 text-blue-600"
+                      >
+                        Yorokobi
+                      </button>
+                      <button
+                        data-product="pyonpyon"
+                        class="influencer-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      >
+                        Pyon Pyon
+                      </button>
+                      <button
+                        data-product="kakkoi"
+                        class="influencer-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      >
+                        Kakkoi
+                      </button>
+                    </nav>
+                  </div>
+                  <div
+                    class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4"
+                  >
+                    <div class="relative w-full sm:w-auto flex-grow">
+                      <input
+                        type="text"
+                        id="search-influencer"
+                        class="w-full pl-10 pr-4 py-2 border rounded-lg"
+                        placeholder="Cari judul video..."
+                      />
+                      <i
+                        class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                      ></i>
+                    </div>
+                    <button
+                      id="add-influencer-btn"
+                      class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto flex-shrink-0"
+                    >
+                      Tambah Video
+                    </button>
+                  </div>
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                          <th scope="col" class="px-6 py-3">Judul Video</th>
+                          <th scope="col" class="px-6 py-3">Video ID</th>
+                          <th scope="col" class="px-6 py-3 text-center">
+                            Aksi
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="influencer-list"></tbody>
+                    </table>
+                  </div>
+                  <div
+                    id="influencer-pagination"
+                    class="mt-4 flex justify-between items-center flex-wrap gap-2"
+                  ></div>
+                </div>
+              </main>
+            </div>
+
+            <div id="page-doctor" class="page-content hidden flex-col h-full">
+              <header
+                class="flex justify-between items-center p-6 bg-white border-b flex-shrink-0"
+              >
+                <div class="flex items-center">
+                  <button
+                    class="open-sidebar-btn text-gray-600 focus:outline-none md:hidden mr-4"
+                  >
+                    <i class="fas fa-bars text-xl"></i>
+                  </button>
+                  <h1 class="text-xl md:text-2xl font-semibold text-gray-800">
+                    Manajemen Video Dokter
+                  </h1>
+                </div>
+              </header>
+              <main class="flex-1 p-4 md:p-6 overflow-y-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <div class="border-b border-gray-200 mb-4">
+                    <nav
+                      class="-mb-px flex space-x-4 sm:space-x-8 overflow-x-auto no-scrollbar"
+                      id="doctor-product-tabs"
+                    >
+                      <button
+                        data-product="yorokobi"
+                        class="doctor-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-blue-500 text-blue-600"
+                      >
+                        Yorokobi
+                      </button>
+                      <button
+                        data-product="pyonpyon"
+                        class="doctor-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      >
+                        Pyon Pyon
+                      </button>
+                      <button
+                        data-product="kakkoi"
+                        class="doctor-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      >
+                        Kakkoi
+                      </button>
+                    </nav>
+                  </div>
+                  <div
+                    class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4"
+                  >
+                    <div class="relative w-full sm:w-auto flex-grow">
+                      <input
+                        type="text"
+                        id="search-doctor"
+                        class="w-full pl-10 pr-4 py-2 border rounded-lg"
+                        placeholder="Cari judul atau author..."
+                      />
+                      <i
+                        class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                      ></i>
+                    </div>
+                    <button
+                      id="add-doctor-btn"
+                      class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto flex-shrink-0"
+                    >
+                      Tambah Video
+                    </button>
+                  </div>
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                          <th scope="col" class="px-6 py-3">Judul Video</th>
+                          <th scope="col" class="px-6 py-3">Author</th>
+                          <th scope="col" class="px-6 py-3">Video ID</th>
+                          <th scope="col" class="px-6 py-3 text-center">
+                            Aksi
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="doctor-list"></tbody>
+                    </table>
+                  </div>
+                  <div
+                    id="doctor-pagination"
+                    class="mt-4 flex justify-between items-center flex-wrap gap-2"
+                  ></div>
+                </div>
+              </main>
+            </div>
+
+            <div id="page-trash" class="page-content hidden flex-col h-full">
+              <header
+                class="flex justify-between items-center p-6 bg-white border-b flex-shrink-0"
+              >
+                <div class="flex items-center">
+                  <button
+                    class="open-sidebar-btn text-gray-600 focus:outline-none md:hidden mr-4"
+                  >
+                    <i class="fas fa-bars text-xl"></i>
+                  </button>
+                  <h1 class="text-xl md:text-2xl font-semibold text-gray-800">
+                    Sampah
+                  </h1>
+                </div>
+              </header>
+              <main class="flex-1 p-4 md:p-6 overflow-y-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <div class="border-b border-gray-200 mb-4">
+                    <nav
+                      class="-mb-px flex space-x-4 sm:space-x-8 overflow-x-auto no-scrollbar"
+                      id="trash-tabs"
+                    >
+                      <button
+                        data-type="reseller"
+                        class="trash-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-blue-500 text-blue-600"
+                      >
+                        Reseller
+                      </button>
+                      <button
+                        data-type="web-reseller"
+                        class="trash-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      >
+                        Web-Reseller
+                      </button>
+                      <button
+                        data-type="acara"
+                        class="trash-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      >
+                        Acara
+                      </button>
+                      <button
+                        data-type="influencer"
+                        class="trash-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      >
+                        Video Influencer
+                      </button>
+                      <button
+                        data-type="doctor"
+                        class="trash-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      >
+                        Video Dokter
+                      </button>
+                    </nav>
+                  </div>
+                  <div id="trash-content-container"></div>
+                  <div
+                    id="trash-pagination"
+                    class="mt-4 flex justify-between items-center flex-wrap gap-2"
+                  ></div>
+                </div>
+              </main>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+    <div
+      id="reseller-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-40"
+    >
+      <div
+        class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-full overflow-y-auto no-scrollbar"
+      >
+        <form id="reseller-form" class="p-6">
+          <input type="hidden" id="reseller-id" />
+          <h2
+            id="reseller-modal-title"
+            class="text-2xl font-bold text-gray-800 mb-6"
+          ></h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="nama" class="block text-sm font-medium text-gray-700"
+                >Nama</label
+              ><input
+                type="text"
+                id="nama"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label for="nomor" class="block text-sm font-medium text-gray-700"
+                >Nomor HP</label
+              ><input
+                type="tel"
+                id="nomor"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="provinsi"
+                class="block text-sm font-medium text-gray-700"
+                >Provinsi</label
+              ><input
+                type="text"
+                id="provinsi"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label for="kota" class="block text-sm font-medium text-gray-700"
+                >Kota</label
+              ><input
+                type="text"
+                id="kota"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div class="md:col-span-2">
+              <label
+                for="alamat"
+                class="block text-sm font-medium text-gray-700"
+                >Alamat Lengkap</label
+              ><textarea
+                id="alamat"
+                rows="3"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              ></textarea>
+            </div>
+            <div class="md:col-span-2">
+              <label for="gmaps" class="block text-sm font-medium text-gray-700"
+                >Link Google Maps (untuk tombol)</label
+              ><input
+                type="url"
+                id="gmaps"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                placeholder="https://maps.app.goo.gl/..."
+              />
+            </div>
+            <div class="md:col-span-2">
+              <label
+                for="gmaps_embed"
+                class="block text-sm font-medium text-gray-700"
+                >HTML Sematan Peta (untuk tampilan peta)</label
+              >
+              <textarea
+                id="gmaps_embed"
+                rows="4"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                placeholder='Contoh: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!..."></iframe>'
+              ></textarea>
+              <p class="mt-1 text-xs text-gray-500">
+                Buka Google Maps, klik 'Share', pilih 'Embed a map', dan salin
+                kode HTML ke sini.
+              </p>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end space-x-3">
+            <button
+              type="button"
+              id="cancel-reseller-btn"
+              class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              id="save-reseller-btn"
+              class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 flex items-center justify-center w-28"
+            >
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="web-reseller-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-40"
+    >
+      <div
+        class="bg-white rounded-lg shadow-xl w-full max-w-lg max-h-full overflow-y-auto no-scrollbar"
+      >
+        <form id="web-reseller-form" class="p-6">
+          <input type="hidden" id="web-reseller-id" />
+          <h2
+            id="web-reseller-modal-title"
+            class="text-2xl font-bold text-gray-800 mb-6"
+          ></h2>
+          <div class="space-y-4">
+            <div>
+              <label
+                for="web-reseller-domain"
+                class="block text-sm font-medium text-gray-700"
+                >Domain</label
+              ><input
+                type="text"
+                id="web-reseller-domain"
+                placeholder="contoh: agus (tanpa spasi, huruf kecil)"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="web-reseller-nomor"
+                class="block text-sm font-medium text-gray-700"
+                >Nomor HP</label
+              ><input
+                type="tel"
+                id="web-reseller-nomor"
+                placeholder="contoh: 628123456789"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700"
+                >Produk</label
+              >
+              <div id="web-reseller-products" class="mt-2 space-y-2">
+                <div class="flex items-center">
+                  <input
+                    id="product-yorokobi"
+                    name="products"
+                    type="checkbox"
+                    value="Yorokobi"
+                    class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  /><label
+                    for="product-yorokobi"
+                    class="ml-3 block text-sm text-gray-900"
+                    >Yorokobi</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    id="product-pyonpyon"
+                    name="products"
+                    type="checkbox"
+                    value="Pyon Pyon"
+                    class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  /><label
+                    for="product-pyonpyon"
+                    class="ml-3 block text-sm text-gray-900"
+                    >Pyon Pyon</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    id="product-kakkoi"
+                    name="products"
+                    type="checkbox"
+                    value="Kakkoi"
+                    class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  /><label
+                    for="product-kakkoi"
+                    class="ml-3 block text-sm text-gray-900"
+                    >Kakkoi</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end space-x-3">
+            <button
+              type="button"
+              id="cancel-web-reseller-btn"
+              class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              id="save-web-reseller-btn"
+              class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 flex items-center justify-center w-28"
+            >
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="influencer-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-40"
+    >
+      <div
+        class="bg-white rounded-lg shadow-xl w-full max-w-lg max-h-full overflow-y-auto no-scrollbar"
+      >
+        <form id="influencer-form" class="p-6">
+          <input type="hidden" id="influencer-id" />
+          <input type="hidden" id="influencer-product" />
+          <h2
+            id="influencer-modal-title"
+            class="text-2xl font-bold text-gray-800 mb-6"
+          ></h2>
+          <div class="space-y-4">
+            <div>
+              <label
+                for="influencer-title"
+                class="block text-sm font-medium text-gray-700"
+                >Judul Video</label
+              ><input
+                type="text"
+                id="influencer-title"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="influencer-link"
+                class="block text-sm font-medium text-gray-700"
+                >Link YouTube Shorts</label
+              >
+              <input
+                type="url"
+                id="influencer-link"
+                placeholder="https://youtube.com/shorts/..."
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+              <p class="mt-1 text-xs text-gray-500">
+                Sistem akan otomatis mengambil ID video.
+              </p>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end space-x-3">
+            <button
+              type="button"
+              id="cancel-influencer-btn"
+              class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              id="save-influencer-btn"
+              class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 flex items-center justify-center w-28"
+            >
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="doctor-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-40"
+    >
+      <div
+        class="bg-white rounded-lg shadow-xl w-full max-w-lg max-h-full overflow-y-auto no-scrollbar"
+      >
+        <form id="doctor-form" class="p-6">
+          <input type="hidden" id="doctor-id" />
+          <input type="hidden" id="doctor-product" />
+          <h2
+            id="doctor-modal-title"
+            class="text-2xl font-bold text-gray-800 mb-6"
+          ></h2>
+          <div class="space-y-4">
+            <div>
+              <label
+                for="doctor-title"
+                class="block text-sm font-medium text-gray-700"
+                >Judul Video</label
+              ><input
+                type="text"
+                id="doctor-title"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="doctor-author"
+                class="block text-sm font-medium text-gray-700"
+                >Author (Nama Dokter)</label
+              ><input
+                type="text"
+                id="doctor-author"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="doctor-link"
+                class="block text-sm font-medium text-gray-700"
+                >Link YouTube Shorts</label
+              >
+              <input
+                type="url"
+                id="doctor-link"
+                placeholder="https://youtube.com/shorts/..."
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+              <p class="mt-1 text-xs text-gray-500">
+                Sistem akan otomatis mengambil ID video.
+              </p>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end space-x-3">
+            <button
+              type="button"
+              id="cancel-doctor-btn"
+              class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              id="save-doctor-btn"
+              class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 flex items-center justify-center w-28"
+            >
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="acara-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50"
+    >
+      <div
+        class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-full overflow-y-auto no-scrollbar"
+      >
+        <form id="acara-form" class="p-6">
+          <input type="hidden" id="acara-id" />
+          <h2
+            id="acara-modal-title"
+            class="text-2xl font-bold text-gray-800 mb-6"
+          ></h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="md:col-span-2">
+              <label for="judul" class="block text-sm font-medium text-gray-700"
+                >Judul Acara</label
+              ><input
+                type="text"
+                id="judul"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="tanggal"
+                class="block text-sm font-medium text-gray-700"
+                >Tanggal</label
+              ><input
+                type="date"
+                id="tanggal"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label for="waktu" class="block text-sm font-medium text-gray-700"
+                >Waktu</label
+              ><input
+                type="time"
+                id="waktu"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div class="md:col-span-2">
+              <label
+                for="lokasi"
+                class="block text-sm font-medium text-gray-700"
+                >Lokasi Acara</label
+              ><input
+                type="text"
+                id="lokasi"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="harga_awal"
+                class="block text-sm font-medium text-gray-700"
+                >Harga Awal (Rp)</label
+              ><input
+                type="number"
+                id="harga_awal"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Contoh: 50000"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="harga_diskon"
+                class="block text-sm font-medium text-gray-700"
+                >Harga Diskon (Rp)</label
+              ><input
+                type="number"
+                id="harga_diskon"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Contoh: 35000"
+                required
+              />
+            </div>
+            <div class="md:col-span-2">
+              <label
+                for="poster_url"
+                class="block text-sm font-medium text-gray-700"
+                >Foto Poster</label
+              >
+              <input
+                type="file"
+                id="poster_url"
+                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                accept="image/*"
+              />
+              <img
+                id="poster-preview"
+                src=""
+                alt="Preview Poster"
+                class="mt-2 rounded-md max-h-48 hidden"
+              />
+              <p class="mt-1 text-xs text-gray-500">
+                Kosongkan jika tidak ingin mengubah poster.
+              </p>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end space-x-3">
+            <button
+              type="button"
+              id="cancel-acara-btn"
+              class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              id="save-acara-btn"
+              class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 flex items-center justify-center w-28"
+            >
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="delete-confirm-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50"
+    >
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+        <div class="p-6">
+          <div class="text-center">
+            <i
+              class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4"
+            ></i>
+            <h2
+              id="delete-modal-title"
+              class="text-2xl font-bold text-gray-800 mb-2"
+            ></h2>
+            <p id="delete-modal-text" class="text-gray-600"></p>
+          </div>
+        </div>
+        <div
+          class="bg-gray-100 px-6 py-4 flex justify-end space-x-3 rounded-b-lg"
+        >
+          <button
+            id="cancel-delete-btn"
+            class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300"
+          >
+            Batal
+          </button>
+          <button
+            id="confirm-delete-btn"
+            class="font-bold py-2 px-4 rounded-lg flex items-center justify-center w-48"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="toast"
+      class="fixed top-5 right-5 w-80 bg-green-500 text-white p-4 rounded-lg shadow-lg hidden z-50"
+    >
+      <div class="flex items-center">
+        <i id="toast-icon" class="fas fa-check-circle mr-3 text-xl"></i>
+        <p id="toast-message">Aksi berhasil!</p>
+      </div>
+    </div>
+
+    <!-- Loading Popup -->
+    <div
+      id="loading-popup"
+      class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-[60]"
+    >
+      <div
+        class="bg-white p-6 rounded-lg shadow-xl flex items-center space-x-4"
+      >
+        <i class="fas fa-spinner fa-spin text-blue-600 text-3xl"></i>
+        <span id="loading-popup-text" class="text-gray-800 text-lg"
+          >Memproses...</span
+        >
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const API_URL = "https://home.chensora.co.id/api.php";
+
+        // --- State Cache ---
+        let allResellers = [],
+          allWebResellers = [],
+          allInfluencerVideos = [],
+          allDoctorVideos = [],
+          allAcara = [],
+          allTrashItems = [];
+        let currentInfluencerProduct = "yorokobi",
+          currentDoctorProduct = "yorokobi",
+          currentTrashType = "reseller";
+
+        // --- Pagination & Chart State ---
+        const itemsPerPage = 10;
+        let paginationState = {
+          reseller: 1,
+          webReseller: 1,
+          acara: 1,
+          influencer: 1,
+          doctor: 1,
+          trash: 1,
+        };
+        let resellerChartInstance = null;
+
+        // --- DOM Elements ---
+        const loginContainer = document.getElementById("login-container");
+        const dashboardContainer = document.getElementById(
+          "dashboard-container"
+        );
+        const loginForm = document.getElementById("login-form");
+        const logoutBtn = document.getElementById("logout-btn");
+        const errorMessage = document.getElementById("error-message");
+        const passwordInput = document.getElementById("password");
+        const showPasswordCheckbox = document.getElementById(
+          "show-password-checkbox"
+        );
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("sidebar-overlay");
+        const closeSidebarBtn = document.getElementById("close-sidebar-btn");
+        const navLinks = document.querySelectorAll(".nav-link");
+        const pages = document.querySelectorAll(".page-content");
+
+        const resellerModal = document.getElementById("reseller-modal");
+        const resellerForm = document.getElementById("reseller-form");
+        const addResellerBtn = document.getElementById("add-reseller-btn");
+        const resellerListBody = document.getElementById("reseller-list");
+        const searchResellerInput = document.getElementById("search-reseller");
+        const backToResellersBtn = document.getElementById(
+          "back-to-resellers-btn"
+        );
+
+        const webResellerModal = document.getElementById("web-reseller-modal");
+        const webResellerForm = document.getElementById("web-reseller-form");
+        const addWebResellerBtn = document.getElementById(
+          "add-web-reseller-btn"
+        );
+        const webResellerListBody =
+          document.getElementById("web-reseller-list");
+        const searchWebResellerInput = document.getElementById(
+          "search-web-reseller"
+        );
+
+        const influencerModal = document.getElementById("influencer-modal");
+        const influencerForm = document.getElementById("influencer-form");
+        const addInfluencerBtn = document.getElementById("add-influencer-btn");
+        const influencerListBody = document.getElementById("influencer-list");
+        const influencerTabs = document.querySelectorAll(".influencer-tab");
+        const searchInfluencerInput =
+          document.getElementById("search-influencer");
+
+        const doctorModal = document.getElementById("doctor-modal");
+        const doctorForm = document.getElementById("doctor-form");
+        const addDoctorBtn = document.getElementById("add-doctor-btn");
+        const doctorListBody = document.getElementById("doctor-list");
+        const doctorTabs = document.querySelectorAll(".doctor-tab");
+        const searchDoctorInput = document.getElementById("search-doctor");
+
+        const acaraModal = document.getElementById("acara-modal");
+        const acaraForm = document.getElementById("acara-form");
+        const addAcaraBtn = document.getElementById("add-acara-btn");
+        const acaraListBody = document.getElementById("acara-list");
+        const searchAcaraInput = document.getElementById("search-acara");
+
+        const trashTabs = document.querySelectorAll(".trash-tab");
+        const trashContentContainer = document.getElementById(
+          "trash-content-container"
+        );
+
+        const deleteModal = document.getElementById("delete-confirm-modal");
+        const confirmDeleteBtn = document.getElementById("confirm-delete-btn");
+        const cancelDeleteBtn = document.getElementById("cancel-delete-btn");
+
+        let deleteAction = null;
+
+        const toast = document.getElementById("toast");
+        const toastMessage = document.getElementById("toast-message");
+        const toastIcon = document.getElementById("toast-icon");
+        let toastTimeout;
+
+        const loadingPopup = document.getElementById("loading-popup");
+        const loadingPopupText = document.getElementById("loading-popup-text");
+
+        // --- UI Helper Functions ---
+        function showLoadingPopup(message = "Memproses...") {
+          if (loadingPopup) {
+            loadingPopupText.textContent = message;
+            loadingPopup.classList.remove("hidden");
+          }
+        }
+
+        function hideLoadingPopup() {
+          if (loadingPopup) {
+            loadingPopup.classList.add("hidden");
+          }
+        }
+
+        function showToast(message, isError = false) {
+          clearTimeout(toastTimeout);
+          toastMessage.textContent = message;
+          toast.classList.remove(
+            "bg-green-500",
+            "bg-red-500",
+            "hidden",
+            "toast-out"
+          );
+          toastIcon.className = `fas mr-3 text-xl ${
+            isError ? "fa-exclamation-circle" : "fa-check-circle"
+          }`;
+          toast.classList.add(
+            isError ? "bg-red-500" : "bg-green-500",
+            "toast-in"
+          );
+          toastTimeout = setTimeout(() => {
+            toast.classList.replace("toast-in", "toast-out");
+            setTimeout(() => toast.classList.add("hidden"), 500);
+          }, 3000);
+        }
+        function showDeleteConfirmModal(config) {
+          document.getElementById("delete-modal-title").textContent =
+            config.title;
+          document.getElementById("delete-modal-text").textContent =
+            config.text;
+          confirmDeleteBtn.className =
+            "font-bold py-2 px-4 rounded-lg flex items-center justify-center w-48";
+          if (config.isPermanent) {
+            confirmDeleteBtn.classList.add(
+              "bg-gray-800",
+              "text-white",
+              "hover:bg-gray-900"
+            );
+            confirmDeleteBtn.textContent = "Ya, Hapus Permanen";
+          } else {
+            confirmDeleteBtn.classList.add(
+              "bg-red-600",
+              "text-white",
+              "hover:bg-red-700"
+            );
+            confirmDeleteBtn.textContent = "Ya, Hapus";
+          }
+          deleteAction = config.onConfirm;
+          deleteModal.classList.remove("hidden");
+        }
+        function formatDateForDisplay(isoString) {
+          if (!isoString) return "-";
+          const date = new Date(isoString);
+          return date.toLocaleDateString("id-ID", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          });
+        }
+        function formatDateForInput(isoString) {
+          if (!isoString) return "";
+          const date = new Date(isoString);
+          date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+          return date.toISOString().split("T")[0];
+        }
+        function formatSheetTime(timeValue) {
+          if (!timeValue) return { display: "-", input: "" };
+          const date = new Date(timeValue);
+          if (isNaN(date.getTime())) {
+            return { display: "-", input: "" };
+          }
+          const hours = String(date.getHours()).padStart(2, "0");
+          const minutes = String(date.getMinutes()).padStart(2, "0");
+          const formattedTime = `${hours}:${minutes}`;
+          return {
+            display: formattedTime,
+            input: formattedTime,
+          };
+        }
+
+        // --- Navigation & Sidebar Logic ---
+        function navigateTo(pageId) {
+          pages.forEach((page) => page.classList.add("hidden"));
+          const targetPage = document.getElementById(`page-${pageId}`);
+          if (targetPage) targetPage.classList.remove("hidden");
+
+          if (!pageId.includes("detail")) {
+            navLinks.forEach((link) => {
+              link.classList.remove("bg-gray-200");
+              if (link.id === `nav-${pageId}`)
+                link.classList.add("bg-gray-200");
+            });
+          }
+
+          if (pageId === "dashboard") initializeDashboardData();
+          if (pageId === "reseller") fetchAndDisplayResellers();
+          if (pageId === "web-reseller") fetchAndDisplayWebResellers();
+          if (pageId === "acara") fetchAndDisplayAcara();
+          if (pageId === "influencer")
+            handleInfluencerTabClick(
+              document.querySelector(".influencer-tab.border-blue-500")
+            );
+          if (pageId === "doctor")
+            handleDoctorTabClick(
+              document.querySelector(".doctor-tab.border-blue-500")
+            );
+          if (pageId === "trash") {
+            const activeTab = document.querySelector(
+              '.trash-tab[data-type="reseller"]'
+            );
+            handleTrashTabClick(activeTab);
+          }
+
+          if (window.innerWidth < 768) closeSidebar();
+        }
+        function openSidebar() {
+          sidebar.classList.remove("-translate-x-full");
+          overlay.classList.remove("hidden");
+        }
+        function closeSidebar() {
+          sidebar.classList.add("-translate-x-full");
+          overlay.classList.add("hidden");
+        }
+
+        // --- Authentication Logic ---
+        function handleSuccessfulLogin(userEmail) {
+          sessionStorage.setItem("loggedInUserEmail", userEmail);
+          loginContainer.classList.add("hidden");
+          dashboardContainer.classList.remove("hidden");
+          navigateTo("dashboard");
+        }
+        function handleLogout() {
+          sessionStorage.removeItem("loggedInUserEmail");
+          dashboardContainer.classList.add("hidden");
+          loginContainer.classList.remove("hidden");
+          allResellers = [];
+          allWebResellers = [];
+          allAcara = [];
+          allInfluencerVideos = [];
+          allDoctorVideos = [];
+          renderResellerTable([]);
+          renderWebResellerTable([]);
+          renderAcaraTable([]);
+          renderInfluencerTable([]);
+          renderDoctorTable([]);
+          renderTrashContent("reseller", []);
+        }
+        function checkLoginStatus() {
+          const userEmail = sessionStorage.getItem("loggedInUserEmail");
+          if (userEmail) {
+            handleSuccessfulLogin(userEmail);
+          } else {
+            loginContainer.classList.remove("hidden");
+            dashboardContainer.classList.add("hidden");
+          }
+        }
+
+        // --- Data Fetching & Rendering ---
+        async function initializeDashboardData() {
+          const elements = {
+            resellers: document.getElementById("total-resellers"),
+            webResellers: document.getElementById("total-web-resellers"),
+            yorokobi: document.getElementById("total-videos-yorokobi"),
+            pyonpyon: document.getElementById("total-videos-pyonpyon"),
+            kakkoi: document.getElementById("total-videos-kakkoi"),
+          };
+
+          if (!elements.resellers) return;
+
+          const loadingSpinner = `<i class="fas fa-spinner fa-spin"></i>`;
+          for (const key in elements) {
+            if (elements[key]) elements[key].innerHTML = loadingSpinner;
+          }
+
+          try {
+            const fetchData = async (action, params = {}) => {
+              const url = new URL(API_URL);
+              url.searchParams.append("action", action);
+              for (const key in params) {
+                url.searchParams.append(key, params[key]);
+              }
+              const response = await fetch(url);
+              if (!response.ok) return [];
+              const result = await response.json();
+              return result.status === "success" ? result.data : [];
+            };
+
+            const [
+              resellers,
+              webResellers,
+              influencerYorokobi,
+              influencerPyonpyon,
+              influencerKakkoi,
+              doctorYorokobi,
+              doctorPyonpyon,
+              doctorKakkoi,
+            ] = await Promise.all([
+              fetchData("getResellers"),
+              fetchData("getWebResellers"),
+              fetchData("getInfluencerVideos", { product: "yorokobi" }),
+              fetchData("getInfluencerVideos", { product: "pyonpyon" }),
+              fetchData("getInfluencerVideos", { product: "kakkoi" }),
+              fetchData("getDoctorVideos", { product: "yorokobi" }),
+              fetchData("getDoctorVideos", { product: "pyonpyon" }),
+              fetchData("getDoctorVideos", { product: "kakkoi" }),
+            ]);
+
+            if (elements.resellers)
+              elements.resellers.textContent = resellers.length;
+            if (elements.webResellers)
+              elements.webResellers.textContent = webResellers.length;
+            if (elements.yorokobi)
+              elements.yorokobi.textContent =
+                influencerYorokobi.length + doctorYorokobi.length;
+            if (elements.pyonpyon)
+              elements.pyonpyon.textContent =
+                influencerPyonpyon.length + doctorPyonpyon.length;
+            if (elements.kakkoi)
+              elements.kakkoi.textContent =
+                influencerKakkoi.length + doctorKakkoi.length;
+
+            // Chart Logic
+            const chartContainer =
+              document.querySelector("#resellerChart").parentElement;
+            chartContainer.innerHTML = '<canvas id="resellerChart"></canvas>'; // Reset canvas
+
+            if (resellers.length === 0) {
+              chartContainer.innerHTML = `<p class="text-center text-gray-500 py-16">Tidak ada data reseller untuk ditampilkan di grafik.</p>`;
+              return;
+            }
+
+            const resellerProvinces = resellers.reduce((acc, reseller) => {
+              const province = (reseller.provinsi || "Lainnya").trim();
+              acc[province] = (acc[province] || 0) + 1;
+              return acc;
+            }, {});
+
+            const sortedProvinces = Object.entries(resellerProvinces)
+              .sort(([, a], [, b]) => b - a)
+              .slice(0, 10);
+
+            const chartLabels = sortedProvinces.map((entry) => entry[0]);
+            const chartData = sortedProvinces.map((entry) => entry[1]);
+
+            const ctx = document.getElementById("resellerChart");
+            if (!ctx) return;
+
+            if (resellerChartInstance) {
+              resellerChartInstance.destroy();
+            }
+
+            resellerChartInstance = new Chart(ctx.getContext("2d"), {
+              type: "bar",
+              data: {
+                labels: chartLabels,
+                datasets: [
+                  {
+                    label: "Jumlah Reseller",
+                    data: chartData,
+                    backgroundColor: "rgba(59, 130, 246, 0.5)",
+                    borderColor: "rgba(59, 130, 246, 1)",
+                    borderWidth: 1,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      stepSize: 1,
+                    },
+                  },
+                },
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                  title: {
+                    display: true,
+                    text: "Top 10 Provinsi dengan Reseller Terbanyak",
+                  },
+                },
+              },
+            });
+          } catch (error) {
+            console.error("Failed to update dashboard stats:", error);
+            for (const key in elements) {
+              if (elements[key]) elements[key].textContent = "Error";
+            }
+            showToast("Gagal memuat statistik dashboard.", true);
+          }
+        }
+
+        function renderPagination(
+          containerId,
+          totalItems,
+          currentPage,
+          onPageClick
+        ) {
+          const paginationContainer = document.getElementById(containerId);
+          if (!paginationContainer) return;
+          paginationContainer.innerHTML = "";
+          const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+          if (totalPages <= 1) return;
+
+          const startItem = (currentPage - 1) * itemsPerPage + 1;
+          const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+
+          const infoEl = document.createElement("span");
+          infoEl.className = "text-sm text-gray-700";
+          infoEl.textContent = `Menampilkan ${startItem}-${endItem} dari ${totalItems} data`;
+          paginationContainer.appendChild(infoEl);
+
+          const buttonsContainer = document.createElement("div");
+          buttonsContainer.className = "flex items-center space-x-1";
+
+          const prevButton = document.createElement("button");
+          prevButton.innerHTML = `<i class="fas fa-chevron-left"></i>`;
+          prevButton.className =
+            "px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed";
+          prevButton.disabled = currentPage === 1;
+          prevButton.onclick = () => onPageClick(currentPage - 1);
+          buttonsContainer.appendChild(prevButton);
+
+          for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement("button");
+            pageButton.textContent = i;
+            pageButton.className =
+              "pagination-btn px-3 py-2 text-sm font-medium border border-gray-300 rounded-md ";
+            if (i === currentPage) {
+              pageButton.classList.add(
+                "bg-blue-500",
+                "text-white",
+                "border-blue-500"
+              );
+            } else {
+              pageButton.classList.add(
+                "bg-white",
+                "text-gray-700",
+                "hover:bg-gray-100"
+              );
+            }
+            pageButton.onclick = () => onPageClick(i);
+            buttonsContainer.appendChild(pageButton);
+          }
+
+          const nextButton = document.createElement("button");
+          nextButton.innerHTML = `<i class="fas fa-chevron-right"></i>`;
+          nextButton.className =
+            "px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed";
+          nextButton.disabled = currentPage === totalPages;
+          nextButton.onclick = () => onPageClick(currentPage + 1);
+          buttonsContainer.appendChild(nextButton);
+
+          paginationContainer.appendChild(buttonsContainer);
+        }
+
+        async function fetchAndDisplayResellers() {
+          renderResellerTable(null);
+          try {
+            const url = new URL(API_URL);
+            url.searchParams.append("action", "getResellers");
+            const response = await fetch(url);
+
+            if (!response.ok) {
+              throw new Error(`Network error: ${response.statusText}`);
+            }
+
+            const responseClone = response.clone();
+
+            try {
+              const result = await response.json();
+              if (result.status === "success") {
+                allResellers = result.data;
+                renderResellerTable(allResellers);
+              } else {
+                throw new Error(result.message);
+              }
+            } catch (jsonError) {
+              console.error("Gagal mem-parsing JSON dari server:", jsonError);
+              const rawText = await responseClone.text();
+              console.error(
+                "Respons mentah dari server (kemungkinan rusak karena data yang tidak di-escape):",
+                rawText
+              );
+              throw new Error(
+                "Server memberikan respons yang tidak valid. Periksa konsol untuk detail."
+              );
+            }
+          } catch (error) {
+            showToast(`Gagal memuat data reseller: ${error.message}`, true);
+            renderResellerTable([]);
+          }
+        }
+
+        function renderResellerTable(resellers) {
+          const listBody = resellerListBody;
+          listBody.innerHTML = "";
+          if (resellers === null) {
+            listBody.innerHTML = `<tr><td colspan="5" class="text-center p-4"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat data...</td></tr>`;
+            return;
+          }
+          const searchTerm = searchResellerInput.value.toLowerCase();
+          const filteredData = resellers.filter(
+            (r) =>
+              r.nama.toLowerCase().includes(searchTerm) ||
+              (r.kota && r.kota.toLowerCase().includes(searchTerm)) ||
+              (r.provinsi && r.provinsi.toLowerCase().includes(searchTerm))
+          );
+
+          if (filteredData.length === 0) {
+            listBody.innerHTML = `<tr><td colspan="5" class="text-center p-4">Tidak ada data yang cocok.</td></tr>`;
+            document.getElementById("reseller-pagination").innerHTML = "";
+            return;
+          }
+
+          const currentPage = paginationState.reseller;
+          const start = (currentPage - 1) * itemsPerPage;
+          const end = start + itemsPerPage;
+          const paginatedData = filteredData.slice(start, end);
+
+          paginatedData.forEach((item) => {
+            const row = document.createElement("tr");
+            row.className = "bg-white border-b hover:bg-gray-50";
+            row.innerHTML = `
+                        <td class="px-6 py-4 font-medium text-gray-900">
+                            <button class="text-blue-600 hover:underline view-reseller-detail-btn" data-id="${
+                              item.id
+                            }">${item.nama || "-"}</button>
+                        </td>
+                        <td class="px-6 py-4">${item.provinsi || "-"}</td>
+                        <td class="px-6 py-4">${item.kota || "-"}</td> 
+                        <td class="px-6 py-4">${item.nomor || "-"}</td>
+                        <td class="px-6 py-4 text-center">
+                            <div class="flex justify-center items-center space-x-2">
+                                <button class="py-1 px-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-xs edit-btn" data-type="reseller" data-id="${
+                                  item.id
+                                }">Edit</button>
+                                <button class="py-1 px-3 bg-red-500 text-white rounded-md hover:bg-red-600 text-xs delete-btn" data-type="reseller" data-id="${
+                                  item.id
+                                }">Hapus</button>
+                            </div>
+                        </td>`;
+            listBody.appendChild(row);
+          });
+          renderPagination(
+            "reseller-pagination",
+            filteredData.length,
+            currentPage,
+            (page) => {
+              paginationState.reseller = page;
+              renderResellerTable(resellers);
+            }
+          );
+        }
+
+        function showResellerDetail(resellerId) {
+          const reseller = allResellers.find((r) => r.id == resellerId);
+          if (!reseller) {
+            showToast("Data reseller tidak ditemukan.", true);
+            return;
+          }
+
+          // Populate detail fields
+          document.getElementById("reseller-detail-name").textContent =
+            reseller.nama;
+          document.getElementById("reseller-detail-provinsi").textContent =
+            reseller.provinsi || "-";
+          document.getElementById("reseller-detail-kota").textContent =
+            reseller.kota || "-";
+          document.getElementById("reseller-detail-nomor").textContent =
+            reseller.nomor || "-";
+          document.getElementById("reseller-detail-alamat").textContent =
+            reseller.alamat || "-";
+
+          const gmapsLinkEl = document.getElementById(
+            "reseller-detail-gmaps-link"
+          );
+          gmapsLinkEl.href = reseller.gmaps || "#";
+          if (!reseller.gmaps) {
+            gmapsLinkEl.classList.add("hidden");
+          } else {
+            gmapsLinkEl.classList.remove("hidden");
+          }
+
+          // Handle Gmaps embed
+          const mapContainer = document.getElementById(
+            "reseller-detail-map-container"
+          );
+          if (
+            reseller.gmaps_embed &&
+            reseller.gmaps_embed.trim().startsWith("<iframe")
+          ) {
+            mapContainer.innerHTML = reseller.gmaps_embed;
+            const iframe = mapContainer.querySelector("iframe");
+            if (iframe) {
+              iframe.className = "w-full h-full border-0";
+              iframe.removeAttribute("width");
+              iframe.removeAttribute("height");
+              iframe.loading = "lazy";
+            }
+          } else {
+            mapContainer.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-gray-200"><p class="text-gray-500">Tidak ada data peta untuk ditampilkan.</p></div>`;
+          }
+
+          // Find and display associated web resellers
+          const associatedWebResellers = allWebResellers.filter(
+            (wr) => wr.nomor === reseller.nomor
+          );
+          const webListContainer = document.getElementById(
+            "reseller-detail-weblist-container"
+          );
+          if (associatedWebResellers.length > 0) {
+            let table = `<table class="w-full text-sm text-left text-gray-500">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">Domain</th>
+                                        <th scope="col" class="px-6 py-3">Produk</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
+            associatedWebResellers.forEach((wr) => {
+              table += `<tr class="bg-white border-b">
+                                <td class="px-6 py-4 font-medium text-gray-900">${wr.domain}</td>
+                                <td class="px-6 py-4">${wr.products}</td>
+                              </tr>`;
+            });
+            table += `</tbody></table>`;
+            webListContainer.innerHTML = table;
+          } else {
+            webListContainer.innerHTML = `<p class="text-center text-gray-500 py-4">Tidak ada web reseller yang terhubung.</p>`;
+          }
+
+          navigateTo("reseller-detail");
+        }
+
+        async function fetchAndDisplayWebResellers() {
+          renderWebResellerTable(null);
+          try {
+            const url = new URL(API_URL);
+            url.searchParams.append("action", "getWebResellers");
+            const response = await fetch(url);
+            if (!response.ok)
+              throw new Error(`Network error: ${response.statusText}`);
+            const result = await response.json();
+            if (result.status === "success") {
+              allWebResellers = result.data;
+              renderWebResellerTable(allWebResellers);
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (error) {
+            showToast(`Gagal memuat data web-reseller: ${error.message}`, true);
+            renderWebResellerTable([]);
+          }
+        }
+        function renderWebResellerTable(webResellers) {
+          const listBody = webResellerListBody;
+          listBody.innerHTML = "";
+          if (webResellers === null) {
+            listBody.innerHTML = `<tr><td colspan="4" class="text-center p-4"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat data...</td></tr>`;
+            return;
+          }
+
+          const searchTerm = searchWebResellerInput.value.toLowerCase();
+          const filteredData = webResellers.filter((r) =>
+            r.domain.toLowerCase().includes(searchTerm)
+          );
+          if (filteredData.length === 0) {
+            listBody.innerHTML = `<tr><td colspan="4" class="text-center p-4">Tidak ada data yang cocok.</td></tr>`;
+            document.getElementById("web-reseller-pagination").innerHTML = "";
+            return;
+          }
+
+          const currentPage = paginationState.webReseller;
+          const start = (currentPage - 1) * itemsPerPage;
+          const end = start + itemsPerPage;
+          const paginatedData = filteredData.slice(start, end);
+
+          paginatedData.forEach((item) => {
+            const row = document.createElement("tr");
+            row.className = "bg-white border-b hover:bg-gray-50";
+            row.innerHTML = `
+                        <td class="px-6 py-4">${item.domain || "-"}</td>
+                        <td class="px-6 py-4">${item.nomor || "-"}</td>
+                        <td class="px-6 py-4">${item.products || "-"}</td>
+                        <td class="px-6 py-4 text-center">
+                            <div class="flex justify-center items-center space-x-2">
+                                <button class="py-1 px-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-xs edit-btn" data-type="web-reseller" data-id="${
+                                  item.id
+                                }">Edit</button>
+                                <button class="py-1 px-3 bg-red-500 text-white rounded-md hover:bg-red-600 text-xs delete-btn" data-type="web-reseller" data-id="${
+                                  item.id
+                                }">Hapus</button>
+                            </div>
+                        </td>`;
+            listBody.appendChild(row);
+          });
+          renderPagination(
+            "web-reseller-pagination",
+            filteredData.length,
+            currentPage,
+            (page) => {
+              paginationState.webReseller = page;
+              renderWebResellerTable(webResellers);
+            }
+          );
+        }
+
+        async function fetchAndDisplayAcara() {
+          renderAcaraTable(null);
+          try {
+            const url = new URL(API_URL);
+            url.searchParams.append("action", "getAcara");
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Network error`);
+            const result = await response.json();
+            if (result.status === "success") {
+              allAcara = result.data;
+              renderAcaraTable(allAcara);
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (error) {
+            showToast(`Gagal memuat data acara: ${error.message}`, true);
+            renderAcaraTable([]);
+          }
+        }
+        function renderAcaraTable(acaraItems) {
+          const listBody = acaraListBody;
+          listBody.innerHTML = "";
+          if (acaraItems === null) {
+            listBody.innerHTML = `<tr><td colspan="5" class="text-center p-4"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat data...</td></tr>`;
+            return;
+          }
+
+          const searchTerm = searchAcaraInput.value.toLowerCase();
+          const filteredData = acaraItems.filter((a) =>
+            a.judul.toLowerCase().includes(searchTerm)
+          );
+
+          if (filteredData.length === 0) {
+            listBody.innerHTML = `<tr><td colspan="5" class="text-center p-4">Tidak ada data yang cocok.</td></tr>`;
+            document.getElementById("acara-pagination").innerHTML = "";
+            return;
+          }
+
+          const currentPage = paginationState.acara;
+          const start = (currentPage - 1) * itemsPerPage;
+          const end = start + itemsPerPage;
+          const paginatedData = filteredData.slice(start, end);
+
+          paginatedData.forEach((item) => {
+            const row = document.createElement("tr");
+            row.className = "bg-white border-b hover:bg-gray-50";
+            row.innerHTML = `
+                        <td class="px-6 py-4">${item.waktu}</td>
+                        <td class="px-6 py-4 font-medium text-gray-900">${
+                          item.judul || "-"
+                        }</td>
+                        <td class="px-6 py-4">${formatDateForDisplay(
+                          item.tanggal
+                        )}</td>
+                        <td class="px-6 py-4">${item.lokasi || "-"}</td>
+                        <td class="px-6 py-4 text-center">
+                            <div class="flex justify-center items-center space-x-2">
+                                <button class="py-1 px-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-xs edit-btn" data-type="acara" data-id="${
+                                  item.id
+                                }"><i class="fas fa-pencil-alt"></i><span class="hidden sm:inline ml-1">Edit</span></button>
+                                <button class="py-1 px-3 bg-red-500 text-white rounded-md hover:bg-red-600 text-xs delete-btn" data-type="acara" data-id="${
+                                  item.id
+                                }"><i class="fas fa-trash-alt"></i><span class="hidden sm:inline ml-1">Hapus</span></button>
+                            </div>
+                        </td>
+                    `;
+            listBody.appendChild(row);
+          });
+          renderPagination(
+            "acara-pagination",
+            filteredData.length,
+            currentPage,
+            (page) => {
+              paginationState.acara = page;
+              renderAcaraTable(acaraItems);
+            }
+          );
+        }
+        async function fetchAndDisplayInfluencerVideos(product) {
+          renderInfluencerTable(null);
+          try {
+            const url = new URL(API_URL);
+            url.searchParams.append("action", "getInfluencerVideos");
+            url.searchParams.append("product", product);
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Network error`);
+            const result = await response.json();
+            if (result.status === "success") {
+              allInfluencerVideos = result.data;
+              renderInfluencerTable(allInfluencerVideos);
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (error) {
+            showToast(`Gagal memuat video: ${error.message}`, true);
+            renderInfluencerTable([]);
+          }
+        }
+        function renderInfluencerTable(videos) {
+          const listBody = influencerListBody;
+          listBody.innerHTML = "";
+          if (videos === null) {
+            listBody.innerHTML = `<tr><td colspan="3" class="text-center p-4"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat video...</td></tr>`;
+            return;
+          }
+          if (!videos || videos.length === 0) {
+            listBody.innerHTML = `<tr><td colspan="3" class="text-center p-4">Belum ada video untuk produk ini.</td></tr>`;
+            document.getElementById("influencer-pagination").innerHTML = "";
+            return;
+          }
+          const currentPage = paginationState.influencer;
+          const start = (currentPage - 1) * itemsPerPage;
+          const end = start + itemsPerPage;
+          const paginatedData = videos.slice(start, end);
+
+          paginatedData.forEach((item) => {
+            const row = document.createElement("tr");
+            row.className = "bg-white border-b hover:bg-gray-50";
+            row.innerHTML = `
+                        <td class="px-6 py-4">${item.title || "-"}</td>
+                        <td class="px-6 py-4">${item.videoid || "-"}</td>
+                        <td class="px-6 py-4 text-center">
+                            <div class="flex justify-center items-center space-x-2">
+                                <button class="py-1 px-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-xs edit-btn" data-type="influencer" data-id="${
+                                  item.id
+                                }">Edit</button>
+                                <button class="py-1 px-3 bg-red-500 text-white rounded-md hover:bg-red-600 text-xs delete-btn" data-type="influencer" data-id="${
+                                  item.id
+                                }">Hapus</button>
+                            </div>
+                        </td>`;
+            listBody.appendChild(row);
+          });
+          renderPagination(
+            "influencer-pagination",
+            videos.length,
+            currentPage,
+            (page) => {
+              paginationState.influencer = page;
+              renderInfluencerTable(videos);
+            }
+          );
+        }
+        async function fetchAndDisplayDoctorVideos(product) {
+          renderDoctorTable(null);
+          try {
+            const url = new URL(API_URL);
+            url.searchParams.append("action", "getDoctorVideos");
+            url.searchParams.append("product", product);
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Network error`);
+            const result = await response.json();
+            if (result.status === "success") {
+              allDoctorVideos = result.data;
+              renderDoctorTable(allDoctorVideos);
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (error) {
+            showToast(`Gagal memuat video dokter: ${error.message}`, true);
+            renderDoctorTable([]);
+          }
+        }
+        function renderDoctorTable(videos) {
+          const listBody = doctorListBody;
+          listBody.innerHTML = "";
+          if (videos === null) {
+            listBody.innerHTML = `<tr><td colspan="4" class="text-center p-4"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat video...</td></tr>`;
+            return;
+          }
+          if (!videos || videos.length === 0) {
+            listBody.innerHTML = `<tr><td colspan="4" class="text-center p-4">Belum ada video untuk produk ini.</td></tr>`;
+            document.getElementById("doctor-pagination").innerHTML = "";
+            return;
+          }
+          const currentPage = paginationState.doctor;
+          const start = (currentPage - 1) * itemsPerPage;
+          const end = start + itemsPerPage;
+          const paginatedData = videos.slice(start, end);
+
+          paginatedData.forEach((item) => {
+            const row = document.createElement("tr");
+            row.className = "bg-white border-b hover:bg-gray-50";
+            row.innerHTML = `
+                        <td class="px-6 py-4">${item.title || "-"}</td>
+                        <td class="px-6 py-4">${item.author || "-"}</td>
+                        <td class="px-6 py-4">${item.videoid || "-"}</td>
+                        <td class="px-6 py-4 text-center">
+                            <div class="flex justify-center items-center space-x-2">
+                                <button class="py-1 px-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-xs edit-btn" data-type="doctor" data-id="${
+                                  item.id
+                                }">Edit</button>
+                                <button class="py-1 px-3 bg-red-500 text-white rounded-md hover:bg-red-600 text-xs delete-btn" data-type="doctor" data-id="${
+                                  item.id
+                                }">Hapus</button>
+                            </div>
+                        </td>`;
+            listBody.appendChild(row);
+          });
+          renderPagination(
+            "doctor-pagination",
+            videos.length,
+            currentPage,
+            (page) => {
+              paginationState.doctor = page;
+              renderDoctorTable(videos);
+            }
+          );
+        }
+
+        // --- TRASH LOGIC ---
+        function handleTrashTabClick(clickedTab) {
+          trashTabs.forEach((tab) => {
+            tab.classList.remove("border-blue-500", "text-blue-600");
+            tab.classList.add(
+              "border-transparent",
+              "text-gray-500",
+              "hover:text-gray-700",
+              "hover:border-gray-300"
+            );
+          });
+          if (clickedTab) {
+            clickedTab.classList.add("border-blue-500", "text-blue-600");
+            clickedTab.classList.remove(
+              "border-transparent",
+              "text-gray-500",
+              "hover:text-gray-700",
+              "hover:border-gray-300"
+            );
+            const type = clickedTab.dataset.type;
+            currentTrashType = type;
+            paginationState.trash = 1; // Reset page on tab change
+            renderTrashContent(type, null);
+            fetchTrashData(type);
+          }
+        }
+        async function fetchTrashData(type) {
+          const action = "getTrashData";
+          try {
+            const url = new URL(API_URL);
+            url.searchParams.append("action", action);
+            url.searchParams.append("type", type);
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Network error`);
+            const result = await response.json();
+            if (result.status === "success") {
+              allTrashItems = result.data;
+              renderTrashContent(type, allTrashItems);
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (error) {
+            showToast(`Gagal memuat data sampah: ${error.message}`, true);
+            renderTrashContent(type, []);
+          }
+        }
+        function renderTrashContent(type, items) {
+          let tableHTML = "";
+          let headers = "";
+          if (type === "reseller") {
+            headers = `<th scope="col" class="px-6 py-3">Nama</th><th scope="col" class="px-6 py-3">Provinsi</th><th scope="col" class="px-6 py-3">Kota</th><th scope="col" class="px-6 py-3 text-center">Aksi</th>`;
+          } else if (type === "web-reseller") {
+            headers = `<th scope="col" class="px-6 py-3">Domain</th><th scope="col" class="px-6 py-3">Nomor HP</th><th scope="col" class="px-6 py-3">Produk</th><th scope="col" class="px-6 py-3 text-center">Aksi</th>`;
+          } else if (type === "influencer") {
+            headers = `<th scope="col" class="px-6 py-3">Judul Video</th><th scope="col" class="px-6 py-3">Video ID</th><th scope="col" class="px-6 py-3 text-center">Aksi</th>`;
+          } else if (type === "doctor") {
+            headers = `<th scope="col" class="px-6 py-3">Judul Video</th><th scope="col" class="px-6 py-3">Author</th><th scope="col" class="px-6 py-3">Video ID</th><th scope="col" class="px-6 py-3 text-center">Aksi</th>`;
+          } else if (type === "acara") {
+            headers = `<th scope="col" class="px-6 py-3">Judul Acara</th><th scope="col" class="px-6 py-3">Tanggal</th><th scope="col" class="px-6 py-3">Lokasi</th><th scope="col" class="px-6 py-3 text-center">Aksi</th>`;
+          }
+
+          tableHTML = `
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr>${headers}</tr></thead>
+                        <tbody>${generateTrashRows(type, items)}</tbody>
+                    </table>
+                </div>`;
+          trashContentContainer.innerHTML = tableHTML;
+
+          if (items && items.length > 0) {
+            renderPagination(
+              "trash-pagination",
+              items.length,
+              paginationState.trash,
+              (page) => {
+                paginationState.trash = page;
+                renderTrashContent(type, items);
+              }
+            );
+          } else {
+            document.getElementById("trash-pagination").innerHTML = "";
+          }
+        }
+        function generateTrashRows(type, items) {
+          const colspans = {
+            reseller: 4,
+            "web-reseller": 4,
+            influencer: 3,
+            doctor: 4,
+            acara: 4,
+          };
+          const colspan = colspans[type];
+          if (items === null) {
+            return `<tr><td colspan="${colspan}" class="text-center p-4"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat data...</td></tr>`;
+          }
+          if (!items || items.length === 0) {
+            return `<tr><td colspan="${colspan}" class="text-center p-4">Tidak ada data di sampah.</td></tr>`;
+          }
+
+          const currentPage = paginationState.trash;
+          const start = (currentPage - 1) * itemsPerPage;
+          const end = start + itemsPerPage;
+          const paginatedItems = items.slice(start, end);
+
+          return paginatedItems
+            .map((item) => {
+              let rowContent = "";
+              if (type === "reseller") {
+                rowContent = `<td class="px-6 py-4">${
+                  item.nama || "-"
+                }</td><td class="px-6 py-4">${
+                  item.provinsi || "-"
+                }</td><td class="px-6 py-4">${item.kota || "-"}</td>`;
+              } else if (type === "web-reseller") {
+                rowContent = `<td class="px-6 py-4">${
+                  item.domain || "-"
+                }</td><td class="px-6 py-4">${
+                  item.nomor || "-"
+                }</td><td class="px-6 py-4">${item.products || "-"}</td>`;
+              } else if (type === "influencer") {
+                rowContent = `<td class="px-6 py-4">${
+                  item.title || "-"
+                }</td><td class="px-6 py-4">${item.videoid || "-"}</td>`;
+              } else if (type === "doctor") {
+                rowContent = `<td class="px-6 py-4">${
+                  item.title || "-"
+                }</td><td class="px-6 py-4">${
+                  item.author || "-"
+                }</td><td class="px-6 py-4">${item.videoid || "-"}</td>`;
+              } else if (type === "acara") {
+                rowContent = `<td class="px-6 py-4">${
+                  item.judul || "-"
+                }</td><td class="px-6 py-4">${formatDateForDisplay(
+                  item.tanggal
+                )}</td><td class="px-6 py-4">${item.lokasi || "-"}</td>`;
+              }
+              return `
+                    <tr class="bg-white border-b hover:bg-gray-50">
+                        ${rowContent}
+                        <td class="px-6 py-4 text-center">
+                            <div class="flex justify-center items-center space-x-2">
+                                <button class="py-1 px-3 bg-green-500 text-white rounded-md hover:bg-green-600 text-xs restore-btn" data-type="${type}" data-id="${item.id}"><i class="fas fa-undo-alt"></i><span class="hidden sm:inline ml-1">Pulihkan</span></button>
+                                <button class="py-1 px-3 bg-gray-700 text-white rounded-md hover:bg-gray-800 text-xs perm-delete-btn" data-type="${type}" data-id="${item.id}"><i class="fas fa-trash-alt"></i><span class="hidden sm:inline ml-1">Hapus Permanen</span></button>
+                            </div>
+                        </td>
+                    </tr>`;
+            })
+            .join("");
+        }
+
+        // --- Modal & Form Logic ---
+        function openResellerModal(isEdit, data) {
+          resellerForm.reset();
+          document.getElementById("reseller-id").value = isEdit ? data.id : "";
+          document.getElementById("reseller-modal-title").textContent = isEdit
+            ? "Edit Reseller"
+            : "Tambah Reseller Baru";
+          if (isEdit && data) {
+            Object.keys(data).forEach((key) => {
+              const el = resellerForm.querySelector(`#${key}`);
+              if (el) el.value = data[key] || "";
+            });
+            // Specifically handle the new field
+            document.getElementById("gmaps_embed").value =
+              data.gmaps_embed || "";
+          }
+          resellerModal.classList.remove("hidden");
+        }
+        function openWebResellerModal(isEdit, data) {
+          webResellerForm.reset();
+          document.getElementById("web-reseller-id").value = isEdit
+            ? data.id
+            : "";
+          document.getElementById("web-reseller-modal-title").textContent =
+            isEdit ? "Edit Web-Reseller" : "Tambah Web-Reseller Baru";
+          if (isEdit) {
+            document.getElementById("web-reseller-domain").value =
+              data.domain || "";
+            document.getElementById("web-reseller-nomor").value =
+              data.nomor || "";
+            const productList =
+              typeof data.products === "string"
+                ? data.products.split(", ")
+                : [];
+            webResellerForm
+              .querySelectorAll('input[name="products"]')
+              .forEach((cb) => {
+                cb.checked = productList.includes(cb.value);
+              });
+          }
+          webResellerModal.classList.remove("hidden");
+        }
+        function openAcaraModal(isEdit = false, data = {}) {
+          acaraForm.reset();
+          const preview = document.getElementById("poster-preview");
+          preview.classList.add("hidden");
+          preview.src = "";
+
+          document.getElementById("acara-id").value = isEdit ? data.id : "";
+          document.getElementById("acara-modal-title").textContent = isEdit
+            ? "Edit Acara"
+            : "Tambah Acara Baru";
+
+          if (isEdit) {
+            document.getElementById("judul").value = data.judul || "";
+            document.getElementById("tanggal").value = formatDateForInput(
+              data.tanggal
+            );
+            document.getElementById("waktu").value = data.waktu;
+            document.getElementById("lokasi").value = data.lokasi || "";
+            document.getElementById("harga_awal").value = data.harga_awal ?? "";
+            document.getElementById("harga_diskon").value =
+              data.harga_diskon ?? "";
+
+            if (data.poster_url) {
+              preview.src = data.poster_url;
+              preview.classList.remove("hidden");
+            }
+          }
+          document.getElementById("poster_url").value = "";
+          acaraModal.classList.remove("hidden");
+        }
+        function openInfluencerModal(isEdit = false, data = {}) {
+          influencerForm.reset();
+          document.getElementById("influencer-id").value = isEdit
+            ? data.id
+            : "";
+          document.getElementById("influencer-product").value =
+            data.product || currentInfluencerProduct;
+          document.getElementById("influencer-modal-title").textContent = isEdit
+            ? `Edit Video (${currentInfluencerProduct})`
+            : `Tambah Video Baru (${currentInfluencerProduct})`;
+          if (isEdit) {
+            document.getElementById("influencer-title").value =
+              data.title || "";
+            document.getElementById("influencer-link").value = data.videoid
+              ? `https://youtube.com/shorts/${data.videoid}`
+              : "";
+          }
+          influencerModal.classList.remove("hidden");
+        }
+        function openDoctorModal(isEdit = false, data = {}) {
+          doctorForm.reset();
+          document.getElementById("doctor-id").value = isEdit ? data.id : "";
+          document.getElementById("doctor-product").value =
+            data.product || currentDoctorProduct;
+          document.getElementById("doctor-modal-title").textContent = isEdit
+            ? `Edit Video (${currentDoctorProduct})`
+            : `Tambah Video Baru (${currentDoctorProduct})`;
+          if (isEdit) {
+            document.getElementById("doctor-title").value = data.title || "";
+            document.getElementById("doctor-author").value = data.author || "";
+            document.getElementById("doctor-link").value = data.videoid
+              ? `https://youtube.com/shorts/${data.videoid}`
+              : "";
+          }
+          doctorModal.classList.remove("hidden");
+        }
+
+        function extractYoutubeId(url) {
+          const match = url.match(
+            /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/shorts\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+          );
+          return match ? match[1] : null;
+        }
+
+        async function handleResellerFormSubmit(e) {
+          e.preventDefault();
+          const id = document.getElementById("reseller-id").value;
+          const isEdit = !!id;
+          showLoadingPopup(isEdit ? "Memperbarui..." : "Menyimpan...");
+
+          const resellerData = {
+            id: id,
+            nama: document.getElementById("nama").value,
+            nomor: document.getElementById("nomor").value,
+            provinsi: document.getElementById("provinsi").value,
+            kota: document.getElementById("kota").value,
+            alamat: document.getElementById("alamat").value,
+            gmaps: document.getElementById("gmaps").value, // The share link
+            gmaps_embed: document.getElementById("gmaps_embed").value, // The embed HTML
+          };
+          const payload = {
+            action: isEdit ? "updateReseller" : "addReseller",
+            data: resellerData,
+          };
+          try {
+            const response = await fetch(API_URL, {
+              method: "POST",
+              body: JSON.stringify(payload),
+            });
+            const result = await response.json();
+            if (result.status === "success") {
+              showToast(result.message);
+              resellerModal.classList.add("hidden");
+              fetchAndDisplayResellers();
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (error) {
+            showToast(`Error: ${error.message}`, true);
+          } finally {
+            hideLoadingPopup();
+          }
+        }
+        async function handleWebResellerFormSubmit(e) {
+          e.preventDefault();
+          const id = document.getElementById("web-reseller-id").value;
+          const isEdit = !!id;
+          showLoadingPopup(isEdit ? "Memperbarui..." : "Menyimpan...");
+          const selectedProducts = Array.from(
+            webResellerForm.querySelectorAll('input[name="products"]:checked')
+          ).map((cb) => cb.value);
+          const webResellerData = {
+            id: id,
+            domain: document
+              .getElementById("web-reseller-domain")
+              .value.toLowerCase()
+              .trim(),
+            nomor: document.getElementById("web-reseller-nomor").value,
+            products: selectedProducts,
+          };
+          const payload = {
+            action: isEdit ? "updateWebReseller" : "addWebReseller",
+            data: webResellerData,
+          };
+
+          try {
+            const response = await fetch(API_URL, {
+              method: "POST",
+              body: JSON.stringify(payload),
+            });
+            const result = await response.json();
+            if (result.status === "success") {
+              showToast(result.message);
+              webResellerModal.classList.add("hidden");
+              fetchAndDisplayWebResellers();
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (error) {
+            showToast(`Error: ${error.message}`, true);
+          } finally {
+            hideLoadingPopup();
+          }
+        }
+        async function handleAcaraFormSubmit(e) {
+          e.preventDefault();
+          const id = document.getElementById("acara-id").value;
+          const isEdit = !!id;
+          const fileInput = document.getElementById("poster_url");
+          showLoadingPopup(isEdit ? "Memperbarui..." : "Menyimpan...");
+
+          const acaraData = {
+            id: id,
+            judul: document.getElementById("judul").value,
+            tanggal: document.getElementById("tanggal").value,
+            waktu: document.getElementById("waktu").value,
+            lokasi: document.getElementById("lokasi").value,
+            harga_awal: document.getElementById("harga_awal").value,
+            harga_diskon: document.getElementById("harga_diskon").value,
+          };
+
+          try {
+            if (fileInput.files.length > 0) {
+              const file = fileInput.files[0];
+              const base64 = await fileToBase64(file);
+              acaraData.fileData = {
+                base64: base64,
+                type: file.type,
+                name: file.name,
+              };
+            }
+
+            const payload = {
+              action: isEdit ? "updateAcara" : "addAcara",
+              data: acaraData,
+            };
+            const response = await fetch(API_URL, {
+              method: "POST",
+              body: JSON.stringify(payload),
+            });
+            const result = await response.json();
+            if (result.status === "success") {
+              showToast(result.message);
+              acaraModal.classList.add("hidden");
+              fetchAndDisplayAcara();
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (error) {
+            showToast(`Error: ${error.message}`, true);
+          } finally {
+            hideLoadingPopup();
+          }
+        }
+        async function handleInfluencerFormSubmit(e) {
+          e.preventDefault();
+          const id = document.getElementById("influencer-id").value;
+          const isEdit = !!id;
+          const link = document.getElementById("influencer-link").value;
+          const videoid = extractYoutubeId(link);
+          if (!videoid) {
+            showToast("Link YouTube Shorts tidak valid.", true);
+            return;
+          }
+          showLoadingPopup(isEdit ? "Memperbarui..." : "Menyimpan...");
+          const videoData = {
+            id: id,
+            title: document.getElementById("influencer-title").value,
+            videoid: videoid,
+            product: document.getElementById("influencer-product").value,
+          };
+          const payload = {
+            action: isEdit ? "updateInfluencerVideo" : "addInfluencerVideo",
+            data: videoData,
+          };
+
+          try {
+            const response = await fetch(API_URL, {
+              method: "POST",
+              body: JSON.stringify(payload),
+            });
+            const result = await response.json();
+            if (result.status === "success") {
+              showToast(result.message);
+              influencerModal.classList.add("hidden");
+              fetchAndDisplayInfluencerVideos(currentInfluencerProduct);
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (error) {
+            showToast(`Error: ${error.message}`, true);
+          } finally {
+            hideLoadingPopup();
+          }
+        }
+        async function handleDoctorFormSubmit(e) {
+          e.preventDefault();
+          const id = document.getElementById("doctor-id").value;
+          const isEdit = !!id;
+          const link = document.getElementById("doctor-link").value;
+          const videoid = extractYoutubeId(link);
+          if (!videoid) {
+            showToast("Link YouTube Shorts tidak valid.", true);
+            return;
+          }
+          showLoadingPopup(isEdit ? "Memperbarui..." : "Menyimpan...");
+          const videoData = {
+            id: id,
+            title: document.getElementById("doctor-title").value,
+            author: document.getElementById("doctor-author").value,
+            videoid: videoid,
+            product: document.getElementById("doctor-product").value,
+          };
+          const payload = {
+            action: isEdit ? "updateDoctorVideo" : "addDoctorVideo",
+            data: videoData,
+          };
+          try {
+            const response = await fetch(API_URL, {
+              method: "POST",
+              body: JSON.stringify(payload),
+            });
+            const result = await response.json();
+            if (result.status === "success") {
+              showToast(result.message);
+              doctorModal.classList.add("hidden");
+              fetchAndDisplayDoctorVideos(currentDoctorProduct);
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (error) {
+            showToast(`Error: ${error.message}`, true);
+          } finally {
+            hideLoadingPopup();
+          }
+        }
+        function fileToBase64(file) {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+              const base64 = reader.result.split(",")[1];
+              resolve(base64);
+            };
+            reader.onerror = (error) => reject(error);
+          });
+        }
+
+        // --- Event Listeners ---
+        showPasswordCheckbox.addEventListener("change", () => {
+          passwordInput.type = showPasswordCheckbox.checked
+            ? "text"
+            : "password";
+        });
+
+        loginForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          errorMessage.textContent = "";
+          const loginButton = document.getElementById("login-button");
+          loginButton.disabled = true;
+          showLoadingPopup("Memverifikasi...");
+          try {
+            const response = await fetch(`${API_URL}`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                action: "login",
+                email: loginForm.email.value,
+                password: loginForm.password.value,
+              }),
+            });
+            if (!response.ok)
+              throw new Error(
+                "Gagal terhubung ke server. Status: " + response.status
+              );
+            const result = await response.json();
+            if (result.status === "success") {
+              handleSuccessfulLogin(result.user.email);
+            } else {
+              throw new Error(result.message);
+            }
+          } catch (error) {
+            if (error instanceof TypeError) {
+              errorMessage.textContent =
+                "Gagal terhubung. Periksa koneksi dan URL API.";
+            } else {
+              errorMessage.textContent =
+                error.message || "Email atau password salah.";
+            }
+            console.error("Login Error:", error);
+          } finally {
+            hideLoadingPopup();
+            loginButton.disabled = false;
+          }
+        });
+
+        logoutBtn.addEventListener("click", handleLogout);
+        navLinks.forEach((link) =>
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            navigateTo(e.currentTarget.id.replace("nav-", ""));
+          })
+        );
+        document
+          .querySelectorAll(".open-sidebar-btn")
+          .forEach((btn) => btn.addEventListener("click", openSidebar));
+        closeSidebarBtn.addEventListener("click", closeSidebar);
+        overlay.addEventListener("click", closeSidebar);
+        backToResellersBtn.addEventListener("click", () =>
+          navigateTo("reseller")
+        );
+
+        // Reseller Listeners
+        searchResellerInput.addEventListener("input", () => {
+          paginationState.reseller = 1;
+          renderResellerTable(allResellers);
+        });
+        addResellerBtn.addEventListener("click", () =>
+          openResellerModal(false)
+        );
+        document
+          .getElementById("cancel-reseller-btn")
+          .addEventListener("click", () =>
+            resellerModal.classList.add("hidden")
+          );
+        resellerForm.addEventListener("submit", handleResellerFormSubmit);
+
+        // Web-Reseller Listeners
+        searchWebResellerInput.addEventListener("input", () => {
+          paginationState.webReseller = 1;
+          renderWebResellerTable(allWebResellers);
+        });
+        addWebResellerBtn.addEventListener("click", () =>
+          openWebResellerModal(false)
+        );
+        document
+          .getElementById("cancel-web-reseller-btn")
+          .addEventListener("click", () =>
+            webResellerModal.classList.add("hidden")
+          );
+        webResellerForm.addEventListener("submit", handleWebResellerFormSubmit);
+
+        // Acara Listeners
+        searchAcaraInput.addEventListener("input", () => {
+          paginationState.acara = 1;
+          renderAcaraTable(allAcara);
+        });
+        addAcaraBtn.addEventListener("click", () => openAcaraModal(false));
+        document
+          .getElementById("cancel-acara-btn")
+          .addEventListener("click", () => acaraModal.classList.add("hidden"));
+        acaraForm.addEventListener("submit", handleAcaraFormSubmit);
+        document
+          .getElementById("poster_url")
+          .addEventListener("change", (e) => {
+            const preview = document.getElementById("poster-preview");
+            const file = e.target.files[0];
+            if (file) {
+              preview.src = URL.createObjectURL(file);
+              preview.classList.remove("hidden");
+            } else {
+              preview.classList.add("hidden");
+            }
+          });
+
+        // Influencer Listeners
+        searchInfluencerInput.addEventListener("input", () => {
+          paginationState.influencer = 1;
+          renderInfluencerTable(allInfluencerVideos);
+        });
+        addInfluencerBtn.addEventListener("click", () =>
+          openInfluencerModal(false)
+        );
+        document
+          .getElementById("cancel-influencer-btn")
+          .addEventListener("click", () =>
+            influencerModal.classList.add("hidden")
+          );
+        influencerForm.addEventListener("submit", handleInfluencerFormSubmit);
+
+        // Doctor Listeners
+        searchDoctorInput.addEventListener("input", () => {
+          paginationState.doctor = 1;
+          renderDoctorTable(allDoctorVideos);
+        });
+        addDoctorBtn.addEventListener("click", () => openDoctorModal(false));
+        document
+          .getElementById("cancel-doctor-btn")
+          .addEventListener("click", () => doctorModal.classList.add("hidden"));
+        doctorForm.addEventListener("submit", handleDoctorFormSubmit);
+
+        function handleInfluencerTabClick(clickedTab) {
+          paginationState.influencer = 1;
+          influencerTabs.forEach((tab) => {
+            tab.classList.remove("border-blue-500", "text-blue-600");
+            tab.classList.add(
+              "border-transparent",
+              "text-gray-500",
+              "hover:text-gray-700",
+              "hover:border-gray-300"
+            );
+          });
+          clickedTab.classList.add("border-blue-500", "text-blue-600");
+          clickedTab.classList.remove(
+            "border-transparent",
+            "text-gray-500",
+            "hover:text-gray-700",
+            "hover:border-gray-300"
+          );
+          currentInfluencerProduct = clickedTab.dataset.product;
+          fetchAndDisplayInfluencerVideos(currentInfluencerProduct);
+        }
+        influencerTabs.forEach((tab) =>
+          tab.addEventListener("click", () => handleInfluencerTabClick(tab))
+        );
+
+        function handleDoctorTabClick(clickedTab) {
+          paginationState.doctor = 1;
+          doctorTabs.forEach((tab) => {
+            tab.classList.remove("border-blue-500", "text-blue-600");
+            tab.classList.add(
+              "border-transparent",
+              "text-gray-500",
+              "hover:text-gray-700",
+              "hover:border-gray-300"
+            );
+          });
+          clickedTab.classList.add("border-blue-500", "text-blue-600");
+          clickedTab.classList.remove(
+            "border-transparent",
+            "text-gray-500",
+            "hover:text-gray-700",
+            "hover:border-gray-300"
+          );
+          currentDoctorProduct = clickedTab.dataset.product;
+          fetchAndDisplayDoctorVideos(currentDoctorProduct);
+        }
+        doctorTabs.forEach((tab) =>
+          tab.addEventListener("click", () => handleDoctorTabClick(tab))
+        );
+
+        trashTabs.forEach((tab) =>
+          tab.addEventListener("click", () => handleTrashTabClick(tab))
+        );
+
+        confirmDeleteBtn.addEventListener("click", async () => {
+          if (typeof deleteAction !== "function") return;
+          showLoadingPopup("Menghapus...");
+          confirmDeleteBtn.disabled = true;
+          cancelDeleteBtn.disabled = true;
+
+          try {
+            await deleteAction();
+          } catch (error) {
+            console.error("Error during confirmation action:", error);
+            showToast("Terjadi kesalahan jaringan.", true);
+          } finally {
+            hideLoadingPopup();
+            deleteModal.classList.add("hidden");
+            confirmDeleteBtn.disabled = false;
+            cancelDeleteBtn.disabled = false;
+            deleteAction = null;
+          }
+        });
+
+        cancelDeleteBtn.addEventListener("click", () => {
+          deleteModal.classList.add("hidden");
+          deleteAction = null;
+        });
+
+        document
+          .getElementById("app-container")
+          .addEventListener("click", async (e) => {
+            const btn = e.target.closest(
+              ".edit-btn, .delete-btn, .restore-btn, .perm-delete-btn, .view-reseller-detail-btn"
+            );
+            if (!btn) return;
+
+            if (btn.classList.contains("view-reseller-detail-btn")) {
+              const resellerId = btn.dataset.id;
+              showResellerDetail(resellerId);
+              return;
+            }
+
+            const id = btn.dataset.id;
+            const type = btn.dataset.type;
+            const actions = {
+              reseller: {
+                delete: "deleteReseller",
+                restore: "restoreReseller",
+                "perm-delete": "permanentlyDeleteReseller",
+              },
+              "web-reseller": {
+                delete: "deleteWebReseller",
+                restore: "restoreWebReseller",
+                "perm-delete": "permanentlyDeleteWebReseller",
+              },
+              acara: {
+                delete: "deleteAcara",
+                restore: "restoreAcara",
+                "perm-delete": "permanentlyDeleteAcara",
+              },
+              influencer: {
+                delete: "deleteInfluencerVideo",
+                restore: "restoreInfluencerVideo",
+                "perm-delete": "permanentlyDeleteInfluencerVideo",
+              },
+              doctor: {
+                delete: "deleteDoctorVideo",
+                restore: "restoreDoctorVideo",
+                "perm-delete": "permanentlyDeleteDoctorVideo",
+              },
+            };
+
+            if (btn.classList.contains("edit-btn")) {
+              if (type === "reseller") {
+                const data = allResellers.find((r) => r.id == id);
+                if (data) openResellerModal(true, data);
+              } else if (type === "web-reseller") {
+                const data = allWebResellers.find((r) => r.id == id);
+                if (data) openWebResellerModal(true, data);
+              } else if (type === "acara") {
+                const data = allAcara.find((a) => a.id == id);
+                if (data) openAcaraModal(true, data);
+              } else if (type === "influencer") {
+                const data = allInfluencerVideos.find((v) => v.id == id);
+                if (data) openInfluencerModal(true, data);
+              } else if (type === "doctor") {
+                const data = allDoctorVideos.find((v) => v.id == id);
+                if (data) openDoctorModal(true, data);
+              }
+            } else if (btn.classList.contains("delete-btn")) {
+              showDeleteConfirmModal({
+                title: "Pindahkan ke Sampah?",
+                text: "Anda yakin ingin menghapus data ini? Data akan dipindahkan ke sampah.",
+                isPermanent: false,
+                onConfirm: async () => {
+                  const action = actions[type]["delete"];
+                  if (!action) return;
+                  try {
+                    const payload = { action: action, data: { id: id } };
+                    const response = await fetch(API_URL, {
+                      method: "POST",
+                      body: JSON.stringify(payload),
+                    });
+                    const result = await response.json();
+                    if (result.status === "success") {
+                      showToast(result.message);
+                      if (type === "reseller") fetchAndDisplayResellers();
+                      else if (type === "web-reseller")
+                        fetchAndDisplayWebResellers();
+                      else if (type === "acara") fetchAndDisplayAcara();
+                      else if (type === "influencer")
+                        fetchAndDisplayInfluencerVideos(
+                          currentInfluencerProduct
+                        );
+                      else if (type === "doctor")
+                        fetchAndDisplayDoctorVideos(currentDoctorProduct);
+                    } else {
+                      throw new Error(result.message);
+                    }
+                  } catch (error) {
+                    showToast(`Error: ${error.message}`, true);
+                  }
+                },
+              });
+            } else if (btn.classList.contains("restore-btn")) {
+              showLoadingPopup("Memulihkan...");
+              try {
+                const action = actions[type]["restore"];
+                if (!action) return;
+                const payload = { action: action, data: { id: id } };
+                const response = await fetch(API_URL, {
+                  method: "POST",
+                  body: JSON.stringify(payload),
+                });
+                const result = await response.json();
+                if (result.status === "success") {
+                  showToast(result.message);
+                  handleTrashTabClick(
+                    document.querySelector(".trash-tab.border-blue-500")
+                  );
+                } else {
+                  throw new Error(result.message);
+                }
+              } catch (error) {
+                showToast(`Error: ${error.message}`, true);
+              } finally {
+                hideLoadingPopup();
+              }
+            } else if (btn.classList.contains("perm-delete-btn")) {
+              showDeleteConfirmModal({
+                title: "Hapus Permanen?",
+                text: "Anda YAKIN ingin menghapus data ini secara permanen? Tindakan ini TIDAK DAPAT dibatalkan.",
+                isPermanent: true,
+                onConfirm: async () => {
+                  const action = actions[type]["perm-delete"];
+                  if (!action) return;
+                  try {
+                    const payload = { action: action, data: { id: id } };
+                    const response = await fetch(API_URL, {
+                      method: "POST",
+                      body: JSON.stringify(payload),
+                    });
+                    const result = await response.json();
+                    if (result.status === "success") {
+                      showToast(result.message);
+                      handleTrashTabClick(
+                        document.querySelector(".trash-tab.border-blue-500")
+                      );
+                    } else {
+                      throw new Error(result.message);
+                    }
+                  } catch (error) {
+                    showToast(`Error: ${error.message}`, true);
+                  }
+                },
+              });
+            }
+          });
+
+        // --- App Initialization ---
+        checkLoginStatus();
+        navigateTo("dashboard");
+      });
+    </script>
+  </body>
+</html>

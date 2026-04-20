@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mesin Pengundi Giveaway</title>
+
+    <!-- Menggunakan Tailwind CSS untuk styling modern -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Menggunakan Google Fonts untuk tampilan yang lebih menarik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Menambahkan pustaka JavaScript untuk efek konfeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <style>
+      /* Menambahkan font kustom ke body */
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      /* Style khusus untuk digit angka agar terlihat seperti di mesin slot */
+      .digit-box {
+        font-family: "Roboto Mono", monospace;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+          inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease-out, border-color 0.2s ease-out;
+      }
+      /* Animasi untuk pemenang */
+      .winner-animation {
+        animation: winner-glow 1.5s ease-in-out infinite;
+      }
+
+      @keyframes winner-glow {
+        0%,
+        100% {
+          border-color: #0284c7; /* sky-600 */
+          box-shadow: 0 0 15px #0284c7, 0 4px 6px rgba(0, 0, 0, 0.1),
+            inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        50% {
+          border-color: #03a9f4; /* sky-500 */
+          box-shadow: 0 0 30px #03a9f4, 0 4px 6px rgba(0, 0, 0, 0.1),
+            inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+      }
+      /* Style tambahan untuk efek reveal per digit */
+      .digit-reveal-effect {
+        transform: scale(1.08);
+        border-color: #38bdf8; /* sky-400 */
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-sky-100 text-slate-800 flex items-center justify-center min-h-screen p-4 overflow-hidden"
+  >
+    <main class="relative w-full max-w-7xl flex justify-center">
+      <div class="flex flex-col items-center w-full">
+        <!-- Judul Acara berupa gambar banner 16:9 -->
+        <div class="w-full max-w-2xl mb-6 px-4">
+          <img
+            src="cbo-bali-judul.png"
+            alt="Banner Acara"
+            class="w-full h-auto rounded-xl shadow-lg"
+            onerror="this.onerror=null;this.src='https://placehold.co/1600x900/0ea5e9/ffffff?text=Gagal+Muat+Gambar';"
+          />
+        </div>
+
+        <!-- Kotak Pengundian -->
+        <div
+          class="bg-white/70 backdrop-blur-sm p-6 md:p-10 rounded-2xl shadow-2xl text-center w-full max-w-2xl border border-sky-200 z-10"
+        >
+          <header class="mb-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-sky-600">
+              Pengundian Pemenang
+            </h2>
+            <p class="text-slate-500 mt-2">
+              Acak nomor tiket dari 1 sampai 100
+            </p>
+          </header>
+
+          <div
+            id="slot-machine"
+            class="flex justify-center space-x-2 md:space-x-4 mb-8"
+          >
+            <div
+              id="digit1"
+              class="digit-box bg-sky-500 text-white border-2 border-sky-600 w-20 h-28 md:w-24 md:h-32 flex items-center justify-center text-6xl md:text-7xl font-bold rounded-lg"
+            >
+              0
+            </div>
+            <div
+              id="digit2"
+              class="digit-box bg-sky-500 text-white border-2 border-sky-600 w-20 h-28 md:w-24 md:h-32 flex items-center justify-center text-6xl md:text-7xl font-bold rounded-lg"
+            >
+              0
+            </div>
+            <div
+              id="digit3"
+              class="digit-box bg-sky-500 text-white border-2 border-sky-600 w-20 h-28 md:w-24 md:h-32 flex items-center justify-center text-6xl md:text-7xl font-bold rounded-lg"
+            >
+              0
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <button
+              id="startButton"
+              class="w-full sm:w-auto bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-10 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              Mulai Acak!
+            </button>
+          </div>
+
+          <div
+            id="statusMessage"
+            class="mt-6 text-lg text-sky-700 font-semibold h-6"
+          ></div>
+
+          <div id="drawn-section" class="mt-8 pt-6 border-t border-sky-200">
+            <h2 class="text-xl font-semibold mb-4 text-slate-600">
+              Nomor yang Sudah Keluar:
+            </h2>
+            <div
+              id="drawnNumbersList"
+              class="flex flex-wrap gap-2 justify-center bg-sky-100 p-4 rounded-lg min-h-[50px]"
+            >
+              <!-- Nomor yang sudah diundi akan muncul di sini -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // --- Konfigurasi ---
+      const MIN_NUMBER = 1;
+      const MAX_NUMBER = 150;
+      // --- BARU: Daftar nomor yang akan dilewati/tidak akan pernah muncul ---
+      const EXCLUDED_NUMBERS = [
+        1, 2, 3, 4, 5, 12, 23, 25, 26, 27, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 58, 59, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+        90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 106, 107,
+        108, 109, 110, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129,
+        130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143,
+        144, 145, 146, 147, 148, 149, 150,
+      ];
+      const SPIN_INTERVAL_MS = 50; // Kecepatan angka berganti
+      const STOP_DELAY_1 = 1500; // Jeda untuk menghentikan digit pertama
+      const STOP_DELAY_2 = 3000; // Jeda untuk menghentikan digit kedua
+      const STOP_DELAY_3 = 4500; // Jeda untuk menghentikan digit ketiga
+
+      // --- Elemen DOM ---
+      const digit1 = document.getElementById("digit1");
+      const digit2 = document.getElementById("digit2");
+      const digit3 = document.getElementById("digit3");
+      const startButton = document.getElementById("startButton");
+      const drawnNumbersList = document.getElementById("drawnNumbersList");
+      const statusMessage = document.getElementById("statusMessage");
+      const slotMachineDigits = [digit1, digit2, digit3];
+
+      // --- State Aplikasi ---
+      let isSpinning = false;
+      let drawnNumbers = [];
+      let spinningInterval1, spinningInterval2, spinningInterval3;
+
+      /**
+       * Fungsi untuk memicu efek konfeti
+       */
+      function triggerConfetti() {
+        const duration = 3 * 1000;
+        const animationEnd = Date.now() + duration;
+        const defaults = {
+          startVelocity: 30,
+          spread: 360,
+          ticks: 60,
+          zIndex: 100, // Pastikan konfeti di atas elemen lain
+        };
+        const colors = ["#38bdf8", "#0ea5e9", "#ffffff", "#e2e8f0"]; // Warna tema biru langit
+
+        function randomInRange(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(function () {
+          const timeLeft = animationEnd - Date.now();
+
+          if (timeLeft <= 0) {
+            return clearInterval(interval);
+          }
+
+          const particleCount = 50 * (timeLeft / duration);
+          // Ledakan dari kiri dan kanan
+          confetti({
+            ...defaults,
+            particleCount,
+            origin: {
+              x: randomInRange(0.1, 0.3),
+              y: Math.random() - 0.2,
+            },
+            colors: colors,
+          });
+          confetti({
+            ...defaults,
+            particleCount,
+            origin: {
+              x: randomInRange(0.7, 0.9),
+              y: Math.random() - 0.2,
+            },
+            colors: colors,
+          });
+        }, 250);
+      }
+
+      /**
+       * Fungsi untuk memformat angka menjadi 3 digit dengan nol di depan
+       */
+      function formatNumberToThreeDigits(num) {
+        return num.toString().padStart(3, "0");
+      }
+
+      /**
+       * Fungsi untuk memperbarui daftar nomor yang sudah diundi di UI
+       */
+      function updateDrawnList() {
+        drawnNumbersList.innerHTML = ""; // Kosongkan daftar
+        if (drawnNumbers.length === 0) {
+          drawnNumbersList.innerHTML =
+            '<span class="text-slate-400">Belum ada nomor yang diundi.</span>';
+        } else {
+          const sortedNumbers = [...drawnNumbers].sort((a, b) => b - a);
+          sortedNumbers.forEach((num) => {
+            const numberElement = document.createElement("span");
+            numberElement.className =
+              "bg-sky-600 text-white font-semibold px-3 py-1 rounded-full text-sm";
+            numberElement.textContent = num;
+            drawnNumbersList.appendChild(numberElement);
+          });
+        }
+      }
+
+      /**
+       * Fungsi untuk memulai putaran mesin slot
+       */
+      function startSpin() {
+        if (isSpinning) return;
+
+        // --- BARU: Hitung jumlah nomor yang tersedia untuk diundi ---
+        const totalAvailableNumbers =
+          MAX_NUMBER - MIN_NUMBER + 1 - EXCLUDED_NUMBERS.length;
+
+        if (drawnNumbers.length >= totalAvailableNumbers) {
+          statusMessage.textContent = "Semua nomor yang valid sudah diundi!";
+          return;
+        }
+
+        isSpinning = true;
+        startButton.disabled = true;
+        startButton.textContent = "Mengacak...";
+        startButton.classList.replace("bg-sky-500", "bg-slate-400");
+        startButton.classList.replace("hover:bg-sky-600", "hover:bg-slate-400");
+        statusMessage.textContent = "Mencari pemenang beruntung...";
+
+        slotMachineDigits.forEach((d) =>
+          d.classList.remove("winner-animation", "digit-reveal-effect")
+        );
+
+        let winnerNumber;
+        do {
+          winnerNumber = Math.floor(Math.random() * MAX_NUMBER) + MIN_NUMBER;
+          // --- DIMODIFIKASI: Mesin akan terus mencari nomor baru jika nomor tersebut sudah keluar ATAU ada di dalam daftar yang dikecualikan ---
+        } while (
+          drawnNumbers.includes(winnerNumber) ||
+          EXCLUDED_NUMBERS.includes(winnerNumber)
+        );
+
+        const finalDigits = formatNumberToThreeDigits(winnerNumber);
+
+        spinningInterval1 = setInterval(() => {
+          digit1.textContent = Math.floor(Math.random() * 10);
+        }, SPIN_INTERVAL_MS);
+        spinningInterval2 = setInterval(() => {
+          digit2.textContent = Math.floor(Math.random() * 10);
+        }, SPIN_INTERVAL_MS);
+        spinningInterval3 = setInterval(() => {
+          digit3.textContent = Math.floor(Math.random() * 10);
+        }, SPIN_INTERVAL_MS);
+
+        setTimeout(() => {
+          clearInterval(spinningInterval1);
+          digit1.textContent = finalDigits[0];
+          digit1.classList.add("digit-reveal-effect");
+        }, STOP_DELAY_1);
+
+        setTimeout(() => {
+          clearInterval(spinningInterval2);
+          digit2.textContent = finalDigits[1];
+          digit2.classList.add("digit-reveal-effect");
+        }, STOP_DELAY_2);
+
+        setTimeout(() => {
+          clearInterval(spinningInterval3);
+          digit3.textContent = finalDigits[2];
+          digit3.classList.add("digit-reveal-effect");
+
+          drawnNumbers.push(winnerNumber);
+          updateDrawnList();
+
+          slotMachineDigits.forEach((d) => d.classList.add("winner-animation"));
+          statusMessage.textContent = `Pemenangnya adalah nomor ${winnerNumber}!`;
+
+          triggerConfetti();
+
+          isSpinning = false;
+          startButton.disabled = false;
+          startButton.textContent = "Mulai Acak!";
+          startButton.classList.replace("bg-slate-400", "bg-sky-500");
+          startButton.classList.replace(
+            "hover:bg-slate-400",
+            "hover:bg-sky-600"
+          );
+        }, STOP_DELAY_3);
+      }
+
+      // --- Event Listeners ---
+      startButton.addEventListener("click", startSpin);
+
+      // --- Inisialisasi saat halaman dimuat ---
+      window.onload = () => {
+        updateDrawnList();
+      };
+    </script>
+  </body>
+</html>

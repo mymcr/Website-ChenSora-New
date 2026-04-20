@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sora Cashback (SOCA) - Belanja & Dapat Cashback</title>
+    <meta
+      name="description"
+      content="Sora Cashback (SOCA). Belanja produk ChenSora (Yorokobi, Pyon Pyon, Kakkoi) dan dapatkan cashback langsung di aplikasi SOCA."
+    />
+    <link rel="canonical" href="https://www.chensora.co.id/soca.html" />
+    <meta name="theme-color" content="#52b3dd" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        safelist: ['-translate-y-full', 'left-0', 'right-0', 'rounded-none', 'left-4', 'right-4', 'lg:left-12', 'lg:right-12', 'rounded-b-2xl'],
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: '#52b3dd',
+                dark: '#3fa1ca',
+                light: '#e0f2fe',
+                50: '#f0f9ff',
+                100: '#e0f2fe',
+                200: '#b9e5f7',
+                300: '#7cd0ef',
+                400: '#52b3dd',
+                500: '#2e9bc8',
+                600: '#2080aa',
+                700: '#1a6689',
+              }
+            },
+            backgroundImage: {
+              'gradient-primary': 'linear-gradient(135deg, #52b3dd 0%, #2080aa 100%)',
+              'gradient-primary-light': 'linear-gradient(135deg, #e0f2fe 0%, #b9e5f7 100%)',
+              'gradient-hero': 'linear-gradient(160deg, #ffffff 0%, #f0f9ff 50%, #e0f2fe 100%)',
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- AOS & Font Awesome -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <link rel="icon" type="image/png" href="asset/logo/LOGO CHENSORA.png" />
+    <link rel="apple-touch-icon" href="asset/logo/LOGO CHENSORA.png" />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #ffffff;
+        scroll-behavior: smooth;
+      }
+      
+      .nav-link {
+        position: relative;
+      }
+      .nav-link.active {
+        color: #52b3dd;
+        font-weight: 600;
+      }
+      .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #52b3dd;
+      }
+      
+      /* Card Hover Effects */
+      .card-app {
+        transition: all 0.3s ease-in-out;
+        border: 1px solid #e5e7eb;
+        background-color: #ffffff;
+      }
+      .card-app:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(82, 179, 221, 0.2);
+        border-color: #52b3dd;
+      }
+      
+      /* Hero background with gradient depth */
+      .hero-bg {
+        background: linear-gradient(160deg, #ffffff 0%, #f0f9ff 55%, #e0f2fe 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg::before {
+        content: '';
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(82,179,221,0.15) 0%, transparent 70%);
+        top: -100px;
+        right: -100px;
+        pointer-events: none;
+      }
+      .hero-bg::after {
+        content: '';
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(82,179,221,0.1) 0%, transparent 70%);
+        bottom: -50px;
+        left: -50px;
+        pointer-events: none;
+      }
+
+      /* Gradient button utility */
+      .btn-gradient {
+        background: linear-gradient(135deg, #52b3dd 0%, #2080aa 100%);
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(82, 179, 221, 0.4);
+      }
+      .btn-gradient:hover {
+        background: linear-gradient(135deg, #2080aa 0%, #1a6689 100%);
+        box-shadow: 0 8px 25px rgba(82, 179, 221, 0.5);
+        transform: translateY(-2px);
+      }
+      .btn-outline-primary {
+        border: 2px solid #52b3dd;
+        color: #2080aa;
+        background: white;
+        transition: all 0.3s ease;
+      }
+      .btn-outline-primary:hover {
+        background: #f0f9ff;
+        border-color: #2080aa;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(82, 179, 221, 0.2);
+      }
+
+      .floating-mockup {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+      }
+    </style>
+  </head>
+
+  <body class="text-slate-800">
+    <!-- Header / Navigation Bar -->
+    <!-- Smart Navigation Bar -->
+    <header
+      id="navbar"
+      class="fixed top-0 left-4 right-4 lg:left-12 lg:right-12 z-50 bg-white rounded-b-2xl shadow-lg px-6 py-3 flex justify-between items-center transition-all duration-300 transform translate-y-0"
+    >
+      <a href="index.html" class="flex items-center space-x-3 text-2xl font-bold">
+        <img
+          src="asset/logo/LOGO CHENSORA PNG web.png"
+          alt="Logo ChenSora"
+          class="h-10 w-auto object-contain"
+          style="aspect-ratio: 375/94;"
+        />
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden xl:flex items-center space-x-8">
+        <a href="index.html" class="nav-link text-slate-600 hover:text-primary transition duration-300">Beranda</a>
+        <a href="index.html#expert-medis" class="nav-link text-slate-600 hover:text-primary transition duration-300">Tentang Kami</a>
+        <a href="index.html#produk" class="nav-link text-slate-600 hover:text-primary transition duration-300">Produk</a>
+        <a href="index.html#marketing-plan" class="nav-link text-slate-600 hover:text-primary transition duration-300">Bisnis</a>
+        <a href="index.html#jadwal-acara" class="nav-link text-slate-600 hover:text-primary transition duration-300">Informasi</a>
+        <a href="soca.html" class="nav-link text-slate-600 hover:text-primary transition duration-300">SOCA</a>
+        <a
+          href="index.html#kontak"
+          class="ml-4 bg-primary text-white font-semibold py-2 px-6 rounded-full text-sm hover:bg-primary-dark transition duration-300 shadow-sm"
+        >
+          Hubungi Kami
+        </a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="xl:hidden flex items-center">
+        <button
+          id="mobile-menu-button"
+          class="text-slate-600 hover:text-primary focus:outline-none p-2"
+        >
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden fixed top-20 left-4 right-4 bg-white rounded-2xl shadow-xl z-40 overflow-hidden xl:hidden transition-all duration-300">
+      <div class="p-4 space-y-1">
+        <a href="index.html" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Beranda</a>
+        <a href="index.html#expert-medis" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Tentang Kami</a>
+        <a href="index.html#produk" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Produk</a>
+        <a href="index.html#marketing-plan" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Bisnis</a>
+        <a href="index.html#jadwal-acara" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Informasi</a>
+        <a href="soca.html" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">SOCA</a>
+        <a href="index.html#kontak" class="block mt-2 bg-primary text-white font-semibold py-4 px-6 rounded-xl text-center text-lg shadow-sm">Hubungi Kami</a>
+      </div>
+    </div>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="pt-32 pb-24 hero-bg relative overflow-hidden min-h-screen flex items-center">
+        <div class="container mx-auto px-6 relative z-10">
+          <div class="flex flex-col lg:flex-row items-center gap-16">
+            
+            <!-- Text Content -->
+            <div class="lg:w-7/12 text-center lg:text-left" data-aos="fade-right">
+              <div class="inline-flex items-center gap-2 bg-white border border-primary/20 rounded-full py-1.5 px-4 shadow-sm mb-6">
+                <span class="text-primary"><i class="fas fa-gift"></i></span>
+                <span class="text-sm font-semibold text-slate-600">Sora Cashback App</span>
+              </div>
+              <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-800 leading-tight tracking-tight">
+                Belanja Cerdas,<br />
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-600">
+                  Dapat Cashback.
+                </span>
+              </h1>
+              <p class="mt-6 text-lg md:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                Platform loyalty eksklusif untuk member ChenSora. Belanja produk favorit Anda seperti Yorokobi, Pyon Pyon, atau Kakkoi dan kumpulkan cashback langsung di genggaman Anda.
+              </p>
+              
+              <div class="mt-10 flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-5">
+                <a href="#download" class="btn-gradient w-full sm:w-auto inline-flex items-center justify-center font-bold text-lg py-4 px-8 rounded-xl hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
+                  <i class="fab fa-google-play text-2xl mr-3"></i> Download SOCA
+                </a>
+                <a href="index.html#produk" class="btn-outline-primary w-full sm:w-auto inline-flex items-center justify-center font-bold text-lg py-4 px-8 rounded-xl">
+                  Lihat Produk
+                </a>
+              </div>
+              
+              <div class="mt-10 flex items-center justify-center lg:justify-start gap-6 text-slate-500 text-sm font-medium">
+                <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> Pendaftaran Gratis</div>
+                <div class="flex items-center gap-2"><i class="fas fa-bolt text-yellow-500"></i> Cashback Instan</div>
+              </div>
+            </div>
+            
+            <!-- Mockup Image -->
+            <div class="lg:w-5/12 flex justify-center" data-aos="fade-up" data-aos-delay="200">
+              <div class="relative w-full max-w-md">
+                <div class="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent rounded-full blur-3xl transform -translate-y-10 scale-110"></div>
+                <img 
+                  src="asset/img/soca_mockup.png" 
+                  alt="SOCA App Mockup" 
+                  class="relative z-10 w-full drop-shadow-2xl floating-mockup object-contain rounded-3xl"
+                  style="max-height: 700px;"
+                />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Flow Section -->
+      <section id="cara-kerja" class="py-24 bg-white border-t border-gray-100">
+        <div class="container mx-auto px-6">
+          <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-slate-800 tracking-tight">
+              Cara Mendapatkan Cashback
+            </h2>
+            <div class="w-24 h-1.5 bg-gradient-to-r from-primary to-primary-dark mx-auto mt-6 mb-6 rounded-full"></div>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              Hanya dengan 3 langkah mudah, Anda bisa langsung menikmati keuntungan cashback dari setiap pembelanjaan produk ChenSora.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            <!-- Step 1 -->
+            <div class="card-app p-10 rounded-3xl text-center relative z-10" data-aos="fade-up" data-aos-delay="100">
+              <div class="w-20 h-20 bg-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-inner border border-primary-100">
+                <i class="fas fa-shopping-bag text-3xl text-primary"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-800 mb-4 tracking-tight">1. Belanja Produk</h3>
+              <p class="text-slate-600 leading-relaxed text-base md:text-lg">
+                Lakukan pembelian produk unggulan kami (Yorokobi, Pyon Pyon, atau Kakkoi) melalui agen resmi ChenSora.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="card-app p-10 rounded-3xl text-center relative z-10" data-aos="fade-up" data-aos-delay="200">
+              <div class="w-20 h-20 bg-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-inner border border-primary-100">
+                <i class="fas fa-qrcode text-3xl text-primary"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-800 mb-4 tracking-tight">2. Scan QR Code</h3>
+              <p class="text-slate-600 leading-relaxed text-base md:text-lg">
+                Buka aplikasi SOCA Anda dan scan QR code unik yang terdapat pada kemasan produk yang Anda beli.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="card-app p-10 rounded-3xl text-center relative z-10" data-aos="fade-up" data-aos-delay="300">
+              <div class="w-20 h-20 bg-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-inner border border-primary-100">
+                <i class="fas fa-wallet text-3xl text-primary"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-800 mb-4 tracking-tight">3. Terima Cashback</h3>
+              <p class="text-slate-600 leading-relaxed text-base md:text-lg">
+                Cashback akan otomatis masuk ke saldo SOCA Anda dan dapat digunakan untuk pembelanjaan berikutnya atau ditarik.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Banner -->
+      <section class="py-24 bg-slate-50">
+        <div class="container mx-auto px-6">
+          <div class="bg-gradient-to-br from-primary to-primary-700 rounded-3xl p-12 text-center text-white shadow-2xl relative overflow-hidden" data-aos="zoom-in">
+            <!-- Decorative circles -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+            
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-6 relative z-10 tracking-tight">Siap Untuk Mulai Menghemat?</h2>
+            <p class="text-xl opacity-90 mb-10 max-w-2xl mx-auto relative z-10 leading-relaxed text-base md:text-lg">
+              Unduh aplikasi Sora Cashback sekarang dan nikmati reward melimpah dari setiap pembelanjaan Anda.
+            </p>
+            <a href="#" class="inline-flex items-center justify-center bg-white text-primary font-bold text-lg py-4 px-10 rounded-xl shadow-xl hover:bg-slate-50 transition-all duration-300 transform hover:-translate-y-1 relative z-10">
+              <i class="fab fa-google-play text-2xl mr-3"></i> Download di Play Store
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-6">
+          <div>
+            <h3 class="text-white text-2xl font-bold mb-2 tracking-tight">ChenSora</h3>
+            <p class="text-sm leading-relaxed text-base md:text-lg">Membangun Masa Depan Sehat</p>
+          </div>
+          <div>
+            <p>© 2024 ChenSora. All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Init AOS
+        AOS.init({ duration: 800, once: true });
+
+        // --- Smart Navbar Logic ---
+        const navbar = document.getElementById("navbar");
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener("scroll", () => {
+          const currentScrollY = window.scrollY;
+          
+          if (currentScrollY <= 10) {
+            // Initial state: floating, attached to top edge, inset margins, rounded bottom
+            navbar.classList.remove("-translate-y-full", "left-0", "right-0", "rounded-none");
+            navbar.classList.add("left-4", "right-4", "lg:left-12", "lg:right-12", "rounded-b-2xl");
+          } else if (currentScrollY > lastScrollY && currentScrollY > 50) {
+            // Scrolling down: slide up and disappear
+            navbar.classList.add("-translate-y-full");
+          } else if (currentScrollY < lastScrollY) {
+            // Scrolling up: slide down, full width, no rounded corners
+            navbar.classList.remove("-translate-y-full", "left-4", "right-4", "lg:left-12", "lg:right-12", "rounded-b-2xl");
+            navbar.classList.add("left-0", "right-0", "rounded-none");
+          }
+          
+          lastScrollY = currentScrollY;
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenuBtn.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+        });
+      });
+    </script>
+  </body>
+</html>

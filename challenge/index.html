@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CHENSORA JOURNEY #CeritaKamuBerarti</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      /* Custom Styles */
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      /* Custom gradient for the sky blue theme */
+      .sky-gradient {
+        background-image: linear-gradient(
+            135deg,
+            rgba(168, 213, 229, 0.9) 0%,
+            rgba(212, 238, 247, 0.9) 100%
+          ),
+          url("https://images.unsplash.com/photo-1536514498073-50e69d39c6cf?q=80&w=2070&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center;
+      }
+      .cta-button {
+        transition: all 0.3s ease;
+      }
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-sky-50">
+    <!-- Header / Hero Section -->
+    <header class="sky-gradient text-white shadow-lg">
+      <div class="container mx-auto px-6 py-16 md:py-24 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-sky-900 leading-tight">
+          CHENSORA JOURNEY
+        </h1>
+        <p class="mt-4 text-xl md:text-2xl text-sky-800 font-semibold">
+          #CeritaKamuBerarti
+        </p>
+        <p class="mt-4 max-w-2xl mx-auto text-sky-700">
+          Bagikan pengalaman berhargamu bersama Chensora dan menangkan hadiah
+          menarik setiap minggunya!
+        </p>
+        <a
+          href="#info"
+          class="mt-8 inline-block bg-white text-sky-700 font-bold py-3 px-8 rounded-full shadow-md cta-button"
+        >
+          Lihat Info Challenge <i class="fas fa-arrow-down ml-2"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content: Info Testi Challenge -->
+    <main id="info" class="container mx-auto px-6 py-16">
+      <h2 class="text-3xl font-bold text-center text-sky-900 mb-12">
+        Info Testi Challenge
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Card 1: Jenis Testimoni -->
+        <div
+          class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-sky-400"
+        >
+          <div class="flex items-center mb-4">
+            <div class="bg-sky-100 p-3 rounded-full mr-4">
+              <i class="fas fa-photo-video text-2xl text-sky-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-sky-800">Jenis Testimoni</h3>
+          </div>
+          <p class="text-gray-600">
+            Kamu bisa mengirimkan testimoni dalam bentuk:
+          </p>
+          <ul class="mt-3 list-disc list-inside space-y-2 text-gray-700">
+            <li>
+              <i class="fas fa-video text-sky-500 mr-2"></i> Video Kreatif
+            </li>
+            <li>
+              <i class="fas fa-comment-dots text-sky-500 mr-2"></i> Cerita &
+              Kata-kata
+            </li>
+            <li>
+              <i class="fas fa-camera text-sky-500 mr-2"></i> Foto Menarik
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 2: Hadiah Pemenang -->
+        <div
+          class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-sky-400"
+        >
+          <div class="flex items-center mb-4">
+            <div class="bg-sky-100 p-3 rounded-full mr-4">
+              <i class="fas fa-gifts text-2xl text-sky-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-sky-800">Hadiah Pemenang</h3>
+          </div>
+          <p class="text-gray-700">
+            Pemenang yang beruntung akan mendapatkan
+            <strong>hadiah spesial & eksklusif</strong> dari Chensora sebagai
+            apresiasi atas cerita terbaikmu. Buat kami terkesan!
+          </p>
+        </div>
+
+        <!-- Card 3: Topik Testimoni -->
+        <div
+          class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-sky-400"
+        >
+          <div class="flex items-center mb-4">
+            <div class="bg-sky-100 p-3 rounded-full mr-4">
+              <i class="fas fa-lightbulb text-2xl text-sky-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-sky-800">Topik Testimoni</h3>
+          </div>
+          <p class="text-gray-700">
+            Ceritakan pengalamanmu tentang semua produk Chensora, atau bisa juga
+            mengenai reward yang kamu dapatkan!
+          </p>
+        </div>
+
+        <!-- Card 4: Pengumuman Pemenang -->
+        <div
+          class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-sky-400"
+        >
+          <div class="flex items-center mb-4">
+            <div class="bg-sky-100 p-3 rounded-full mr-4">
+              <i class="fas fa-bullhorn text-2xl text-sky-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-sky-800">Pengumuman Pemenang</h3>
+          </div>
+          <p class="text-gray-700">
+            Satu pemenang akan dipilih setiap minggunya dan diumumkan pada
+            <strong>Setiap Hari Sabtu</strong>.
+            <span class="block mt-2 text-sm text-gray-500">
+              *Jika tidak ada testimoni yang memenuhi kriteria, maka tidak ada
+              pemenang untuk minggu tersebut.
+            </span>
+          </p>
+        </div>
+
+        <!-- Card 5: Cara Kirim -->
+        <div
+          class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-sky-400 md:col-span-2 lg:col-span-1"
+        >
+          <div class="flex items-center mb-4">
+            <div class="bg-sky-100 p-3 rounded-full mr-4">
+              <i class="fas fa-paper-plane text-2xl text-sky-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-sky-800">Cara Kirim Testimoni</h3>
+          </div>
+          <p class="text-gray-700">
+            Kirimkan hasil karyamu ke nomor WhatsApp Admin ChenSora. Klik tombol
+            di bawah ini!
+          </p>
+        </div>
+
+        <!-- Card 6: Gift Worth -->
+        <div
+          class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-sky-400"
+        >
+          <div class="flex items-center mb-4">
+            <div class="bg-sky-100 p-3 rounded-full mr-4">
+              <i class="fas fa-star text-2xl text-sky-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-sky-800">
+              GIFT WORTH DARI CHENSORA
+            </h3>
+          </div>
+          <p class="text-gray-700">
+            Setiap hari Sabtu, tim Chensora akan memilih testimoni terbaik yang
+            berhak mendapatkan hadiah spesial!
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Call to Action Section -->
+    <section class="bg-sky-100">
+      <div class="container mx-auto px-6 py-16 text-center">
+        <h2 class="text-3xl font-bold text-sky-900">Tunggu Apa Lagi?</h2>
+        <p class="mt-4 text-lg text-sky-800 max-w-2xl mx-auto">
+          Ceritamu sangat berarti untuk kami dan yang lainnya. Kirimkan
+          testimonimu sekarang juga!
+        </p>
+        <a
+          href="https://api.whatsapp.com/send/?phone=6285183363794&text=Halo%20Saya%20Ingin%20Mengirim%20Testimoni%20Dari%20Produk%20ChenSora"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-8 inline-flex items-center bg-green-500 text-white font-bold py-4 px-8 rounded-full shadow-lg cta-button"
+        >
+          <i class="fab fa-whatsapp text-2xl mr-3"></i> Kirim via WhatsApp
+        </a>
+        <p class="mt-4 text-sm text-gray-600">
+          ke nomor: <strong>+62 851-8336-3794</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-sky-900 text-white">
+      <div class="container mx-auto px-6 py-6 text-center">
+        <p>&copy; 2025 Chensora. All Rights Reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
