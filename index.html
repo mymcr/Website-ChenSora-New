@@ -40,6 +40,10 @@
               500: '#2e9bc8',
               600: '#2080aa',
               700: '#1a6689',
+            },
+            soca: {
+              navy: '#0a1628',
+              yellow: '#d4ff00',
             }
           },
           backgroundImage: {
@@ -52,10 +56,10 @@
     }
   </script>
 
-  <!-- Google Fonts: Inter -->
+  <!-- Google Fonts: Manrope -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
 
   <!-- AOS (Animate On Scroll) Library for animations -->
@@ -67,8 +71,10 @@
   <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  <link rel="icon" type="image/png" href="asset/logo/LOGO CHENSORA PNG web.png" />
-  <link rel="apple-touch-icon" href="asset/logo/LOGO CHENSORA PNG web.png" />
+  <link rel="icon" href="favicon.ico?v=4" type="image/x-icon" />
+  <link rel="icon" type="image/png" sizes="32x32" href="asset/logo/favicon-32x32.png?v=4" />
+  <link rel="icon" type="image/png" sizes="16x16" href="asset/logo/favicon-16x16.png?v=4" />
+  <link rel="apple-touch-icon" sizes="180x180" href="asset/logo/apple-touch-icon.png?v=4" />
 
   <link rel="preload" as="image" href="/asset/img/chensora%20lounge.webp" imagesizes="100vw" />
 
@@ -100,7 +106,7 @@
           "https://www.instagram.com/chensora.official/",
           "https://www.youtube.com/@ChensoraOfficial",
           "https://www.facebook.com/profile.php?id=61564119424539",
-          "https://www.tiktok.com/@chensora"
+          "https://www.tiktok.com/@chensoraofficial"
         ]
       }
     </script>
@@ -119,11 +125,37 @@
     </script>
 
   <style>
-    /* Custom styles to apply the Inter font and smooth scrolling */
+    /* SOCA banner background position: right on mobile, center on desktop */
+    .soca-bg-banner {
+      background-position: right center;
+    }
+
+    @media (min-width: 768px) {
+      .soca-bg-banner {
+        background-position: center center;
+      }
+    }
+
+    /* Custom styles — Manrope font and smooth scrolling */
     body {
-      font-family: "Inter", sans-serif;
+      font-family: "Manrope", sans-serif;
+      font-weight: 300;
+      /* Regular/Light weight */
+      line-height: 1.6;
       background-color: #ffffff;
       scroll-behavior: smooth;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Manrope", sans-serif;
+      font-weight: 600;
+      /* Semibold weight */
+      letter-spacing: -0.5px;
     }
 
     /* Active navigation link style */
@@ -144,6 +176,27 @@
       width: 100%;
       height: 2px;
       background-color: #52b3dd;
+    }
+
+    /* SOCA Highlighted Nav Link */
+    .soca-nav-link {
+      background: linear-gradient(135deg, var(--soca-accent), var(--soca-primary));
+      color: #FFFFFF !important;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 12px rgba(0, 123, 255, 0.25);
+    }
+
+    .soca-nav-link:hover {
+      background: linear-gradient(135deg, #0088ff, #004a94);
+      color: #FFFFFF !important;
+      box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
+    }
+
+    .soca-nav-link.active::after {
+      display: none;
     }
 
     /* Hide scrollbar for Chrome, Safari and Opera */
@@ -172,7 +225,8 @@
     .swiper-slide {
       text-align: center;
       background: #fff;
-      border-radius: 1.5rem;
+      border-radius: 2rem;
+      /* 32px Apple Style */
       padding: 1.5rem;
       border: 1px solid rgba(82, 179, 221, 0.1);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
@@ -186,28 +240,84 @@
       background-color: #52b3dd !important;
     }
 
-    /* Custom Swiper Navigation Arrows */
+    /* Elegant Expert Medis Arrows */
+    .expert-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid #52b3dd;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .expert-nav-btn:hover {
+      background: #52b3dd;
+      box-shadow: 0 4px 15px rgba(82, 179, 221, 0.3);
+    }
+
+    .expert-nav-btn:hover svg {
+      stroke: white;
+    }
+
+    .expert-nav-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: #52b3dd;
+      stroke-width: 2.5;
+      fill: none;
+      transition: stroke 0.3s ease;
+    }
+
+    .expert-prev {
+      left: -20px;
+    }
+
+    .expert-next {
+      right: -20px;
+    }
+
+    @media (max-width: 640px) {
+      .expert-prev {
+        left: -8px;
+      }
+
+      .expert-next {
+        right: -8px;
+      }
+    }
+
+    /* Default Swiper nav arrows (for management etc.) */
     .swiper-button-next,
     .swiper-button-prev {
       color: #52b3dd !important;
       background-color: white;
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 9999px;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
-        0 2px 4px -2px rgb(0 0 0 / 0.1);
-      transition: background-color 0.3s;
+      border: 1.5px solid #52b3dd;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
     }
 
     .swiper-button-next:hover,
     .swiper-button-prev:hover {
-      background-color: #f0f9ff;
+      background-color: #52b3dd;
+      color: white !important;
     }
 
     .swiper-button-next::after,
     .swiper-button-prev::after {
-      font-size: 1.25rem !important;
-      font-weight: 800 !important;
+      font-size: 1rem !important;
+      font-weight: 400 !important;
     }
 
     /* Hide nav buttons on larger screens for managementSwiper */
@@ -220,12 +330,13 @@
       }
     }
 
-    /* Premium AIA-inspired Card Effect */
+    /* Premium Card Effect */
     .card-product {
       transition: all 0.3s ease-in-out;
       border: 1px solid rgba(82, 179, 221, 0.1);
       background-color: #ffffff;
-      border-radius: 1.5rem;
+      border-radius: 2rem;
+      /* 32px Apple Style */
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     }
 
@@ -300,46 +411,405 @@
       margin: 0 auto;
       width: 80px;
     }
+
+    /* ===== SOCA SECTION — Brand Color System ===== */
+    :root {
+      --soca-primary: #003A75;
+      /* Deep Cobalt */
+      --soca-accent: #007BFF;
+      /* Vibrant Azure */
+      --soca-gold: #C5A070;
+      /* Muted Gold */
+      --soca-black: #000000;
+      /* True Black */
+      --soca-white: #FFFFFF;
+      /* Clean White */
+      --soca-gradient: linear-gradient(135deg, #007BFF 0%, #003A75 100%);
+      --soca-glow: 0 0 20px rgba(0, 123, 255, 0.35);
+    }
+
+    /* SOCA Feature Cards — Glassmorphism */
+    .soca-feature-card {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2rem;
+      /* 32px Apple Style */
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .soca-feature-card:hover {
+      background: rgba(0, 123, 255, 0.12);
+      border-color: var(--soca-gold);
+      transform: translateY(-4px);
+      box-shadow: var(--soca-glow);
+    }
+
+    /* SOCA CTA Button — Azure Glow */
+    .btn-soca {
+      background: var(--soca-gradient);
+      color: var(--soca-white);
+      font-weight: 700;
+      transition: all 0.3s ease;
+      box-shadow: var(--soca-glow);
+    }
+
+    .btn-soca:hover {
+      background: linear-gradient(135deg, #0088ff 0%, #004a94 100%);
+      box-shadow: 0 0 30px rgba(0, 123, 255, 0.55);
+      transform: translateY(-2px);
+    }
+
+    /* Floating animation for mockups */
+    .floating-mockup {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    /* --- Floating Capsule Navbar --- */
+    .floating-navbar {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 40px);
+      max-width: 1100px;
+      z-index: 9999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px 10px 24px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: #333333;
+      /* Darker color for light background */
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .floating-navbar.hidden-navbar {
+      transform: translate(-50%, -150%);
+      opacity: 0;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #333333;
+    }
+
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333333;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s ease, color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.7;
+    }
+
+    .floating-navbar.at-top {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .floating-navbar.at-top .nav-links a,
+    .floating-navbar.at-top .nav-logo {
+      color: #ffffff;
+    }
+
+    .floating-navbar.at-top #mobile-menu-button {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-pill {
+      background: rgba(255, 255, 255, 0.8);
+      color: #333333 !important;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 13px;
+      transition: background 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-pill:hover {
+      background: #ffffff;
+    }
+
+    .btn-cta {
+      background: linear-gradient(135deg, #52b3dd 0%, #2080aa 100%);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px);
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    @media (min-width: 1025px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-pill:hover {
+      background: #ffffff;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ---- Hero Slider ---- */
+    .hero-slider-section {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      pointer-events: none;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Hero slider arrows */
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .hero-arrow:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.8);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .hero-arrow svg {
+      width: 20px;
+      height: 20px;
+      stroke: #ffffff;
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    .hero-prev {
+      left: 24px;
+    }
+
+    .hero-next {
+      right: 24px;
+    }
+
+    @media (max-width: 640px) {
+
+      /* Hide arrows on mobile */
+      .hero-prev,
+      .hero-next {
+        display: none;
+      }
+
+      /* Shift hero overlay content up on mobile */
+      .hero-overlay-content {
+        padding-top: 90px !important;
+        align-items: flex-start;
+      }
+
+      /* Tighten hero text on mobile */
+      #hero-slide-text h1 {
+        font-size: 2.25rem !important;
+        line-height: 1.3 !important;
+      }
+
+      #hero-slide-text p {
+        font-size: 1.125rem !important;
+        margin-top: 1rem !important;
+      }
+    }
+
+    /* Hero slider pagination dots */
+    .hero-dots {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      transition: all 0.35s ease;
+    }
+
+    .hero-dot.active {
+      width: 28px;
+      border-radius: 8px;
+      background: #ffffff;
+      border-color: #ffffff;
+    }
+
+    /* Mobile navbar: compact */
+    @media (max-width: 1024px) {
+      .floating-navbar {
+        padding: 8px 10px 8px 16px;
+        width: calc(100% - 24px);
+        top: 12px;
+      }
+
+      .nav-logo img {
+        height: 26px;
+      }
+
+      .btn-cta-mobile-hide {
+        display: none;
+      }
+    }
+
+    /* Desktop: no shadow on CTA */
+    @media (min-width: 1025px) {
+      .btn-cta {
+        box-shadow: none !important;
+      }
+    }
   </style>
 </head>
 
 <body class="text-slate-800">
-  <!-- Smart Navigation Bar -->
-  <header id="navbar"
-    class="fixed top-0 left-4 right-4 lg:left-12 lg:right-12 z-50 bg-white rounded-b-2xl shadow-lg px-6 py-3 flex justify-between items-center transition-all duration-300 transform">
-    <a href="#beranda" class="flex items-center space-x-3 text-2xl font-bold">
-      <img src="asset/logo/LOGO CHENSORA PNG web.png" alt="Logo ChenSora" class="h-10 w-auto object-contain"
-        style="aspect-ratio: 375/94;" />
+  <!-- Floating Capsule Navigation Bar -->
+  <header id="navbar" class="floating-navbar at-top">
+
+    <!-- Bagian Kiri: Logo -->
+    <a href="#beranda" class="nav-logo">
+      <img src="asset/logo/LOGO CHENSORA PNG web.png" alt="Logo ChenSora" />
     </a>
 
-    <!-- Desktop Navigation -->
-    <nav class="hidden xl:flex items-center space-x-8">
-      <a href="#beranda" class="nav-link text-slate-600 hover:text-primary transition duration-300">Beranda</a>
-      <a href="#expert-medis" class="nav-link text-slate-600 hover:text-primary transition duration-300">Tentang
-        Kami</a>
-      <a href="#produk" class="nav-link text-slate-600 hover:text-primary transition duration-300">Produk</a>
-      <a href="#marketing-plan" class="nav-link text-slate-600 hover:text-primary transition duration-300">Bisnis</a>
-      <a href="#jadwal-acara" class="nav-link text-slate-600 hover:text-primary transition duration-300">Informasi</a>
-      <a href="soca.html" class="nav-link text-slate-600 hover:text-primary transition duration-300">SOCA</a>
-      <a href="#kontak"
-        class="ml-4 bg-primary text-white font-semibold py-2 px-6 rounded-full text-sm hover:bg-primary-dark transition duration-300 shadow-sm">
-        Hubungi Kami
-      </a>
-    </nav>
+    <!-- Bagian Tengah: Menu Tautan -->
+    <ul class="nav-links">
+      <li>
+        <a href="#beranda">Beranda</a>
+      </li>
+      <li>
+        <a href="#expert-medis">Tentang Kami</a>
+      </li>
+      <li>
+        <a href="#produk">Produk</a>
+      </li>
+      <li>
+        <a href="#marketing-plan">Bisnis</a>
+      </li>
+      <li>
+        <a href="https://socacuan.com" target="_blank" class="nav-pill">SOCA</a>
+      </li>
+    </ul>
 
-    <!-- Mobile Menu Button -->
-    <div class="xl:hidden flex items-center">
-      <button id="mobile-menu-button" class="text-slate-600 hover:text-primary focus:outline-none p-2">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Bagian Kanan: Aksi -->
+    <div class="nav-actions">
+      <a href="#kontak" class="btn-cta btn-cta-mobile-hide">Contact Us</a>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button"
+        class="xl:hidden w-9 h-9 rounded-full bg-white/80 flex items-center justify-center text-slate-800 border border-white/40 focus:outline-none">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
         </svg>
       </button>
     </div>
+
   </header>
 
   <!-- Mobile Menu Dropdown -->
   <div id="mobile-menu"
-    class="hidden fixed top-20 left-4 right-4 bg-white rounded-2xl shadow-xl z-40 overflow-hidden xl:hidden transition-all duration-300">
+    class="hidden fixed top-20 left-4 right-4 bg-white/90 backdrop-blur-2xl rounded-3xl shadow-xl z-40 overflow-hidden xl:hidden transition-all duration-300 border border-white/20">
     <div class="p-4 space-y-1">
       <a href="#beranda"
         class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Beranda</a>
@@ -352,8 +822,11 @@
         class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Bisnis</a>
       <a href="#jadwal-acara"
         class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Informasi</a>
-      <a href="soca.html"
-        class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">SOCA</a>
+      <a href="https://socacuan.com" target="_blank"
+        class="flex items-center gap-2 py-4 text-lg font-semibold px-4 rounded-xl transition-colors text-white"
+        style="background: linear-gradient(135deg, #007BFF, #003A75);">
+        <img src="asset/logo/soca icon.webp" alt="SOCA" class="h-5 w-auto object-contain" /> SOCA
+      </a>
       <a href="#kontak"
         class="block mt-2 bg-primary text-white font-semibold py-4 px-6 rounded-xl text-center text-lg shadow-sm">Hubungi
         Kami</a>
@@ -361,94 +834,113 @@
   </div>
 
   <main>
-    <!-- Section 1: Beranda (Home) Full-Width -->
-    <section id="beranda" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      <!-- Full-width background image -->
-      <img src="asset/img/chensora lounge.webp" alt="ChenSora Lounge"
-        class="absolute inset-0 w-full h-full object-cover" />
-      <!-- Dark overlay to ensure text readability -->
-      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-800/60"></div>
+    <!-- Section 1: Beranda (Home) Full-Width — Auto Slider -->
+    <section id="beranda" class="hero-slider-section" style="min-height: 100vh;">
 
-      <div class="container mx-auto px-6 relative z-10 text-center" data-aos="zoom-in">
-        <div class="max-w-4xl mx-auto flex flex-col items-center">
-          <!-- SOCA Promo Banner (Centered) -->
+      <!-- Slide 1 -->
+      <div class="hero-slide active">
+        <img src="asset/img/content 1.webp" alt="ChenSora - Membangun Masa Depan Sehat" />
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-800/50"></div>
+      </div>
+      <!-- Slide 2 -->
+      <div class="hero-slide">
+        <img src="asset/img/content 2.jpg" alt="ChenSora - Produk Kesehatan Inovatif" />
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-800/50"></div>
+      </div>
+      <!-- Slide 3 -->
+      <div class="hero-slide">
+        <img src="asset/img/content 3.jpg" alt="ChenSora - Bisnis Menjanjikan" />
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-800/50"></div>
+      </div>
+      <!-- Slide 4 -->
+      <div class="hero-slide">
+        <img src="asset/img/content 4.jpg" alt="ChenSora - Komunitas Solid" />
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-800/50"></div>
+      </div>
+
+      <!-- Fixed Overlay Content -->
+      <div class="absolute inset-0 z-10 flex items-center hero-overlay-content" style="padding-top: 80px;">
+        <div class="container mx-auto px-8 md:px-16">
+          <!-- SOCA Promo Banner -->
           <div
-            class="mb-8 inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full py-2 px-5 shadow-lg">
-            <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">✨ SOCA App</span>
+            class="mb-6 md:mb-8 inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full py-2 px-5 shadow-lg">
+            <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1">
+              <img src="asset/logo/soca icon.webp" alt="SOCA" class="h-4 w-auto object-contain" /> SOCA App
+            </span>
             <span class="text-sm text-slate-100">Dapatkan Cashback setiap pembelanjaan!</span>
-            <a href="soca.html" class="text-white font-semibold text-sm hover:underline">Pelajari →</a>
+            <a href="https://socacuan.com" target="_blank"
+              class="text-white font-semibold text-sm hover:underline">Pelajari →</a>
           </div>
 
-          <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white leading-tight tracking-tight">
-            Membangun Masa Depan Sehat bersama <br class="hidden md:block" />
-            <span class="text-primary-300">ChenSora</span>
-          </h1>
-          <p class="mt-8 text-lg md:text-xl text-slate-200 max-w-2xl leading-relaxed">
-            Kami berdedikasi untuk meningkatkan kualitas hidup Anda melalui produk kesehatan inovatif dan peluang bisnis
-            yang terpercaya.
-          </p>
+          <!-- Dynamic slide text -->
+          <div id="hero-slide-text" class="max-w-3xl">
+            <!-- Text changes with JS for each slide -->
+          </div>
 
-          <div class="mt-12 flex flex-col sm:flex-row justify-center items-center gap-5 w-full sm:w-auto">
+          <!-- Static buttons -->
+          <div class="mt-8 md:mt-10 flex flex-col sm:flex-row justify-start items-start gap-5">
             <a href="#produk"
-              class="w-full sm:w-auto bg-primary hover:bg-primary-dark text-white font-semibold text-lg py-4 px-10 rounded-full shadow-[0_4px_14px_0_rgba(82,179,221,0.39)] hover:shadow-[0_6px_20px_rgba(82,179,221,0.23)] hover:-translate-y-1 transition-all duration-300">
+              class="bg-primary hover:bg-primary-dark text-white font-semibold text-lg py-4 px-10 rounded-full shadow-[0_4px_14px_0_rgba(82,179,221,0.39)] hover:shadow-[0_6px_20px_rgba(82,179,221,0.23)] hover:-translate-y-1 transition-all duration-300">
               Selengkapnya
             </a>
           </div>
         </div>
       </div>
+
+      <!-- Prev/Next Arrows -->
+      <button class="hero-arrow hero-prev" id="hero-prev" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button class="hero-arrow hero-next" id="hero-next" aria-label="Next slide">
+        <svg viewBox="0 0 24 24">
+          <polyline points="9 6 15 12 9 18"></polyline>
+        </svg>
+      </button>
+
+      <!-- Pagination Dots -->
+      <div class="hero-dots" id="hero-dots">
+        <div class="hero-dot active" data-index="0"></div>
+        <div class="hero-dot" data-index="1"></div>
+        <div class="hero-dot" data-index="2"></div>
+        <div class="hero-dot" data-index="3"></div>
+      </div>
+
     </section>
     <!-- Section 1.5: Key Advantages -->
     <section class="py-24 bg-white relative z-20 -mt-10">
       <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           <!-- Advantage 1: Trusted Products -->
-          <div data-aos="fade-up" data-aos-delay="100"
-            class="bg-gradient-to-b from-white to-primary-50 p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-primary/10 flex flex-col items-center text-center hover:shadow-[0_8px_30px_rgba(82,179,221,0.2)] hover:-translate-y-1 transition-all duration-300">
-            <div class="bg-primary-light/30 p-4 rounded-full mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="text-primary">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-800 tracking-tight">Produk Terpercaya</h3>
-            <p class="mt-3 text-slate-600 leading-relaxed text-base md:text-lg">
+          <div data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"
+            class="bg-white p-8 lg:p-10 rounded-[32px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
+            <img src="asset/img/trusted_products_icon_1777389983473.png" alt="Produk Terpercaya"
+              class="w-24 h-24 lg:w-32 lg:h-32 object-cover rounded-[32px] mb-8 shadow-md" />
+            <h3 class="text-2xl font-semibold text-slate-800 tracking-tight">Produk Terpercaya</h3>
+            <p class="mt-4 text-slate-500 leading-relaxed text-base">
               Produk kami didukung oleh para ahli medis dan teruji untuk
               memberikan manfaat terbaik.
             </p>
           </div>
           <!-- Advantage 2: Business Opportunity -->
-          <div data-aos="fade-up" data-aos-delay="200"
-            class="bg-gradient-to-b from-white to-primary-50 p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-primary/10 flex flex-col items-center text-center hover:shadow-[0_8px_30px_rgba(82,179,221,0.2)] hover:-translate-y-1 transition-all duration-300">
-            <div class="bg-primary-light/30 p-4 rounded-full mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="text-primary">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-800 tracking-tight">Bisnis Menjanjikan</h3>
-            <p class="mt-3 text-slate-600 leading-relaxed text-base md:text-lg">
+          <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="800"
+            class="bg-white p-8 lg:p-10 rounded-[32px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
+            <img src="asset/img/promising_business_icon_1777390071990.png" alt="Bisnis Menjanjikan"
+              class="w-24 h-24 lg:w-32 lg:h-32 object-cover rounded-[32px] mb-8 shadow-md" />
+            <h3 class="text-2xl font-semibold text-slate-800 tracking-tight">Bisnis Menjanjikan</h3>
+            <p class="mt-4 text-slate-500 leading-relaxed text-base">
               Raih kebebasan finansial melalui skema bisnis yang adil,
               transparan, dan menguntungkan.
             </p>
           </div>
           <!-- Advantage 3: Supportive Community -->
-          <div data-aos="fade-up" data-aos-delay="300"
-            class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
-            <div class="bg-primary-light/30 p-4 rounded-full mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="text-primary">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-slate-800 tracking-tight">Komunitas Solid</h3>
-            <p class="mt-3 text-slate-600 leading-relaxed text-base md:text-lg">
+          <div data-aos="fade-up" data-aos-delay="300" data-aos-duration="800"
+            class="bg-white p-8 lg:p-10 rounded-[32px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
+            <img src="asset/img/solid_community_icon_1777390100747.png" alt="Komunitas Solid"
+              class="w-24 h-24 lg:w-32 lg:h-32 object-cover rounded-[32px] mb-8 shadow-md" />
+            <h3 class="text-2xl font-semibold text-slate-800 tracking-tight">Komunitas Solid</h3>
+            <p class="mt-4 text-slate-500 leading-relaxed text-base">
               Anda tidak sendiri. Bergabunglah dengan komunitas positif yang
               siap mendukung kesuksesan Anda.
             </p>
@@ -473,7 +965,7 @@
         </div>
 
         <!-- Swiper Carousel Container -->
-        <div class="relative max-w-sm mx-auto" data-aos="fade-up">
+        <div class="relative max-w-md mx-auto" data-aos="fade-up">
           <!-- Swiper Carousel -->
           <div class="swiper expertSwiper">
             <div class="swiper-wrapper">
@@ -482,9 +974,8 @@
                 <div class="flex flex-col items-center">
                   <img src="asset/img/drdhan.webp" class="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                     alt="dr. Dhany Akbar" />
-                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">
-                    dr. Dhany Akbar
-                  </h4>
+                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">dr. Dhany Akbar</h4>
+                  <p class="text-sm text-primary font-medium mt-1">Expert Medis ChenSora</p>
                 </div>
               </div>
               <!-- Doctor 2 -->
@@ -492,9 +983,8 @@
                 <div class="flex flex-col items-center">
                   <img src="asset/img/drdiva.webp" class="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                     alt="dr. Nadiva Rully" />
-                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">
-                    dr. Nadiva Rully
-                  </h4>
+                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">dr. Nadiva Rully</h4>
+                  <p class="text-sm text-primary font-medium mt-1">Expert Medis ChenSora</p>
                 </div>
               </div>
               <!-- Doctor 3 -->
@@ -502,9 +992,8 @@
                 <div class="flex flex-col items-center">
                   <img src="asset/img/drfin.webp" class="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                     alt="dr. Fin Endriana" />
-                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">
-                    dr. Fin Endriana
-                  </h4>
+                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">dr. Fin Endriana</h4>
+                  <p class="text-sm text-primary font-medium mt-1">Expert Medis ChenSora</p>
                 </div>
               </div>
               <!-- Doctor 4 -->
@@ -512,9 +1001,8 @@
                 <div class="flex flex-col items-center">
                   <img src="asset/img/drnov.webp" class="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                     alt="dr. Novi Yuliana" />
-                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">
-                    dr. Novi Yuliana
-                  </h4>
+                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">dr. Novi Yuliana</h4>
+                  <p class="text-sm text-primary font-medium mt-1">Expert Medis ChenSora</p>
                 </div>
               </div>
               <!-- Doctor 5 -->
@@ -522,9 +1010,8 @@
                 <div class="flex flex-col items-center">
                   <img src="asset/img/drheni.webp" class="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                     alt="dr. Heni Susi" />
-                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">
-                    dr. Heni Susi
-                  </h4>
+                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">dr. Heni Susi</h4>
+                  <p class="text-sm text-primary font-medium mt-1">Expert Medis ChenSora</p>
                 </div>
               </div>
               <!-- Doctor 6 -->
@@ -532,9 +1019,8 @@
                 <div class="flex flex-col items-center">
                   <img src="asset/img/drindri.webp" class="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                     alt="dr. Indri Buchari" />
-                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">
-                    dr. Indri Buchari
-                  </h4>
+                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">dr. Indri Buchari</h4>
+                  <p class="text-sm text-primary font-medium mt-1">Expert Medis ChenSora</p>
                 </div>
               </div>
               <!-- Doctor 7 -->
@@ -542,9 +1028,8 @@
                 <div class="flex flex-col items-center">
                   <img src="https://placehold.co/300x300/a5f3fc/0e7490?text=dr.agnestity"
                     class="w-40 h-40 rounded-full object-cover mb-4 shadow-lg" alt="dr. Agnes Tity" />
-                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">
-                    dr. Agnes Tity
-                  </h4>
+                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">dr. Agnes Tity</h4>
+                  <p class="text-sm text-primary font-medium mt-1">Expert Medis ChenSora</p>
                 </div>
               </div>
               <!-- Doctor 8 -->
@@ -552,9 +1037,8 @@
                 <div class="flex flex-col items-center">
                   <img src="asset/img/dryohan.webp" class="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                     alt="dr. Yohana M.R Maryorie" />
-                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">
-                    dr. Yohana M.R Maryorie
-                  </h4>
+                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">dr. Yohana M.R Maryorie</h4>
+                  <p class="text-sm text-primary font-medium mt-1">Expert Medis ChenSora</p>
                 </div>
               </div>
               <!-- Doctor 9 -->
@@ -562,9 +1046,9 @@
                 <div class="flex flex-col items-center">
                   <img src="asset/img/drrob.webp" class="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                     alt="dr. Roberto Augustino, M.Biomed AAM" />
-                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">
-                    dr. Roberto Augustino, M.Biomed AAM
+                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">dr. Roberto Augustino, M.Biomed AAM
                   </h4>
+                  <p class="text-sm text-primary font-medium mt-1">Expert Medis ChenSora</p>
                 </div>
               </div>
               <!-- Doctor 10 -->
@@ -572,9 +1056,8 @@
                 <div class="flex flex-col items-center">
                   <img src="asset/img/drlucky.webp" class="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                     alt="dr. Lucky Rahardjo R" />
-                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">
-                    dr. Lucky Rahardjo R
-                  </h4>
+                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">dr. Lucky Rahardjo R</h4>
+                  <p class="text-sm text-primary font-medium mt-1">Expert Medis ChenSora</p>
                 </div>
               </div>
               <!-- Doctor 11 -->
@@ -582,18 +1065,14 @@
                 <div class="flex flex-col items-center">
                   <img src="asset/img/drvid.webp" class="w-40 h-40 rounded-full object-cover mb-4 shadow-lg"
                     alt="dr. Viedya Soesetyo" />
-                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">
-                    dr. Viedya Soesetyo
-                  </h4>
+                  <h4 class="text-xl font-semibold text-slate-800 tracking-tight">dr. Viedya Soesetyo</h4>
+                  <p class="text-sm text-primary font-medium mt-1">Expert Medis ChenSora</p>
                 </div>
               </div>
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
           </div>
-          <!-- Add Navigation -->
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
         </div>
       </div>
     </section>
@@ -672,10 +1151,8 @@
                 </div>
               </div>
             </div>
-            <!-- Pagination and Navigation for Mobile -->
+            <!-- Pagination for Mobile -->
             <div class="swiper-pagination management-pagination"></div>
-            <div class="swiper-button-next management-button-next"></div>
-            <div class="swiper-button-prev management-button-prev"></div>
           </div>
         </div>
       </div>
@@ -695,150 +1172,190 @@
           </p>
         </div>
 
-        <!-- Redesigned Product Cards -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <!-- Product Card 1: Yorokobi -->
+        <!-- Redesigned Product Cards — 3-Column Equal Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+          <!-- Product Card 1: Yorokobi Koffie -->
           <div
-            class="lg:col-span-7 bg-white rounded-3xl p-10 text-center flex flex-col items-center justify-center shadow-md hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] transition-all duration-300 border border-gray-100"
+            class="bg-white rounded-3xl p-8 text-center flex flex-col items-center shadow-md hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] transition-all duration-300 border border-gray-100"
             data-aos="fade-up" data-aos-delay="100">
-            <img src="/asset/poster/BROSURYK.webp" sizes="(max-width:768px) 100vw, 33vw" width="960" height="640"
+            <img src="asset/poster/BROSURYK.webp" sizes="(max-width:768px) 100vw, 33vw" width="960" height="640"
               alt="Yorokobi Koffie, kopi stamina dengan Panax Ginseng dan daun kelor" loading="lazy" decoding="async"
-              class="clickable-image" />
+              class="clickable-image rounded-[32px]" />
             <h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Yorokobi Koffie</h3>
             <p class="mt-3 text-slate-600 flex-grow leading-relaxed text-base md:text-lg">
-              Kopi stamina dan antioksidan pertama di Indonesia dengan Panax
-              Ginseng, Guarana, dan Daun Kelor.
+              Kopi stamina dan antioksidan pertama di Indonesia dengan Panax Ginseng, Guarana, dan Daun Kelor.
             </p>
             <a href="http://www.yorokobikoffie.com" target="_blank"
-              class="mt-8 btn-gradient inline-block font-semibold py-2 px-6 rounded-full hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
+              class="mt-8 btn-gradient inline-block font-semibold py-2.5 px-6 rounded-full hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
               Pelajari Lebih Lanjut
             </a>
           </div>
 
-          <!-- Column 2 for stacked products -->
-          <div class="lg:col-span-5 flex flex-col gap-8">
-            <!-- Product Card 2: Pyon Pyon -->
-            <div
-              class="bg-white rounded-3xl p-8 text-center flex flex-col items-center shadow-md hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] transition-all duration-300 border border-gray-100"
-              data-aos="fade-up" data-aos-delay="200">
-              <img src="/asset/poster/BROSURPYON.webp" sizes="(max-width:768px) 100vw, 33vw" width="960" height="640"
-                alt="Pyon Pyon Jelly Fiber dengan rasa lezat untuk memenuhi nutrisi harian dan mendukung tumbuh kembang anak."
-                loading="lazy" decoding="async" class="clickable-image" />
-              <h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Pyon Pyon Jelly</h3>
-              <p class="mt-3 text-slate-600 flex-grow leading-relaxed text-base md:text-lg">
-                Jelly Fiber dengan rasa lezat untuk memenuhi nutrisi harian dan
-                mendukung tumbuh kembang anak.
-              </p>
-              <a href="http://pyonpyonjelly.com" target="_blank"
-                class="mt-8 btn-gradient inline-block font-semibold py-2 px-6 rounded-full hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
-                Pelajari Lebih Lanjut
-              </a>
-            </div>
-            <!-- Product Card 3: Kakkoi -->
-            <div
-              class="bg-white rounded-3xl p-8 text-center flex flex-col items-center shadow-md hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] transition-all duration-300 border border-gray-100"
-              data-aos="fade-up" data-aos-delay="300">
-              <img src="/asset/poster/BROSURKK.webp" sizes="(max-width:768px) 100vw, 33vw" width="960" height="640"
-                alt="KAKKOI Minuman gel detox dan kecantikan dengan kolagen" loading="lazy" decoding="async"
-                class="clickable-image" />
-              <h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Kakkoi</h3>
-              <p class="mt-3 text-slate-600 flex-grow leading-relaxed text-base md:text-lg">
-                Minuman gel detox dan kecantikan dengan kolagen untuk
-                meregenerasi sel dan mencerahkan kulit dari dalam.
-              </p>
-              <a href="http://kakkoi.id" target="_blank"
-                class="mt-8 btn-gradient inline-block font-semibold py-2 px-6 rounded-full hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
-                Pelajari Lebih Lanjut
-              </a>
-            </div>
+          <!-- Product Card 2: Pyon Pyon -->
+          <div
+            class="bg-white rounded-3xl p-8 text-center flex flex-col items-center shadow-md hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] transition-all duration-300 border border-gray-100"
+            data-aos="fade-up" data-aos-delay="200">
+            <img src="asset/poster/BROSURPYON.webp" sizes="(max-width:768px) 100vw, 33vw" width="960" height="640"
+              alt="Pyon Pyon Jelly Fiber dengan rasa lezat untuk memenuhi nutrisi harian dan mendukung tumbuh kembang anak."
+              loading="lazy" decoding="async" class="clickable-image rounded-[32px]" />
+            <h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Pyon Pyon Jelly</h3>
+            <p class="mt-3 text-slate-600 flex-grow leading-relaxed text-base md:text-lg">
+              Jelly Fiber dengan rasa lezat untuk memenuhi nutrisi harian dan mendukung tumbuh kembang anak.
+            </p>
+            <a href="http://pyonpyonjelly.com" target="_blank"
+              class="mt-8 btn-gradient inline-block font-semibold py-2.5 px-6 rounded-full hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
+              Pelajari Lebih Lanjut
+            </a>
+          </div>
+
+          <!-- Product Card 3: Kakkoi -->
+          <div
+            class="bg-white rounded-3xl p-8 text-center flex flex-col items-center shadow-md hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] transition-all duration-300 border border-gray-100"
+            data-aos="fade-up" data-aos-delay="300">
+            <img src="asset/poster/BROSURKK.webp" sizes="(max-width:768px) 100vw, 33vw" width="960" height="640"
+              alt="KAKKOI Minuman gel detox dan kecantikan dengan kolagen" loading="lazy" decoding="async"
+              class="clickable-image rounded-[32px]" />
+            <h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Kakkoi</h3>
+            <p class="mt-3 text-slate-600 flex-grow leading-relaxed text-base md:text-lg">
+              Minuman gel detox dan kecantikan dengan kolagen untuk meregenerasi sel dan mencerahkan kulit dari dalam.
+            </p>
+            <a href="http://kakkoi.id" target="_blank"
+              class="mt-8 btn-gradient inline-block font-semibold py-2.5 px-6 rounded-full hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
+              Pelajari Lebih Lanjut
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 4: Marketing Plan -->
+    <!-- ===================== SOCA APP SECTION ===================== -->
+    <section id="soca-app" class="py-24 relative overflow-hidden" style="background: #020b1c;">
+      <!-- Background banner image with dark overlay -->
+      <div class="absolute inset-0 w-full h-full soca-bg-banner"
+        style="background-image: url('asset/img/soca banner.jpeg'); background-size: cover; background-repeat: no-repeat;">
+      </div>
+      <div class="absolute inset-0 w-full h-full"
+        style="background: linear-gradient(160deg, rgba(10,22,40,0.85) 0%, rgba(12,45,94,0.78) 50%, rgba(2,11,28,0.92) 100%);">
+      </div>
+      <!-- Decorative glow orbs: blue ocean tones -->
+      <div class="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20 blur-3xl" style="background: #3b82f6;"></div>
+      <div class="absolute bottom-0 left-0 w-72 h-72 rounded-full opacity-10 blur-3xl" style="background: #0ea5e9;">
+      </div>
+
+      <div
+        class="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center text-center min-h-[50vh]">
+        <div data-aos="fade-up">
+          <span
+            class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full text-sm font-bold mb-6 shadow-lg bg-gradient-to-r from-blue-500 to-cyan-400 text-white">
+            <img src="asset/logo/soca icon.webp" alt="SOCA" class="h-5 w-auto object-contain" /> SOCA
+          </span>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6">
+            Belanja Mudah,<br class="hidden md:block" /> Cuan Melimpah
+          </h2>
+          <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
+            Dapatkan cashback otomatis setiap belanja online. Ubah pengeluaranmu menjadi pendapatan bersama SOCA.
+          </p>
+
+          <div
+            class="flex items-center justify-center gap-4 mb-10 text-white font-semibold bg-slate-800/50 backdrop-blur-md py-3 px-6 rounded-full border border-slate-700 w-max mx-auto">
+            <i class="fa-solid fa-cart-shopping text-white"></i>
+            <span>Shopee dan Shopeefood</span>
+          </div>
+
+          <a href="https://app.socacuan.com/" target="_blank"
+            class="inline-block bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-bold text-lg py-4 px-12 rounded-full shadow-[0_8px_30px_rgba(59,130,246,0.4)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.5)] hover:-translate-y-1 transition-all duration-300">
+            Coba Sekarang
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============== MARKETING PLAN — 3 PILAR =============== -->
     <section id="marketing-plan" class="py-24 bg-white">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16" data-aos="fade-up">
           <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">
-            Marketing Plan & Peluang Bisnis
+            Strategi Cuan Terukur
           </h2>
           <div class="w-24 h-1 bg-primary mx-auto mt-6 mb-6"></div>
-          <p class="text-lg text-slate-600 leading-relaxed">
-            Raih kebebasan finansial bersama ChenSora. Inilah cara kami
-            membantu Anda sukses.
+          <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            Raih kebebasan finansial bersama ChenSora melalui 3 pilar keuntungan yang terstruktur, transparan, dan
+            terbukti menghasilkan.
           </p>
         </div>
-        <div class="max-w-4xl mx-auto" data-aos="fade-up">
-          <div class="space-y-8">
-            <!-- Step 1 -->
-            <div class="bg-white p-8 rounded-2xl border border-primary/10 shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-              <h4 class="text-2xl font-bold text-primary flex items-center tracking-tight">
-                <span
-                  class="bg-primary text-white rounded-full w-8 h-8 inline-flex items-center justify-center mr-3 text-sm">1</span>
-                Skema Keuntungan yang Transparan
-              </h4>
-              <p class="mt-4 text-slate-600 leading-relaxed text-base md:text-lg">
-                Di sini Anda dapat menjelaskan rincian keuntungan, seperti
-                bonus sponsor, bonus pasangan, reward, dll. Gunakan daftar
-                atau poin untuk mempermudah pembacaan.
-              </p>
-              <ul class="list-disc list-inside mt-2 text-slate-600 space-y-1">
-                <li>Bonus Sponsor Langsung</li>
-                <li>Bonus Pengembangan Jaringan (Pasangan)</li>
-                <li>
-                  Reward Poin: Trip Luar Negeri, Mobil, Motor, Uang Tunai
-                </li>
-                <li>Bonus Royalti RO</li>
-              </ul>
+
+        <!-- 3-Pillar Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Pilar 1: Passive Income Synergy -->
+          <div
+            class="bg-gradient-to-b from-white to-primary-50 p-8 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-primary/10 text-center hover:shadow-[0_8px_30px_rgba(82,179,221,0.2)] hover:-translate-y-2 transition-all duration-300"
+            data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-primary/10 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-handshake text-2xl text-primary"></i>
             </div>
-            <!-- Step 2 -->
-            <div class="bg-white p-8 rounded-2xl border border-primary/10 shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-              <h4 class="text-2xl font-bold text-primary flex items-center tracking-tight">
-                <span
-                  class="bg-primary text-white rounded-full w-8 h-8 inline-flex items-center justify-center mr-3 text-sm">2</span>
-                Cara Menjalankan Bisnis
-              </h4>
-              <p class="mt-4 text-slate-600 leading-relaxed text-base md:text-lg">
-                Jelaskan langkah-langkah praktis untuk memulai dan
-                mengembangkan bisnis bersama ChenSora. Fokus pada kemudahan
-                dan dukungan yang diberikan perusahaan.
-              </p>
-              <ol class="list-decimal list-inside mt-2 text-slate-600 space-y-1">
-                <li>Bergabung dengan paket member yang tersedia.</li>
-                <li>Gunakan produknya dan rasakan manfaatnya.</li>
-                <li>
-                  Ceritakan pengalaman Anda dan rekomendasikan produk ke orang
-                  lain.
-                </li>
-                <li>
-                  Ajak rekan untuk bergabung dan duplikasikan sistemnya.
-                </li>
-                <li>
-                  Ikuti pelatihan dan bimbingan dari para leader sukses.
-                </li>
-              </ol>
-            </div>
-            <!-- Step 3 -->
-            <div class="bg-white p-8 rounded-2xl border border-primary/10 shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-              <h4 class="text-2xl font-bold text-primary flex items-center tracking-tight">
-                <span
-                  class="bg-primary text-white rounded-full w-8 h-8 inline-flex items-center justify-center mr-3 text-sm">3</span>
-                Dukungan Penuh dari Perusahaan
-              </h4>
-              <p class="mt-4 text-slate-600 leading-relaxed text-base md:text-lg">
-                Kami menyediakan berbagai alat bantu untuk kesuksesan Anda,
-                mulai dari materi promosi digital, website replika.
-              </p>
-            </div>
+            <h3 class="text-xl font-bold text-slate-800 tracking-tight mb-2">Passive Income Synergy</h3>
+            <p class="text-primary font-semibold text-sm mb-4">Bonus Sponsor & Pasangan</p>
+            <p class="text-slate-600 leading-relaxed text-base">
+              Bangun jaringan mitra dan raih pendapatan pasif yang terus bertumbuh. Setiap sponsor yang bergabung dan
+              setiap pasangan yang terbentuk menghasilkan bonus langsung untuk Anda.
+            </p>
+            <ul class="mt-5 text-slate-600 text-sm space-y-2 text-left">
+              <li class="flex items-center gap-2"><i class="fas fa-check-circle text-primary text-xs"></i> Bonus Sponsor
+                Langsung</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check-circle text-primary text-xs"></i> Bonus
+                Pasangan Otomatis</li>
+            </ul>
           </div>
-          <div class="mt-12 text-center">
-            <a href="https://wa.me/6289653515912?text=Halo,%20saya%20tertarik%20untuk%20bergabung%20dengan%20ChenSora%20setelah%20melihat%20marketing%20plan."
-              target="_blank"
-              class="btn-gradient inline-block font-bold text-lg py-4 px-10 rounded-full shadow-lg hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
-              Mulai Bisnis Anda Sekarang!
-            </a>
+
+          <!-- Pilar 2: Infinite Rewards -->
+          <div
+            class="bg-gradient-to-b from-white to-primary-50 p-8 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-primary/10 text-center hover:shadow-[0_8px_30px_rgba(82,179,221,0.2)] hover:-translate-y-2 transition-all duration-300"
+            data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-primary/10 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-trophy text-2xl text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 tracking-tight mb-2">Infinite Rewards</h3>
+            <p class="text-primary font-semibold text-sm mb-4">Akumulasi Poin untuk Reward Impian</p>
+            <p class="text-slate-600 leading-relaxed text-base">
+              Setiap transaksi mengumpulkan poin reward yang mendekatkan Anda ke hadiah impian. Dari trip luar negeri
+              hingga mobil mewah — semua bisa Anda raih.
+            </p>
+            <ul class="mt-5 text-slate-600 text-sm space-y-2 text-left">
+              <li class="flex items-center gap-2"><i class="fas fa-check-circle text-primary text-xs"></i> Trip Luar
+                Negeri</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check-circle text-primary text-xs"></i> Mobil, Motor
+                & Uang Tunai</li>
+            </ul>
           </div>
+
+          <!-- Pilar 3: Loyalty Royalty -->
+          <div
+            class="bg-gradient-to-b from-white to-primary-50 p-8 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-primary/10 text-center hover:shadow-[0_8px_30px_rgba(82,179,221,0.2)] hover:-translate-y-2 transition-all duration-300"
+            data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-primary/10 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-crown text-2xl text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 tracking-tight mb-2">Loyalty Royalty</h3>
+            <p class="text-primary font-semibold text-sm mb-4">Bonus Repeat Order</p>
+            <p class="text-slate-600 leading-relaxed text-base">
+              Nikmati komisi berkelanjutan dari setiap pembelian ulang di seluruh jaringan Anda. Semakin loyal
+              pelanggan, semakin besar royalti Anda.
+            </p>
+            <ul class="mt-5 text-slate-600 text-sm space-y-2 text-left">
+              <li class="flex items-center gap-2"><i class="fas fa-check-circle text-primary text-xs"></i> Passive
+                Income Berkelanjutan</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check-circle text-primary text-xs"></i> Bonus Seumur
+                Hidup</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-14 text-center" data-aos="fade-up">
+          <a href="https://wa.me/6289653515912?text=Halo,%20saya%20tertarik%20untuk%20bergabung%20dengan%20ChenSora%20setelah%20melihat%20marketing%20plan."
+            target="_blank"
+            class="btn-gradient inline-block font-bold text-lg py-4 px-10 rounded-full shadow-lg hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
+            Mulai Bisnis Anda Sekarang!
+          </a>
         </div>
       </div>
     </section>
@@ -881,57 +1398,78 @@
           </h2>
           <div class="w-24 h-1 bg-primary mx-auto mt-6 mb-6"></div>
           <p class="text-lg text-slate-600 leading-relaxed">
-            Kami senang bisa terhubung dengan Anda. Kunjungi kami atau hubungi
-            melalui kanal berikut.
+            Kami senang bisa terhubung dengan Anda. Kunjungi kami atau hubungi melalui kanal berikut.
           </p>
         </div>
-        <div class="bg-white max-w-4xl mx-auto p-10 rounded-xl shadow-lg border border-gray-100" data-aos="zoom-in">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-center md:text-left">
-            <div>
-              <h4
-                class="text-xl font-bold text-slate-800 mb-3 flex items-center justify-center md:justify-start tracking-tight">
+
+        <div class="max-w-5xl mx-auto" data-aos="zoom-in">
+          <!-- Row 1: Google Maps Preview + Alamat Kantor -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+            <!-- Google Maps Embed -->
+            <div class="rounded-[32px] overflow-hidden shadow-lg border border-gray-100" style="min-height: 280px;">
+              <iframe
+                src="https://maps.google.com/maps?q=Graha+SA+Surabaya+Jawa+Timur+Indonesia&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%" height="100%" style="border:0; min-height: 280px;" allowfullscreen loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade" title="Lokasi Kantor ChenSora - Graha S.A. Surabaya">
+              </iframe>
+            </div>
+            <!-- Office Address -->
+            <div class="flex flex-col justify-center bg-slate-50 rounded-[32px] p-8 border border-gray-100">
+              <h4 class="text-xl font-bold text-slate-800 mb-4 flex items-center tracking-tight">
                 <i class="fas fa-map-marker-alt text-primary mr-3"></i> Alamat Kantor
               </h4>
-              <p class="text-slate-700 leading-relaxed text-base md:text-lg">
+              <p class="text-slate-700 leading-relaxed text-base md:text-lg mb-4">
                 Graha S.A., Gedung, Lantai 3. Unit 302<br />
                 Surabaya, Jawa Timur<br />
                 Indonesia
               </p>
+              <a href="https://maps.google.com/maps?q=Graha+SA+Surabaya+Jawa+Timur+Indonesia" target="_blank"
+                class="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-medium transition-colors">
+                <i class="fas fa-external-link-alt text-sm"></i> Buka di Google Maps
+              </a>
             </div>
-            <div>
-              <h4
-                class="text-xl font-bold text-slate-800 mb-3 flex items-center justify-center md:justify-start tracking-tight">
-                <i class="fas fa-address-book text-primary mr-3"></i> Kontak & Sosial Media
-              </h4>
-              <p class="text-slate-700 space-y-2 leading-relaxed text-base md:text-lg">
-                <span class="block">Telepon: <a href="tel:+6289653515912"
-                    class="text-primary hover:text-primary-dark font-medium">+6289653515912</a></span>
-                <span class="block">Email: <a href="mailto:chensora.official@gmail.com"
-                    class="text-primary hover:text-primary-dark font-medium">chensora.official@gmail.com</a></span>
-              </p>
-              <div class="flex items-center justify-center md:justify-start space-x-6 mt-6">
-                <a href="https://www.facebook.com/profile.php?id=61564119424539" target="_blank"
-                  class="text-slate-400 hover:text-blue-600 transition-colors duration-300">
-                  <i class="fab fa-facebook fa-2x"></i>
-                </a>
-                <a href="https://www.youtube.com/@ChensoraOfficial" target="_blank"
-                  class="text-slate-400 hover:text-red-600 transition-colors duration-300">
-                  <i class="fab fa-youtube fa-2x"></i>
-                </a>
-                <a href="https://www.instagram.com/chensora.official/" target="_blank"
-                  class="text-slate-400 hover:text-pink-600 transition-colors duration-300">
-                  <i class="fab fa-instagram fa-2x"></i>
-                </a>
-                <a href="https://www.tiktok.com/@chensora" target="_blank"
-                  class="text-slate-400 hover:text-black transition-colors duration-300">
-                  <i class="fab fa-tiktok fa-2x"></i>
-                </a>
-              </div>
+          </div>
+
+          <!-- Row 2: Kontak & Sosial Media -->
+          <div class="bg-white rounded-[32px] p-8 shadow-lg border border-gray-100 text-center">
+            <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center justify-center tracking-tight">
+              <i class="fas fa-address-book text-primary mr-3"></i> Kontak & Sosial Media
+            </h4>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-10 mb-6">
+              <span class="text-slate-700 text-base md:text-lg">
+                <i class="fas fa-phone text-primary mr-2"></i>
+                Telepon: <a href="tel:+6289653515912"
+                  class="text-primary hover:text-primary-dark font-medium">+6289653515912</a>
+              </span>
+              <span class="text-slate-700 text-base md:text-lg">
+                <i class="fas fa-envelope text-primary mr-2"></i>
+                Email: <a href="mailto:chensora.official@gmail.com"
+                  class="text-primary hover:text-primary-dark font-medium">chensora.official@gmail.com</a>
+              </span>
+            </div>
+            <div class="flex items-center justify-center space-x-8">
+              <a href="https://www.facebook.com/profile.php?id=61564119424539" target="_blank"
+                class="text-slate-400 hover:text-blue-600 transition-colors duration-300">
+                <i class="fab fa-facebook fa-2x"></i>
+              </a>
+              <a href="https://www.youtube.com/@ChensoraOfficial" target="_blank"
+                class="text-slate-400 hover:text-red-600 transition-colors duration-300">
+                <i class="fab fa-youtube fa-2x"></i>
+              </a>
+              <a href="https://www.instagram.com/chensora.official/" target="_blank"
+                class="text-slate-400 hover:text-pink-600 transition-colors duration-300">
+                <i class="fab fa-instagram fa-2x"></i>
+              </a>
+              <a href="https://www.tiktok.com/@chensoraofficial" target="_blank"
+                class="text-slate-400 hover:text-black transition-colors duration-300">
+                <i class="fab fa-tiktok fa-2x"></i>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- Footer -->
@@ -974,7 +1512,7 @@
         once: true, // whether animation should happen only once - while scrolling down
       });
 
-      // Initialize Expert Medis Swiper
+      // Initialize Expert Medis Swiper with custom elegant arrows
       var expertSwiper = new Swiper(".expertSwiper", {
         slidesPerView: 1,
         spaceBetween: 30,
@@ -984,12 +1522,12 @@
           disableOnInteraction: true, // Stop autoplay when user interacts
         },
         pagination: {
-          el: ".swiper-pagination",
+          el: ".expertSwiper .swiper-pagination",
           clickable: true,
         },
         navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+          nextEl: ".expert-btn-next",
+          prevEl: ".expert-btn-prev",
         },
       });
 
@@ -1056,6 +1594,13 @@
             closeModal();
           }
         });
+
+        // Auto-close popup on scroll
+        window.addEventListener("scroll", () => {
+          if (!imageModal.classList.contains("hidden")) {
+            closeModal();
+          }
+        }, { passive: true });
       }
 
       // Back to Top Button Logic
@@ -1073,19 +1618,35 @@
       // Mobile menu toggle
       const mobileMenuButton = document.getElementById("mobile-menu-button");
       const mobileMenu = document.getElementById("mobile-menu");
-      mobileMenuButton.addEventListener("click", () => {
+      mobileMenuButton.addEventListener("click", (e) => {
+        e.stopPropagation();
         mobileMenu.classList.toggle("hidden");
       });
 
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (
+          !mobileMenu.classList.contains("hidden") &&
+          !mobileMenu.contains(e.target) &&
+          !mobileMenuButton.contains(e.target)
+        ) {
+          mobileMenu.classList.add("hidden");
+        }
+      });
+
+      // Close mobile menu on scroll
+      window.addEventListener("scroll", () => {
+        if (!mobileMenu.classList.contains("hidden")) {
+          mobileMenu.classList.add("hidden");
+        }
+      }, { passive: true });
+
       // Close mobile menu when a link is clicked
-      const allNavLinks = document.querySelectorAll("#navbar a");
+      const allNavLinks = document.querySelectorAll("#navbar a, #mobile-menu a");
       allNavLinks.forEach((link) => {
-        link.addEventListener("click", (e) => {
-          // Only close menu for anchor links on the same page
-          if (link.getAttribute("href").startsWith("#")) {
-            if (!mobileMenu.classList.contains("hidden")) {
-              mobileMenu.classList.add("hidden");
-            }
+        link.addEventListener("click", () => {
+          if (!mobileMenu.classList.contains("hidden")) {
+            mobileMenu.classList.add("hidden");
           }
         });
       });
@@ -1113,7 +1674,7 @@
           allEvents.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
 
           if (allEvents.length === 0) {
-            container.innerHTML = `<div class="text-center p-8 bg-white/50 rounded-2xl shadow"><p class="text-slate-700 font-semibold leading-relaxed text-base md:text-lg">Belum ada acara yang dijadwalkan.</p><p class="text-slate-500 mt-2 leading-relaxed text-base md:text-lg">Silakan cek kembali nanti.</p></div>`;
+            container.innerHTML = `<div class="text-center p-8 bg-white/50 rounded-[32px] shadow"><p class="text-slate-700 font-semibold leading-relaxed text-base md:text-lg">Belum ada acara yang dijadwalkan.</p><p class="text-slate-500 mt-2 leading-relaxed text-base md:text-lg">Silakan cek kembali nanti.</p></div>`;
             AOS.refresh();
             return;
           }
@@ -1181,7 +1742,7 @@
             const registrationLink = `https://wa.me/${waNumber}?text=${registrationText}`;
 
             allEventsHtml += `
-                <div class="bg-white overflow-hidden rounded-xl shadow-sm border border-gray-100 md:flex relative hover:shadow-md transition-shadow duration-300 ${isPastEvent ? "opacity-60" : ""
+                <div class="bg-white overflow-hidden rounded-[32px] shadow-sm border border-gray-100 md:flex relative hover:shadow-md transition-shadow duration-300 ${isPastEvent ? "opacity-60" : ""
               }" data-aos="fade-up">
                     ${isPastEvent
                 ? '<div class="absolute top-4 right-4 bg-slate-700 text-white text-xs font-bold px-3 py-1 rounded-full z-10">TELAH BERAKHIR</div>'
@@ -1221,7 +1782,7 @@
           AOS.refresh();
         } catch (error) {
           console.error("Gagal mengambil data acara:", error);
-          container.innerHTML = `<div class="text-center p-8 bg-white/50 rounded-2xl shadow"><p class="text-red-600 font-semibold leading-relaxed text-base md:text-lg">Gagal memuat jadwal acara.</p><p class="text-slate-500 mt-2 leading-relaxed text-base md:text-lg">Silakan coba muat ulang halaman.</p></div>`;
+          container.innerHTML = `<div class="text-center p-8 bg-white/50 rounded-[32px] shadow"><p class="text-red-600 font-semibold leading-relaxed text-base md:text-lg">Gagal memuat jadwal acara.</p><p class="text-slate-500 mt-2 leading-relaxed text-base md:text-lg">Silakan coba muat ulang halaman.</p></div>`;
           AOS.refresh();
         }
       }
@@ -1285,21 +1846,89 @@
         const currentScrollY = window.scrollY;
 
         if (currentScrollY <= 10) {
-          // Initial state: floating, attached to top edge, inset margins, rounded bottom
-          navbar.classList.remove("-translate-y-full", "left-0", "right-0", "rounded-none");
-          navbar.classList.add("left-4", "right-4", "lg:left-12", "lg:right-12", "rounded-b-2xl");
-        } else if (currentScrollY > lastScrollY && currentScrollY > 50) {
-          // Scrolling down: slide up and disappear
-          navbar.classList.add("-translate-y-full");
-          // If the mobile menu is open, we can close it here, but leaving it as is for now.
-        } else if (currentScrollY < lastScrollY) {
-          // Scrolling up: slide down, full width, no rounded corners
-          navbar.classList.remove("-translate-y-full", "left-4", "right-4", "lg:left-12", "lg:right-12", "rounded-b-2xl");
-          navbar.classList.add("left-0", "right-0", "rounded-none");
+          // Initial state: visible and at top
+          navbar.classList.remove("hidden-navbar");
+          navbar.classList.add("at-top");
+        } else {
+          navbar.classList.remove("at-top");
+          if (currentScrollY > lastScrollY && currentScrollY > 50) {
+            // Scrolling down: slide up and disappear
+            navbar.classList.add("hidden-navbar");
+          } else if (currentScrollY < lastScrollY) {
+            // Scrolling up: slide down and appear
+            navbar.classList.remove("hidden-navbar");
+          }
         }
 
         lastScrollY = currentScrollY;
       });
+
+      // ---- Hero Slider Logic ----
+      const heroSlideData = [
+        {
+          title: 'Membangun Masa Depan Sehat bersama<br/><span class="text-primary-300" style="color:#7cd0ef">ChenSora</span>',
+          desc: 'Kami berdedikasi untuk meningkatkan kualitas hidup Anda melalui produk kesehatan inovatif dan peluang bisnis yang terpercaya.'
+        },
+        {
+          title: 'Produk Kesehatan<br/><span style="color:#7cd0ef">Inovatif & Terpercaya</span>',
+          desc: 'Setiap produk ChenSora didukung oleh para ahli medis dan telah teruji memberikan manfaat nyata bagi kesehatan Anda.'
+        },
+        {
+          title: 'Bisnis Menjanjikan,<br/><span style="color:#7cd0ef">Masa Depan Cerah</span>',
+          desc: 'Raih kebebasan finansial melalui skema bisnis yang adil, transparan, dan terbukti menghasilkan bersama ChenSora.'
+        },
+        {
+          title: 'Komunitas Solid,<br/><span style="color:#7cd0ef">Anda Tidak Sendiri</span>',
+          desc: 'Bergabunglah dengan komunitas positif yang saling mendukung. Bersama kami, perjalanan menuju sukses terasa lebih mudah.'
+        }
+      ];
+
+      let heroCurrentIndex = 0;
+      let heroAutoplay;
+
+      const heroSlides = document.querySelectorAll('.hero-slide');
+      const heroDots = document.querySelectorAll('.hero-dot');
+      const heroTextEl = document.getElementById('hero-slide-text');
+
+      function heroGoTo(index) {
+        heroSlides[heroCurrentIndex].classList.remove('active');
+        heroDots[heroCurrentIndex].classList.remove('active');
+        heroCurrentIndex = (index + heroSlides.length) % heroSlides.length;
+        heroSlides[heroCurrentIndex].classList.add('active');
+        heroDots[heroCurrentIndex].classList.add('active');
+        const d = heroSlideData[heroCurrentIndex];
+        heroTextEl.innerHTML = `
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight" style="text-align:left;">${d.title}</h1>
+          <p class="mt-6 text-lg md:text-xl text-slate-200 max-w-2xl leading-relaxed" style="text-align:left;">${d.desc}</p>
+        `;
+      }
+
+      // Init first slide text
+      heroGoTo(0);
+
+      document.getElementById('hero-prev').addEventListener('click', () => {
+        clearInterval(heroAutoplay);
+        heroGoTo(heroCurrentIndex - 1);
+        heroAutoplay = setInterval(() => heroGoTo(heroCurrentIndex + 1), 5000);
+      });
+
+      document.getElementById('hero-next').addEventListener('click', () => {
+        clearInterval(heroAutoplay);
+        heroGoTo(heroCurrentIndex + 1);
+        heroAutoplay = setInterval(() => heroGoTo(heroCurrentIndex + 1), 5000);
+      });
+
+      heroDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          clearInterval(heroAutoplay);
+          heroGoTo(parseInt(dot.dataset.index));
+          heroAutoplay = setInterval(() => heroGoTo(heroCurrentIndex + 1), 5000);
+        });
+      });
+
+      heroAutoplay = setInterval(() => heroGoTo(heroCurrentIndex + 1), 5000);
+      // ---- End Hero Slider Logic ----
+
     });
   </script>
 </body>

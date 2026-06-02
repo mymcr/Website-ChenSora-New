@@ -31,6 +31,10 @@
                 500: '#2e9bc8',
                 600: '#2080aa',
                 700: '#1a6689',
+              },
+              soca: {
+                navy: '#0a1628',
+                yellow: '#d4ff00',
               }
             },
             backgroundImage: {
@@ -43,11 +47,11 @@
       }
     </script>
 
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Roboto -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
       rel="stylesheet"
     />
 
@@ -60,9 +64,14 @@
 
     <style>
       body {
-        font-family: "Inter", sans-serif;
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
         background-color: #ffffff;
         scroll-behavior: smooth;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
       }
       
       .nav-link {
@@ -80,6 +89,24 @@
         width: 100%;
         height: 2px;
         background-color: #52b3dd;
+      }
+      /* SOCA Highlighted Nav Link */
+      .soca-nav-link {
+        background: linear-gradient(135deg, #007BFF, #003A75);
+        color: #FFFFFF !important;
+        padding: 6px 18px;
+        border-radius: 9999px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 12px rgba(0, 123, 255, 0.25);
+      }
+      .soca-nav-link:hover {
+        background: linear-gradient(135deg, #0088ff, #004a94);
+        color: #FFFFFF !important;
+        box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
+      }
+      .soca-nav-link.active::after {
+        display: none;
       }
       
       /* Card Hover Effects */
@@ -163,7 +190,7 @@
     <!-- Smart Navigation Bar -->
     <header
       id="navbar"
-      class="fixed top-0 left-4 right-4 lg:left-12 lg:right-12 z-50 bg-white rounded-b-2xl shadow-lg px-6 py-3 flex justify-between items-center transition-all duration-300 transform translate-y-0"
+      class="fixed top-0 left-4 right-4 lg:left-12 lg:right-12 z-50 bg-white rounded-b-2xl shadow-lg px-6 py-5 flex justify-between items-center transition-all duration-300 transform translate-y-0"
     >
       <a href="index.html" class="flex items-center space-x-3 text-2xl font-bold">
         <img
@@ -175,16 +202,16 @@
       </a>
       
       <!-- Desktop Navigation -->
-      <nav class="hidden xl:flex items-center space-x-8">
+      <nav class="hidden xl:flex items-center space-x-6">
         <a href="index.html" class="nav-link text-slate-600 hover:text-primary transition duration-300">Beranda</a>
         <a href="index.html#expert-medis" class="nav-link text-slate-600 hover:text-primary transition duration-300">Tentang Kami</a>
         <a href="index.html#produk" class="nav-link text-slate-600 hover:text-primary transition duration-300">Produk</a>
         <a href="index.html#marketing-plan" class="nav-link text-slate-600 hover:text-primary transition duration-300">Bisnis</a>
         <a href="index.html#jadwal-acara" class="nav-link text-slate-600 hover:text-primary transition duration-300">Informasi</a>
-        <a href="soca.html" class="nav-link text-slate-600 hover:text-primary transition duration-300">SOCA</a>
+        <a href="soca.html" class="nav-link soca-nav-link transition duration-300">SOCA</a>
         <a
           href="index.html#kontak"
-          class="ml-4 bg-primary text-white font-semibold py-2 px-6 rounded-full text-sm hover:bg-primary-dark transition duration-300 shadow-sm"
+          class="ml-2 bg-primary text-white font-semibold py-2.5 px-6 rounded-full text-sm hover:bg-primary-dark transition duration-300 shadow-sm"
         >
           Hubungi Kami
         </a>
@@ -204,14 +231,14 @@
     </header>
 
     <!-- Mobile Menu Dropdown -->
-    <div id="mobile-menu" class="hidden fixed top-20 left-4 right-4 bg-white rounded-2xl shadow-xl z-40 overflow-hidden xl:hidden transition-all duration-300">
+    <div id="mobile-menu" class="hidden fixed top-24 left-4 right-4 bg-white rounded-2xl shadow-xl z-40 overflow-hidden xl:hidden transition-all duration-300">
       <div class="p-4 space-y-1">
         <a href="index.html" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Beranda</a>
         <a href="index.html#expert-medis" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Tentang Kami</a>
         <a href="index.html#produk" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Produk</a>
         <a href="index.html#marketing-plan" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Bisnis</a>
         <a href="index.html#jadwal-acara" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Informasi</a>
-        <a href="soca.html" class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">SOCA</a>
+        <a href="soca.html" class="block py-4 text-lg font-semibold px-4 rounded-xl transition-colors text-white" style="background: linear-gradient(135deg, #007BFF, #003A75);">✨ SOCA</a>
         <a href="index.html#kontak" class="block mt-2 bg-primary text-white font-semibold py-4 px-6 rounded-xl text-center text-lg shadow-sm">Hubungi Kami</a>
       </div>
     </div>
@@ -388,8 +415,34 @@
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById("mobile-menu-button");
         const mobileMenu = document.getElementById("mobile-menu");
-        mobileMenuBtn.addEventListener("click", () => {
+        mobileMenuBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
           mobileMenu.classList.toggle("hidden");
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener("click", (e) => {
+          if (
+            !mobileMenu.classList.contains("hidden") &&
+            !mobileMenu.contains(e.target) &&
+            !mobileMenuBtn.contains(e.target)
+          ) {
+            mobileMenu.classList.add("hidden");
+          }
+        });
+
+        // Close mobile menu on scroll
+        window.addEventListener("scroll", () => {
+          if (!mobileMenu.classList.contains("hidden")) {
+            mobileMenu.classList.add("hidden");
+          }
+        }, { passive: true });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll("#mobile-menu a").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.add("hidden");
+          });
         });
       });
     </script>
