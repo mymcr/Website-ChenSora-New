@@ -1,22 +1,49 @@
 <?php
+session_start(['cookie_httponly' => true, 'cookie_samesite' => 'Lax', 'cookie_secure' => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off']);
 // Mengatur header agar outputnya adalah JSON
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *"); 
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit(); }
+$requestInput = json_decode(file_get_contents('php://input'), true) ?? [];
+$requestAction = $_GET['action'] ?? $requestInput['action'] ?? null;
+if (($_SERVER['REQUEST_METHOD'] === 'POST' && $requestAction !== 'login') || $requestAction === 'getTrashData') {
+    if (empty($_SESSION['content_admin'])) {
+        http_response_code(401);
+        echo json_encode(['status' => 'error', 'message' => 'Sesi admin berakhir. Silakan login kembali.']);
+        exit();
+    }
+}
 
-// --- KONFIGURASI DATABASE ---
-$db_host = "localhost";      
-$db_user = "u652620101_chensora";
-$db_pass = "PTLs123456.";
-$db_name = "u652620101_websiteadmin";    
-// -------------------------
+// --- KONFIGURASI DATABASE: tetapkan pada environment hosting ---
+$db_host = getenv('DB_HOST') ?: 'localhost';
+$db_user = getenv('DB_USER') ?: '';
+$db_pass = getenv('DB_PASSWORD') ?: '';
+$db_name = getenv('DB_NAME') ?: '';
+if ($db_user === '' || $db_name === '') {
+    http_response_code(503);
+    echo json_encode(['status' => 'error', 'message' => 'Database belum dikonfigurasi. Tetapkan DB_HOST, DB_USER, DB_PASSWORD, dan DB_NAME pada environment hosting.']);
+    exit();
+}
 
-// Buat koneksi ke database
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+// Buat koneksi ke database; jangan tampilkan detail koneksi kepada klien.
+if (!class_exists('mysqli')) {
+    http_response_code(503);
+    echo json_encode(['status' => 'error', 'message' => 'Login database memerlukan ekstensi PHP mysqli. Gunakan server hosting yang terkonfigurasi atau akun admin melalui konfigurasi environment.']);
+    exit();
+}
+try {
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+} catch (mysqli_sql_exception $error) {
+    http_response_code(503);
+    echo json_encode(['status' => 'error', 'message' => 'Database admin belum tersedia pada server ini. Periksa konfigurasi database server.']);
+    exit();
+}
 
 if ($conn->connect_error) {
-    echo json_encode(['status' => 'error', 'message' => 'Koneksi database gagal: ' . $conn->connect_error]);
+    http_response_code(503);
+    echo json_encode(['status' => 'error', 'message' => 'Database admin belum tersedia pada server ini.']);
     exit();
 }
 
@@ -35,7 +62,7 @@ function uploadFile($fileData) {
         }
         $file_path = 'uploads/' . $file_name;
         $file_data = base64_decode($base64_string);
-        
+
         if (file_put_contents($file_path, $file_data)) {
             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
             $domainName = $_SERVER['HTTP_HOST'];
@@ -108,13 +135,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($action) {
         case 'login':
             $email = $input['email'] ?? ''; $password = $input['password'] ?? '';
-            if (empty($email) || empty($password)) { $response = ['status' => 'error', 'message' => 'Email dan password tidak boleh kosong.']; } 
+            if (empty($email) || empty($password)) { $response = ['status' => 'error', 'message' => 'Email dan password tidak boleh kosong.']; }
             else {
                 $stmt = $conn->prepare("SELECT password FROM login WHERE email = ?");
                 $stmt->bind_param("s", $email); $stmt->execute(); $result = $stmt->get_result();
                 if ($result->num_rows > 0) {
                     $user = $result->fetch_assoc();
-                    if ($password === $user['password']) { $response = ['status' => 'success', 'user' => ['email' => $email]]; } 
+                    $isHashed = password_get_info($user['password'])['algo'] !== null;
+                    if (($isHashed && password_verify($password, $user['password'])) || (!$isHashed && hash_equals($user['password'], $password))) { session_regenerate_id(true); $_SESSION['content_admin'] = $email; $_SESSION['content_csrf'] = bin2hex(random_bytes(32)); $response = ['status' => 'success', 'user' => ['email' => $email]]; }
                     else { $response = ['status' => 'error', 'message' => 'Email atau password salah.']; }
                 } else { $response = ['status' => 'error', 'message' => 'Email atau password salah.']; }
                 $stmt->close();

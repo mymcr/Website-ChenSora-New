@@ -180,6 +180,7 @@
                 <i class="fas fa-tachometer-alt w-6 text-center"></i>
                 <span class="mx-3">Dashboard</span>
               </a>
+              <a href="content.html" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-200">Kelola Konten Website</a>
               <a
                 href="#reseller"
                 id="nav-reseller"
@@ -1480,7 +1481,7 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const API_URL = "https://home.chensora.co.id/api.php";
+        const API_URL = new URL("../api.php", window.location.href).href;
 
         // --- State Cache ---
         let allResellers = [],
@@ -1725,6 +1726,14 @@
           navigateTo("dashboard");
         }
         function handleLogout() {
+          fetch('../content-api.php?admin=1', {credentials:'same-origin'})
+            .then(response => response.json())
+            .then(result => {
+              if (result.status === 'success') return fetch('../content-api.php', {
+                method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({action:'logout',csrf:result.csrf})
+              });
+            }).catch(() => {});
           sessionStorage.removeItem("loggedInUserEmail");
           dashboardContainer.classList.add("hidden");
           loginContainer.classList.remove("hidden");

@@ -1,0 +1,218 @@
+{
+  "products": [
+    {
+      "id": "product-0",
+      "name": "Yorokobi Koffie",
+      "description": "Kopi stamina dan antioksidan pertama di Indonesia dengan Panax Ginseng, Guarana, dan Daun Kelor.",
+      "image": "asset/poster/Yorokobi-Koffie.jpg",
+      "url": "http://www.yorokobikoffie.com",
+      "order": 0,
+      "published": true
+    },
+    {
+      "id": "product-1",
+      "name": "Pyon Pyon Jelly",
+      "description": "Jelly Fiber dengan rasa lezat untuk memenuhi nutrisi harian dan mendukung tumbuh kembang anak.",
+      "image": "asset/poster/BROSURPYON.webp",
+      "url": "http://pyonpyonjelly.com",
+      "order": 1,
+      "published": true
+    },
+    {
+      "id": "product-2",
+      "name": "Kakkoi",
+      "description": "Minuman gel detox dan kecantikan dengan kolagen untuk meregenerasi sel dan mencerahkan kulit dari dalam.",
+      "image": "asset/poster/BROSURKK.webp",
+      "url": "http://kakkoi.id",
+      "order": 2,
+      "published": true
+    },
+    {
+      "id": "product-3",
+      "name": "SOCA Guard",
+      "description": "SOCA GUARD adalah perlindungan antimikroba serbaguna berbasis air (water-based) yang aman, ramah lingkungan, dan dirancang khusus untuk melindungi berbagai permukaan dari mikroorganisme berbahaya serta bau tak sedap.",
+      "image": "",
+      "url": "https://socaofficial.co.id/",
+      "order": 3,
+      "published": true
+    }
+  ],
+  "experts": [
+    {
+      "id": "expert-0",
+      "name": "dr. Dhany Akbar",
+      "description": "Expert Medis ChenSora",
+      "image": "asset/img/drdhan.webp",
+      "order": 0,
+      "published": true
+    },
+    {
+      "id": "expert-1",
+      "name": "dr. Nadiva Rully",
+      "description": "Expert Medis ChenSora",
+      "image": "asset/img/drdiva.webp",
+      "order": 1,
+      "published": true
+    },
+    {
+      "id": "expert-2",
+      "name": "dr. Fin Endriana",
+      "description": "Expert Medis ChenSora",
+      "image": "asset/img/drfin.webp",
+      "order": 2,
+      "published": true
+    },
+    {
+      "id": "expert-3",
+      "name": "dr. Novi Yuliana",
+      "description": "Expert Medis ChenSora",
+      "image": "asset/img/drnov.webp",
+      "order": 3,
+      "published": true
+    },
+    {
+      "id": "expert-4",
+      "name": "dr. Heni Susi",
+      "description": "Expert Medis ChenSora",
+      "image": "asset/img/drheni.webp",
+      "order": 4,
+      "published": true
+    },
+    {
+      "id": "expert-5",
+      "name": "dr. Indri Buchari",
+      "description": "Expert Medis ChenSora",
+      "image": "asset/img/drindri.webp",
+      "order": 5,
+      "published": true
+    },
+    {
+      "id": "expert-6",
+      "name": "dr. Agnes Tity",
+      "description": "Expert Medis ChenSora",
+      "image": "https://placehold.co/300x300/a5f3fc/0e7490?text=dr.agnestity",
+      "order": 6,
+      "published": true
+    },
+    {
+      "id": "expert-7",
+      "name": "dr. Yohana M.R Maryorie",
+      "description": "Expert Medis ChenSora",
+      "image": "asset/img/dryohan.webp",
+      "order": 7,
+      "published": true
+    },
+    {
+      "id": "expert-8",
+      "name": "dr. Roberto Augustino, M.Biomed AAM",
+      "description": "Expert Medis ChenSora",
+      "image": "asset/img/drrob.webp",
+      "order": 8,
+      "published": true
+    },
+    {
+      "id": "expert-9",
+      "name": "dr. Lucky Rahardjo R",
+      "description": "Expert Medis ChenSora",
+      "image": "asset/img/drlucky.webp",
+      "order": 9,
+      "published": true
+    },
+    {
+      "id": "expert-10",
+      "name": "dr. Viedya Soesetyo",
+      "description": "Expert Medis ChenSora",
+      "image": "asset/img/drvid.webp",
+      "order": 10,
+      "published": true
+    }
+  ],
+  "merchants": [
+    {
+      "id": "merchant-0",
+      "name": "Shopee",
+      "description": "Belanja online",
+      "image": "asset/logo/merchant-shopee.png",
+      "url": "https://socaofficial.co.id/",
+      "order": 0,
+      "published": true
+    },
+    {
+      "id": "merchant-1",
+      "name": "Shopeefood",
+      "description": "Pesan makanan",
+      "image": "asset/logo/merchant-shopeefood.png",
+      "url": "https://socaofficial.co.id/",
+      "order": 1,
+      "published": true
+    },
+    {
+      "id": "merchant-2",
+      "name": "TikTok Shop",
+      "description": "Temukan produk favorit",
+      "image": "asset/logo/merchant-tiktokshop.png",
+      "url": "https://socaofficial.co.id/",
+      "order": 2,
+      "published": true
+    },
+    {
+      "id": "merchant-3",
+      "name": "Tokopedia",
+      "description": "Kebutuhan sehari-hari",
+      "image": "asset/logo/merchant-tokopedia.png",
+      "url": "https://socaofficial.co.id/",
+      "order": 3,
+      "published": true
+    },
+    {
+      "id": "merchant-4",
+      "name": "Traveloka",
+      "description": "Rencanakan perjalanan",
+      "image": "asset/logo/merchant-traveloka.png",
+      "url": "https://socaofficial.co.id/",
+      "order": 4,
+      "published": true
+    }
+  ],
+  "news": [
+    {
+      "id": "news-komunitas",
+      "name": "ChenSora memperkenalkan Kakkoi bersama komunitas Surabaya",
+      "description": "Liputan Kabarhit membahas kegiatan ?From Gut to Glow? bersama Hijaber Community Surabaya. Acara ini mempertemukan tim ChenSora, dokter, dan undangan dalam pengenalan produk.",
+      "body": "Kegiatan ini menjadi ruang berbagi informasi mengenai produk ChenSora dan gaya hidup sehat. Ringkasan ini merujuk pada liputan Kabarhit tanggal 28 Juli 2025; baca sumber asli untuk konteks lengkap.",
+      "date": "2025-07-28",
+      "source": "Kabarhit",
+      "url": "https://kabarhit.com/news-28704-kakkoi-jadi-primadona-baru-detox-harian-aman-dikonsumsi-dan-bersertifikat-halal",
+      "image": "asset/img/chensora lounge.webp",
+      "image_caption": "Ilustrasi: lounge ChenSora, bukan foto acara.",
+      "order": 0,
+      "published": true
+    },
+    {
+      "id": "news-kakkoi",
+      "name": "Peluncuran Kakkoi menjadi ajang pengenalan produk ChenSora",
+      "description": "RRI melaporkan peluncuran Kakkoi di Surabaya pada Juli 2025. Liputan tersebut memuat penjelasan tim ChenSora mengenai produk dan kegiatan pengenalannya.",
+      "body": "Laporan RRI memuat keterangan Chen Maria, dr. Festine Rohrich, dan Eko Wibowo mengenai pengenalan Kakkoi. Ringkasan ini tidak menambahkan klaim medis di luar liputan aslinya.",
+      "date": "2025-07-01",
+      "source": "RRI Surabaya",
+      "url": "https://rri.co.id/surabaya/bisnis/1671711/kakkoi-detox-usus-sekaligus-perawatan-kulit-dari-chensora",
+      "image": "asset/img/dokfest.webp",
+      "image_caption": "Ilustrasi: profil dr. Festine Rohrich.",
+      "order": 1,
+      "published": true
+    },
+    {
+      "id": "news-kantor",
+      "name": "ChenSora/PTLS membuka kantor di Graha SA Surabaya",
+      "description": "RRI memberitakan soft launching kantor ChenSora pada 31 Agustus 2024. Pembukaan kantor dihadiri Chen Maria dan tim perusahaan.",
+      "body": "RRI menyebut PT Pelabuhan Terakhir Langgeng Sejahtera sebagai perusahaan yang dikenal dengan nama ChenSora. Kantor di Graha SA Surabaya menjadi bagian dari perluasan jaringan dan layanan informasi perusahaan.",
+      "date": "2024-08-31",
+      "source": "RRI Surabaya",
+      "url": "https://rri.co.id/surabaya/bisnis/943986/chensora-soft-launching-kantor-baru",
+      "image": "asset/img/chensora lounge.webp",
+      "image_caption": "Ilustrasi: lounge ChenSora.",
+      "order": 2,
+      "published": true
+    }
+  ]
+}

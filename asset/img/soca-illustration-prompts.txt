@@ -1,0 +1,7 @@
+Generated with built-in image_gen.
+
+Shopping/travel prompt:
+Create a premium playful 3D clay-render illustration for Indonesian cashback app SOCA website. Shopping bag, miniature travel airplane, suitcase, shopping cart, floating golden coins, soft sky-blue palette, centered compact composition, soft studio lighting, isolated on a uniform very pale blue #e7f7fc background, landscape 3:2. No words, no text, no logos, no currency amounts. Website benefit panel editorial asset.
+
+Cashback/rewards prompt:
+Create a premium playful 3D clay-render illustration for Indonesian cashback app SOCA website. A sleek upright smartphone with abstract blue screen, golden coins, a small trophy and mint confetti, conveying cashback rewards. Centered compact composition, soft studio lighting, isolated on a uniform very pale mint #eaf8f0 background, landscape 3:2. No words, no text, no logos, no numbers. Website benefit panel editorial asset.

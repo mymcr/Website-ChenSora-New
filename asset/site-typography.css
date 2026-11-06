@@ -1,0 +1,9 @@
+/* Shared narrative alignment for ChenSora public pages. */
+p.narrative-text,
+p[class*="leading-relaxed"],
+p[class*="leading-loose"],
+blockquote {
+  text-align: justify;
+  text-align-last: start;
+  overflow-wrap: break-word;
+}

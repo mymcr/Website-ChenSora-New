@@ -1,0 +1,7 @@
+/scratch/php-runtime/
+/scratch/php-runtime.zip
+/scratch/cms-test-data/
+/content-data/store.json
+/content-data/write.lock
+/uploads/content/*
+!/uploads/content/.htaccess

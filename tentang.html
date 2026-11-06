@@ -65,15 +65,27 @@
       scroll-behavior: smooth;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-family: "Manrope", sans-serif;
       font-weight: 600;
       letter-spacing: -0.5px;
     }
 
     /* SOCA banner: fokus ke kanan di HP, tengah di desktop (sama seperti beranda) */
-    .soca-bg-banner { background-position: right center; }
-    @media (min-width: 768px) { .soca-bg-banner { background-position: center center; } }
+    .soca-bg-banner {
+      background-position: right center;
+    }
+
+    @media (min-width: 768px) {
+      .soca-bg-banner {
+        background-position: center center;
+      }
+    }
 
     .btn-gradient {
       background: linear-gradient(135deg, #52b3dd 0%, #2080aa 100%);
@@ -81,10 +93,273 @@
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(82, 179, 221, 0.4);
     }
+
     .btn-gradient:hover {
       background: linear-gradient(135deg, #2080aa 0%, #1a6689 100%);
       box-shadow: 0 8px 25px rgba(82, 179, 221, 0.5);
       transform: translateY(-2px);
+    }
+
+    /* --- Timeline Perjalanan Kami --- */
+    .tl-line-fill {
+      transform-origin: top;
+      transform: scaleY(0);
+      transition: transform 0.15s linear;
+    }
+
+    .tl-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 9999px;
+      background: #ffffff;
+      border: 4px solid #b9e5f7;
+      z-index: 2;
+      transition: border-color 0.5s ease, background-color 0.5s ease, transform 0.5s ease;
+    }
+
+    .tl-dot.is-active {
+      border-color: #52b3dd;
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    .tl-dot-focus {
+      width: 26px;
+      height: 26px;
+    }
+
+    .tl-dot-focus.is-active {
+      background: #52b3dd;
+      border-color: #ffffff;
+      box-shadow: 0 0 0 4px rgba(82, 179, 221, 0.35);
+    }
+
+    .tl-dot-focus.is-active::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 9999px;
+      border: 2px solid rgba(82, 179, 221, 0.5);
+      animation: tl-pulse 2.2s ease-out infinite;
+    }
+
+    @keyframes tl-pulse {
+      0% {
+        transform: scale(0.7);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    .tl-track {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 3px;
+      margin-left: -1.5px;
+      background: #d9eff9;
+      border-radius: 999px;
+    }
+
+    #timeline-fill {
+      background: linear-gradient(to bottom, #7cd0ef, #52b3dd, #2080aa);
+    }
+
+    .tl-rows {
+      display: grid;
+      gap: 88px;
+      padding: 24px 0;
+    }
+
+    .tl-history {
+      display: grid;
+      gap: 88px;
+    }
+
+    .tl-history[hidden] {
+      display: none;
+    }
+
+    .tl-history-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 auto 40px;
+      padding: 12px 22px;
+      border: 1px solid #b9e5f7;
+      border-radius: 999px;
+      background: white;
+      color: #2080aa;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .tl-history-toggle:hover {
+      background: #f0f9ff;
+    }
+
+    .tl-history-toggle:focus-visible {
+      outline: 3px solid #52b3dd;
+      outline-offset: 4px;
+    }
+
+    .tl-history-toggle svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s ease;
+    }
+
+    .tl-history-toggle[aria-expanded="true"] svg {
+      transform: rotate(180deg);
+    }
+
+    .tl-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+      column-gap: 112px;
+    }
+
+    .tl-item>.tl-dot {
+      position: absolute;
+      left: 50%;
+      top: 36px;
+      transform: translateX(-50%);
+    }
+
+    .tl-copy {
+      grid-column: 1;
+      grid-row: 1;
+      min-width: 0;
+    }
+
+    .tl-media {
+      grid-column: 2;
+      grid-row: 1;
+      margin: 0;
+      padding: 24px;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #eef8fc;
+      border: 1px solid #e0f2fe;
+    }
+
+    .tl-item-reverse .tl-copy {
+      grid-column: 2;
+    }
+
+    .tl-item-reverse .tl-media {
+      grid-column: 1;
+    }
+
+    .tl-year {
+      display: inline-block;
+      color: #2080aa;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .tl-copy h3 {
+      color: #1e293b;
+      font-size: clamp(1.5rem, 2.3vw, 1.875rem);
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.025em;
+    }
+
+    .tl-points {
+      display: grid;
+      gap: 18px;
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+      color: #475569;
+      line-height: 1.8;
+    }
+
+    .tl-points strong {
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .tl-media img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+    }
+
+    .tl-media-photo {
+      padding: 0;
+    }
+
+    .tl-media-photo img {
+      object-fit: cover;
+    }
+
+    @media (max-width: 767px) {
+      .tl-track {
+        left: 10px;
+      }
+
+      .tl-rows {
+        gap: 48px;
+        padding-top: 12px;
+      }
+
+      .tl-history {
+        gap: 48px;
+      }
+
+      .tl-item {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        padding-left: 42px;
+      }
+
+      .tl-item>.tl-dot {
+        left: 10px;
+        top: 4px;
+      }
+
+      .tl-item .tl-copy {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .tl-item .tl-media {
+        grid-column: 1;
+        grid-row: 2;
+        border-radius: 20px;
+      }
+
+      .tl-points {
+        font-size: 15px;
+        margin-top: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .tl-line-fill,
+      .tl-dot {
+        transition: none;
+      }
+
+      .tl-dot-focus.is-active::after {
+        animation: none;
+      }
     }
 
     /* --- Navbar kapsul melayang (sama dengan beranda) --- */
@@ -111,17 +386,48 @@
       color: #333333;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    .floating-navbar.hidden-navbar { transform: translate(-50%, -150%); opacity: 0; }
-    .floating-navbar.at-top { background: rgba(255, 255, 255, 0.85); border-color: rgba(82, 179, 221, 0.2); }
-    .floating-navbar.at-top .nav-links a { color: #333333; }
+
+    .floating-navbar.hidden-navbar {
+      transform: translate(-50%, -150%);
+      opacity: 0;
+    }
+
+    .floating-navbar.at-top {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(82, 179, 221, 0.2);
+    }
+
+    .floating-navbar.at-top .nav-links a {
+      color: #333333;
+    }
+
     .floating-navbar.at-top #mobile-menu-button {
       color: #333333;
       background: rgba(255, 255, 255, 0.8);
       border-color: rgba(82, 179, 221, 0.25);
     }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo img { height: 32px; width: auto; }
-    .nav-links { display: none; align-items: center; gap: 24px; list-style: none; margin: 0; padding: 0; }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
     .nav-links a {
       text-decoration: none;
       color: #333333;
@@ -130,8 +436,15 @@
       gap: 6px;
       transition: opacity 0.2s ease, color 0.3s ease;
     }
-    .nav-links a:hover { opacity: 0.7; }
-    .nav-links a.is-current { font-weight: 800; }
+
+    .nav-links a:hover {
+      opacity: 0.7;
+    }
+
+    .nav-links a.is-current {
+      font-weight: 800;
+    }
+
     .nav-pill {
       background: rgba(255, 255, 255, 0.8);
       color: #333333 !important;
@@ -141,7 +454,11 @@
       font-size: 13px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
-    .nav-pill:hover { background: #ffffff; }
+
+    .nav-pill:hover {
+      background: #ffffff;
+    }
+
     .btn-cta {
       background: linear-gradient(135deg, #52b3dd 0%, #2080aa 100%);
       color: #ffffff;
@@ -152,17 +469,109 @@
       font-size: 14px;
       transition: transform 0.2s ease;
     }
-    .btn-cta:hover { transform: translateY(-2px); }
-    .nav-actions { display: flex; align-items: center; gap: 12px; }
 
-    @media (min-width: 1025px) { .nav-links { display: flex; } .btn-cta { box-shadow: none !important; } }
-    @media (min-width: 1280px) { .nav-links { gap: 32px; } }
-    @media (max-width: 1024px) {
-      .floating-navbar { padding: 8px 10px 8px 16px; width: calc(100% - 24px); top: 12px; }
-      .nav-logo img { height: 26px; }
-      .btn-cta-mobile-hide { display: none; }
+    .btn-cta:hover {
+      transform: translateY(-2px);
     }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    @media (min-width: 1025px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .btn-cta {
+        box-shadow: none !important;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .nav-links {
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .floating-navbar {
+        padding: 8px 10px 8px 16px;
+        width: calc(100% - 24px);
+        top: 12px;
+      }
+
+      .nav-logo img {
+        height: 26px;
+      }
+
+      .btn-cta-mobile-hide {
+        display: none;
+      }
+    }
+
+    /* Compact spacing across the about page; keep text and scroll effects intact. */
+    main > section { scroll-margin-top: 100px; }
+    main > section:first-child .aspect-square { max-width: 340px; margin-inline: auto; }
+    #kisah-kami img { max-height: 320px; }
+    #perjalanan .tl-rows, #perjalanan .tl-history { gap: 48px; }
+    #perjalanan .tl-rows { padding-block: 16px; }
+    #perjalanan .tl-item { column-gap: 80px; }
+    #perjalanan .tl-media { padding: 16px; }
+    #perjalanan .tl-media-photo { padding: 0; }
+    #perjalanan .tl-media img { aspect-ratio: 16 / 10; max-height: 280px; }
+    #perjalanan .tl-points { gap: 12px; margin-top: 16px; line-height: 1.65; }
+    #perjalanan .tl-history-toggle { margin-bottom: 24px; }
+    #pilar .grid > div, #nilai .grid > div { text-align: left; }
+    #pilar .w-12, #nilai .w-12 { margin-left: 0; margin-right: 0; border-radius: 16px; }
+    @media (max-width: 767px) {
+      main > section:first-child .aspect-square { max-width: 280px; }
+      #perjalanan .tl-rows, #perjalanan .tl-history { gap: 32px; }
+      #perjalanan .tl-item { row-gap: 16px; }
+      #perjalanan .tl-media img { max-height: 220px; }
+      #kisah-kami img { max-height: 240px; }
+    }
+
+    /* Editorial typography and photo composition for the about page. */
+    .about-intro-grid, .about-story-inner { max-width:1152px;margin:auto;padding-inline:24px; }
+    .about-intro-grid { display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center; }
+    .about-eyebrow { display:inline-block;background:#f3f4f6;color:#475569;font-size:12px;font-weight:500;padding:6px 14px;border-radius:99px;margin-bottom:18px; }
+    main h1, main h2 { font-weight:700!important;letter-spacing:-.04em!important;line-height:1.18!important; }
+    main h1 { color:#100f12;font-size:clamp(30px,3.4vw,44px); }
+    main h1 span, main h2 span { color:#8a8a8a; }
+    main h2 { font-size:clamp(26px,3vw,40px)!important; }
+    main h2.text-slate-800 { color:#100f12; }
+    #visi-misi h2 span, #pilar h2 span, #gabung h2 span { color:#b7b4bd; }
+    .about-intro-copy > p { color:#64748b;font-size:16px;line-height:1.8;margin-top:22px; }
+    .about-photo-collage { position:relative;min-height:380px;margin-block:12px; }
+    .about-photo-collage img { position:absolute;object-fit:cover;border-radius:8px;box-shadow:0 8px 30px #0f172a12; }
+    .about-photo-main { width:76%;height:310px;left:12%;top:12px; }
+    .about-photo-small { border:5px solid #fff; }
+    .about-photo-bottom { width:32%;height:180px;bottom:0;left:0; }
+    .about-photo-top { width:33%;height:165px;right:0;top:44px; }
+    .about-story { padding:48px 0 56px; }
+    .about-story-heading { display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:start;margin-bottom:28px; }
+    .about-story-copy p { color:#64748b;font-size:15px;line-height:1.8;margin-bottom:16px; }
+    .about-story-strip { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px; }
+    #kisah-kami .about-story-strip img { width:100%;height:190px;object-fit:cover;max-height:none;border-radius:8px; }
+    @media(max-width:767px) {
+      .about-intro-grid { grid-template-columns:1fr;gap:28px; }
+      .about-photo-collage { min-height:310px;width:100%;max-width:480px;margin-inline:auto; }
+      .about-photo-main { height:260px; }
+      .about-photo-bottom { height:145px; }
+      .about-photo-top { height:130px; }
+      .about-story-heading { grid-template-columns:1fr;gap:12px; }
+      .about-story-strip { grid-template-columns:repeat(2,minmax(0,1fr));gap:10px; }
+      #kisah-kami .about-story-strip img { height:140px; }
+      main h1 { font-size:32px; } main h2 { font-size:28px!important; }
+    }
+    #perjalanan .text-center > p { text-align:center;text-align-last:auto; }
+    #gabung .soca-bg-banner { background-position:center; }
   </style>
+  <link rel="stylesheet" href="asset/site-typography.css" />
+  <link rel="stylesheet" href="asset/site-footer.css" />
 </head>
 
 <body class="text-slate-800">
@@ -176,15 +585,15 @@
       <li><a href="index.html">Beranda</a></li>
       <li><a href="tentang.html" class="is-current" aria-current="page">Tentang ChenSora</a></li>
       <li><a href="index.html#produk">Produk</a></li>
-      <li><a href="index.html#marketing-plan">Bisnis</a></li>
+      <li><a href="index.html#soca-app">Bisnis</a></li>
       <li><a href="index.html#jadwal-acara">Kegiatan</a></li>
-      <li><a href="index.html#produk">Reseller</a></li>
+
       <li><a href="https://socaofficial.co.id/" target="_blank" class="nav-pill">SOCA</a></li>
     </ul>
 
     <div class="nav-actions">
-      <a href="https://wa.me/6289653515912?text=Halo,%20saya%20ingin%20bergabung%20dengan%20ChenSora."
-        target="_blank" class="btn-cta btn-cta-mobile-hide">Gabung</a>
+      <a href="https://wa.me/6289653515912?text=Halo,%20saya%20ingin%20bergabung%20dengan%20ChenSora." target="_blank"
+        class="btn-cta btn-cta-mobile-hide">Gabung</a>
       <button id="mobile-menu-button" aria-label="Buka menu"
         class="min-[1025px]:hidden w-9 h-9 rounded-full bg-white/80 flex items-center justify-center text-slate-800 border border-white/40 focus:outline-none">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -205,12 +614,11 @@
         ChenSora</a>
       <a href="index.html#produk"
         class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Produk</a>
-      <a href="index.html#marketing-plan"
+      <a href="index.html#soca-app"
         class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Bisnis</a>
       <a href="index.html#jadwal-acara"
         class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Kegiatan</a>
-      <a href="index.html#produk"
-        class="block py-4 text-lg text-slate-600 hover:text-primary hover:bg-slate-50 px-4 rounded-xl transition-colors">Reseller</a>
+
       <a href="https://socaofficial.co.id/" target="_blank"
         class="flex items-center gap-2 py-4 text-lg font-semibold px-4 rounded-xl transition-colors text-white"
         style="background: linear-gradient(135deg, #007BFF, #003A75);">
@@ -223,190 +631,254 @@
 
   <main>
     <!-- ===== Hero / Banner Utama (Split Layout: Teks Kiri, Gambar 1:1 Kanan) ===== -->
-    <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-br from-white via-primary-50/70 to-primary-100/50 overflow-hidden">
-      <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
-          <!-- Kolom Kiri: Teks Narasi Utama -->
-          <div class="lg:col-span-7" data-aos="fade-right">
-            <nav aria-label="Breadcrumb" class="text-sm text-slate-500 mb-4">
-              <a href="index.html" class="hover:text-primary transition-colors">Beranda</a>
-              <span class="mx-2">/</span>
-              <span class="text-primary font-semibold">Tentang ChenSora</span>
-            </nav>
-            <span class="inline-block bg-primary-100 text-primary-700 font-bold tracking-widest text-xs uppercase px-4 py-1.5 rounded-full mb-5">
-              Tentang ChenSora
-            </span>
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-800 leading-tight tracking-tight">
-              "Menjalin Keberkahan, Menumbuhkan Potensi, Membangun Masa Depan."
-            </h1>
-            <p class="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed">
+    <section id="tentang-chensora" class="about-intro relative pt-28 pb-12 md:pt-32 md:pb-16 bg-gradient-to-br from-white via-primary-50/70 to-primary-100/50 overflow-hidden">
+      <div class="about-intro-grid">
+        <div class="about-intro-copy" data-aos="fade-right"><h1>Menjalin Keberkahan, <span> Menumbuhkan Potensi, Membangun Masa Depan.</span></h1><p class="narrative-text">
               ChenSora hadir lebih dari sekadar ekosistem bisnis. Kami adalah wadah kolaboratif yang didedikasikan untuk
               menghadirkan produk berkualitas tinggi, memberdayakan komunitas, dan mengalirkan dampak positif yang
               berkelanjutan bagi setiap keluarga Indonesia.
-            </p>
-            <div class="mt-8">
-              <a href="#kisah-kami"
+            </p><div class="mt-6"><a href="#kisah-kami"
                 class="btn-gradient inline-block font-semibold text-base md:text-lg py-3.5 px-8 rounded-full hover:-translate-y-1 transition-all duration-300">
                 Kenali Kisah Kami
-              </a>
-            </div>
-          </div>
-
-          <!-- Kolom Kanan: Gambar Rasio 1:1 -->
-          <div class="lg:col-span-5" data-aos="fade-left">
-            <div class="relative max-w-md mx-auto lg:max-w-none">
-              <div class="absolute -inset-3 bg-gradient-to-tr from-primary/20 to-primary-300/20 rounded-[40px] blur-2xl -z-10"></div>
-              <div class="aspect-square w-full rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(82,179,221,0.22)] border-4 border-white">
-                <img src="asset/img/content 1.webp"
-                  alt="Tim yang berdiskusi sambil memandang cakrawala kota, menggambarkan kolaborasi membangun masa depan"
-                  class="w-full h-full object-cover" />
-              </div>
-            </div>
-          </div>
+              </a></div></div>
+        <div class="about-photo-collage" data-aos="fade-left">
+          <img class="about-photo-main" src="asset/img/content 1.webp" alt="Tim yang berdiskusi sambil memandang cakrawala kota, menggambarkan kolaborasi membangun masa depan" width="640" height="520" />
+          <img class="about-photo-small about-photo-bottom" src="asset/img/chensora lounge.webp" alt="Lounge ChenSora di Surabaya" width="320" height="360" loading="lazy" />
+          <img class="about-photo-small about-photo-top" src="asset/img/content 2.jpg" alt="Produk kesehatan ChenSora" width="320" height="320" loading="lazy" />
         </div>
       </div>
     </section>
 
     <!-- ===== Kisah Kami ===== -->
     <!-- Gambar: area lounge ChenSora dengan logo → tempat komunitas berkumpul -->
-    <section id="kisah-kami" class="py-24 bg-white">
-      <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
-          <div data-aos="fade-right">
-            <img src="asset/img/chensora lounge.webp"
-              alt="Area lounge ChenSora yang hangat dengan tanaman hijau dan logo ChenSora di dinding" loading="lazy"
-              class="w-full rounded-[32px] shadow-[0_8px_40px_rgb(0,0,0,0.12)] object-cover aspect-[4/3]" />
-          </div>
-          <div data-aos="fade-left">
-            <p class="text-primary font-bold tracking-widest text-sm uppercase mb-3">Our Story</p>
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">Kisah Kami</h2>
-            <div class="w-24 h-1 bg-primary mt-6 mb-6"></div>
-            <p class="text-lg text-slate-600 leading-relaxed">
+    <section id="kisah-kami" class="about-story bg-white">
+      <div class="about-story-inner"><div class="about-story-heading" data-aos="fade-up"><div><p class="about-eyebrow">Our Story</p><h2>Kisah <span>Kami</span></h2></div><div class="about-story-copy"><p class="narrative-text">
               Berawal dari sebuah komitmen tulus untuk menciptakan nilai yang berdampak nyata, ChenSora tumbuh menjadi
               ekosistem yang menaungi berbagai inovasi di bidang produk, jaringan komunitas, dan peluang usaha.
-            </p>
-            <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+            </p><p class="narrative-text">
               Kami percaya bahwa bisnis terbaik adalah bisnis yang tidak hanya mengejar pertumbuhan angka, tetapi juga
               menopang dan membawa keberkahan bagi orang-orang di dalamnya. Melalui integrasi teknologi modern, produk
               unggulan, dan sistem pendukung yang kokoh, ChenSora membuka pintu lebar-lebar bagi siapa saja yang ingin
               tumbuh, mandiri secara finansial, dan berkembang bersama.
-            </p>
+            </p></div></div>
+        <div class="about-story-strip" data-aos="fade-up">
+          <img src="asset/img/chensora lounge.webp" alt="Area lounge ChenSora yang hangat dengan tanaman hijau dan logo ChenSora di dinding" width="400" height="300" loading="lazy" />
+          <img src="asset/img/content 1.webp" alt="" width="400" height="300" loading="lazy" />
+          <img src="asset/img/content 3.jpg" alt="" width="400" height="300" loading="lazy" />
+          <img src="asset/img/content 4.jpg" alt="" width="400" height="300" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Perjalanan Kami: narasi dan gambar bergantian sisi ===== -->
+    <section id="perjalanan"
+      class="py-12 md:py-16 bg-gradient-to-b from-white to-primary-50/60 border-t border-gray-100 overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-9" data-aos="fade-up">
+          <p class="text-primary font-bold tracking-widest text-sm uppercase mb-3">Our Milestones</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">Perjalanan <span>Kami</span></h2>
+          <div class="w-24 h-1 bg-primary mx-auto mt-4 mb-4"></div>
+          <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">Fondasi, Inovasi, dan Ekosistem yang Terus
+            Bertumbuh</p>
+        </div>
+        <button type="button" id="tl-history-toggle" class="tl-history-toggle" aria-expanded="false"
+          aria-controls="tl-history">
+          <span>Selengkapnya: perjalanan sebelum 2024</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
+        <div id="timeline" class="relative max-w-6xl mx-auto">
+          <div class="tl-track" aria-hidden="true"></div>
+          <div id="timeline-fill" class="tl-track tl-line-fill" aria-hidden="true"></div>
+          <div class="tl-rows">
+            <div id="tl-history" class="tl-history" hidden>
+              <article class="tl-item">
+                <span class="tl-dot" aria-hidden="true"></span>
+                <div class="tl-copy" data-aos="fade-right">
+                  <span class="tl-year">2019</span>
+                  <h3>Langkah Awal (PTLS)</h3>
+                  <ul class="tl-points">
+                    <li>
+                      <p class="narrative-text"><strong>Ekspansi Operasional:</strong> PT Pelabuhan Terakhir Langgeng Sejahtera (PTLS) resmi
+                        beroperasi di Surabaya, membangun fondasi logistik dan distribusi yang tangguh.</p>
+                    </li>
+                    <li>
+                      <p class="narrative-text"><strong>Pusat Komunitas:</strong> Membuka Kantin PTLS di Jalan Lombok No. 22, Surabaya, sebagai
+                        titik awal kolaborasi dan relasi sosial yang erat.</p>
+                    </li>
+                  </ul>
+                </div>
+                <figure class="tl-media" data-aos="fade-left">
+                  <img src="asset/img/solid_community_icon_1777390100747.png"
+                    alt="Ilustrasi komunitas sebagai fondasi kolaborasi PTLS" loading="lazy" width="640" height="480" />
+                </figure>
+              </article>
+
+              <article class="tl-item tl-item-reverse">
+                <span class="tl-dot" aria-hidden="true"></span>
+                <div class="tl-copy" data-aos="fade-left">
+                  <span class="tl-year">2020 - 2023</span>
+                  <h3>Transformasi Kesehatan</h3>
+                  <ul class="tl-points">
+                    <li>
+                      <p class="narrative-text"><strong>Pengembangan Produk:</strong> Manajemen memperluas fokus ke sektor suplemen dan nutrisi
+                        kesehatan berkualitas tinggi bersama para ahli.</p>
+                    </li>
+                    <li>
+                      <p class="narrative-text"><strong>Pemberdayaan:</strong> Membangun sistem pemasaran berbasis komunitas yang transparan
+                        dan berorientasi pada kesejahteraan bersama.</p>
+                    </li>
+                  </ul>
+                </div>
+                <figure class="tl-media" data-aos="fade-right">
+                  <img src="asset/img/trusted_products_icon_1777389983473.png"
+                    alt="Ilustrasi perlindungan dan pengembangan produk kesehatan" loading="lazy" width="640"
+                    height="480" />
+                </figure>
+              </article>
+
+            </div>
+            <article class="tl-item">
+              <span class="tl-dot tl-dot-focus" aria-hidden="true"></span>
+              <div class="tl-copy" data-aos="fade-right">
+                <span class="tl-year">2024 - 2025</span>
+                <h3>Lahirnya ChenSora</h3>
+                <ul class="tl-points">
+                  <li>
+                    <p class="narrative-text"><strong>Grand Launching:</strong> ChenSora resmi berdiri di Surabaya sebagai merek kesehatan dan
+                      kecantikan unggulan (menghadirkan lini produk seperti <em>Yorokobi Koffie</em>, <em>Pyon Pyon
+                        Jelly</em>, dan <em>Kakkoi</em>).</p>
+                  </li>
+                  <li>
+                    <p class="narrative-text"><strong>Digitalisasi Komunitas:</strong> Memperluas ekosistem jaringan pemasaran dengan standar
+                      edukasi kesehatan berbasis sains.</p>
+                  </li>
+                </ul>
+              </div>
+              <figure class="tl-media tl-media-photo" data-aos="fade-left">
+                <img src="asset/img/chensora lounge.webp" alt="Lounge ChenSora di Surabaya" loading="lazy" width="640"
+                  height="480" />
+              </figure>
+            </article>
+
+            <article class="tl-item tl-item-reverse">
+              <span class="tl-dot tl-dot-focus" aria-hidden="true"></span>
+              <div class="tl-copy" data-aos="fade-left">
+                <span class="tl-year">2026</span>
+                <h3>Era Integrasi &amp; SOCA</h3>
+                <ul class="tl-points">
+                  <li>
+                    <p class="narrative-text"><strong>Ekosistem Digital:</strong> Memperkenalkan aplikasi <strong>SOCA</strong> (<em>Cashback
+                        &amp; Affiliate App</em>) untuk belanja hemat <em>no minimum spend</em> di berbagai
+                      <em>marketplace</em>.</p>
+                  </li>
+                  <li>
+                    <p class="narrative-text"><strong>Sinergi Penuh:</strong> ChenSora dan SOCA melebur dalam satu ekosistem digital solid yang
+                      menggabungkan produk berkualitas tinggi dengan teknologi finansial harian yang transparan dan
+                      <em>sat-set</em>.</p>
+                  </li>
+                </ul>
+              </div>
+              <figure class="tl-media" data-aos="fade-right">
+                <img src="asset/img/soca_mockup.png" alt="Tampilan aplikasi SOCA untuk cashback dan affiliate"
+                  loading="lazy" width="640" height="480" />
+              </figure>
+            </article>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== Visi & Misi ===== -->
-    <!-- Gambar: ikon perisai (kualitas), grafik tumbuh (peluang usaha), lingkaran komunitas (saling menopang) -->
-    <section id="visi-misi" class="py-24 bg-slate-50 border-t border-gray-100">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-16" data-aos="fade-up">
-          <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">Visi &amp; Misi</h2>
-          <div class="w-24 h-1 bg-primary mx-auto mt-6"></div>
+    <section id="visi-misi" class="py-12 md:py-14 text-white" style="background-color: #100f12;">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="mb-9 md:mb-10" data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Visi <span>&amp; Misi</span></h2>
+          <div class="w-12 h-1 bg-primary mt-4"></div>
         </div>
-
-        <!-- Visi -->
-        <div data-aos="fade-up"
-          class="max-w-5xl mx-auto bg-gradient-primary rounded-[32px] p-10 md:p-14 text-center text-white shadow-[0_8px_30px_rgba(82,179,221,0.35)] relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+          <div data-aos="fade-up">
+            <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-4">Visi Kami</h3>
+            <p class="narrative-text text-xl md:text-xl leading-relaxed font-medium max-w-lg">Menjadi ekosistem komunitas dan produk
+              terdepan yang terpercaya, berdampak positif, dan menjadi pilar penopang kesejahteraan masyarakat secara
+              berkelanjutan.</p>
           </div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 bg-white/20 rounded-[24px] flex items-center justify-center mx-auto mb-6">
-              <i class="fas fa-bullseye text-2xl"></i>
-            </div>
-            <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-4">Visi Kami</h3>
-            <p class="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-white/95" style="font-weight:400">
-              Menjadi ekosistem komunitas dan produk terdepan yang terpercaya, berdampak positif, dan menjadi pilar
-              penopang kesejahteraan masyarakat secara berkelanjutan.
-            </p>
-          </div>
-        </div>
-
-        <!-- Misi -->
-        <h3 class="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight text-center mt-20 mb-10"
-          data-aos="fade-up">Misi Kami</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <div data-aos="fade-up" data-aos-delay="100"
-            class="bg-white p-8 lg:p-10 rounded-[32px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
-            <span class="w-9 h-9 rounded-full bg-primary text-white font-bold flex items-center justify-center mb-6">1</span>
-            <img src="asset/img/trusted_products_icon_1777389983473.png" alt="Ikon perisai kesehatan, melambangkan kualitas produk"
-              loading="lazy" class="w-24 h-24 lg:w-28 lg:h-28 object-cover rounded-[32px] mb-6 shadow-md" />
-            <h4 class="text-xl font-semibold text-slate-800 tracking-tight">Kualitas Tanpa Kompromi</h4>
-            <p class="mt-4 text-slate-500 leading-relaxed text-base">
-              Menghadirkan produk-produk unggulan yang aman, bermanfaat, dan teruji untuk memenuhi kebutuhan harian
-              masyarakat.
-            </p>
-          </div>
-          <div data-aos="fade-up" data-aos-delay="200"
-            class="bg-white p-8 lg:p-10 rounded-[32px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
-            <span class="w-9 h-9 rounded-full bg-primary text-white font-bold flex items-center justify-center mb-6">2</span>
-            <img src="asset/img/promising_business_icon_1777390071990.png"
-              alt="Ikon grafik yang bertumbuh, melambangkan akses peluang usaha" loading="lazy"
-              class="w-24 h-24 lg:w-28 lg:h-28 object-cover rounded-[32px] mb-6 shadow-md" />
-            <h4 class="text-xl font-semibold text-slate-800 tracking-tight">Pemberdayaan Komunitas</h4>
-            <p class="mt-4 text-slate-500 leading-relaxed text-base">
-              Membuka akses peluang usaha dan penghasilan yang adil, transparan, serta dapat dijalankan oleh siapa
-              saja.
-            </p>
-          </div>
-          <div data-aos="fade-up" data-aos-delay="300"
-            class="bg-white p-8 lg:p-10 rounded-[32px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
-            <span class="w-9 h-9 rounded-full bg-primary text-white font-bold flex items-center justify-center mb-6">3</span>
-            <img src="asset/img/solid_community_icon_1777390100747.png"
-              alt="Ikon sosok-sosok yang bergandengan melingkar, melambangkan ekosistem yang saling menopang"
-              loading="lazy" class="w-24 h-24 lg:w-28 lg:h-28 object-cover rounded-[32px] mb-6 shadow-md" />
-            <h4 class="text-xl font-semibold text-slate-800 tracking-tight">Ekosistem yang Saling Menopang</h4>
-            <p class="mt-4 text-slate-500 leading-relaxed text-base">
-              Membangun lingkungan bisnis yang penuh transparansi, gotong royong, dan orientasi keberkahan jangka
-              panjang.
-            </p>
+          <div>
+            <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-5" data-aos="fade-up">Misi Kami</h3>
+            <ol class="space-y-6">
+              <li class="flex gap-4" data-aos="fade-up" data-aos-delay="75">
+                <span class="text-primary text-sm font-semibold pt-1 shrink-0" aria-hidden="true">01</span>
+                <div>
+                  <h4 class="text-lg font-semibold tracking-tight">Kualitas Tanpa Kompromi</h4>
+                  <p class="narrative-text mt-1 text-white text-sm md:text-base leading-relaxed">Menghadirkan produk-produk unggulan
+                    yang aman, bermanfaat, dan teruji untuk memenuhi kebutuhan harian masyarakat.</p>
+                </div>
+              </li>
+              <li class="flex gap-4" data-aos="fade-up" data-aos-delay="150">
+                <span class="text-primary text-sm font-semibold pt-1 shrink-0" aria-hidden="true">02</span>
+                <div>
+                  <h4 class="text-lg font-semibold tracking-tight">Pemberdayaan Komunitas</h4>
+                  <p class="narrative-text mt-1 text-white text-sm md:text-base leading-relaxed">Membuka akses peluang usaha dan
+                    penghasilan yang adil, transparan, serta dapat dijalankan oleh siapa saja.</p>
+                </div>
+              </li>
+              <li class="flex gap-4" data-aos="fade-up" data-aos-delay="225">
+                <span class="text-primary text-sm font-semibold pt-1 shrink-0" aria-hidden="true">03</span>
+                <div>
+                  <h4 class="text-lg font-semibold tracking-tight">Ekosistem yang Saling Menopang</h4>
+                  <p class="narrative-text mt-1 text-white text-sm md:text-base leading-relaxed">Membangun lingkungan bisnis yang penuh
+                    transparansi, gotong royong, dan orientasi keberkahan jangka panjang.</p>
+                </div>
+              </li>
+            </ol>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== Pilar Ekosistem ===== -->
-    <section id="pilar" class="py-24 bg-white">
+    <section id="pilar" class="py-12 md:py-16 text-white" style="background-color: #100f12;">
       <div class="container mx-auto px-6">
-        <div class="text-center mb-16" data-aos="fade-up">
-          <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">Pilar Ekosistem ChenSora</h2>
-          <div class="w-24 h-1 bg-primary mx-auto mt-6 mb-6"></div>
-          <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+        <div class="text-center mb-9" data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Pilar Ekosistem <span>ChenSora</span></h2>
+          <div class="w-24 h-1 bg-primary mx-auto mt-4 mb-4"></div>
+          <p class="narrative-text text-lg text-white max-w-3xl mx-auto leading-relaxed">
             Untuk mewujudkan misi besar ini, ChenSora bergerak melalui sinergi tiga pilar utama:
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
           <div data-aos="fade-up" data-aos-delay="100"
-            class="bg-gradient-to-b from-white to-primary-50 p-8 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-primary/10 text-center hover:shadow-[0_8px_30px_rgba(82,179,221,0.2)] hover:-translate-y-2 transition-all duration-300">
-            <div class="w-16 h-16 bg-primary/10 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+            class="p-6 rounded-[24px] text-center hover:-translate-y-2 transition-all duration-300">
+            <div class="w-12 h-12 bg-primary/10 rounded-[24px] flex items-center justify-center mx-auto mb-4">
               <i class="fas fa-box-open text-2xl text-primary"></i>
             </div>
-            <h3 class="text-xl font-bold text-slate-800 tracking-tight mb-2">ChenSora Products</h3>
-            <p class="text-slate-600 leading-relaxed text-base">
+            <h3 class="text-xl font-bold text-white tracking-tight mb-2">ChenSora Products</h3>
+            <p class="narrative-text text-white leading-relaxed text-base">
               Inovasi produk berkualitas tinggi yang diproduksi dengan standar terbaik untuk menjaga kepuasan dan
               kepercayaan konsumen.
             </p>
           </div>
           <div data-aos="fade-up" data-aos-delay="200"
-            class="bg-gradient-to-b from-white to-primary-50 p-8 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-primary/10 text-center hover:shadow-[0_8px_30px_rgba(82,179,221,0.2)] hover:-translate-y-2 transition-all duration-300">
-            <div class="w-16 h-16 bg-primary/10 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+            class="p-6 rounded-[24px] text-center hover:-translate-y-2 transition-all duration-300">
+            <div class="w-12 h-12 bg-primary/10 rounded-[24px] flex items-center justify-center mx-auto mb-4">
               <i class="fas fa-mobile-screen-button text-2xl text-primary"></i>
             </div>
-            <h3 class="text-xl font-bold text-slate-800 tracking-tight mb-2">SOCA Ecosystem</h3>
-            <p class="text-slate-600 leading-relaxed text-base">
+            <h3 class="text-xl font-bold text-white tracking-tight mb-2">SOCA Ecosystem</h3>
+            <p class="narrative-text text-white leading-relaxed text-base">
               Platform digital berbasis komunitas dan cashback yang memberikan peluang penghasilan harian, pasif
               income, hingga bagi hasil omzet bagi setiap anggotanya.
             </p>
           </div>
           <div data-aos="fade-up" data-aos-delay="300"
-            class="bg-gradient-to-b from-white to-primary-50 p-8 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-primary/10 text-center hover:shadow-[0_8px_30px_rgba(82,179,221,0.2)] hover:-translate-y-2 transition-all duration-300">
-            <div class="w-16 h-16 bg-primary/10 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+            class="p-6 rounded-[24px] text-center hover:-translate-y-2 transition-all duration-300">
+            <div class="w-12 h-12 bg-primary/10 rounded-[24px] flex items-center justify-center mx-auto mb-4">
               <i class="fas fa-scale-balanced text-2xl text-primary"></i>
             </div>
-            <h3 class="text-xl font-bold text-slate-800 tracking-tight mb-2">PTLS</h3>
+            <h3 class="text-xl font-bold text-white tracking-tight mb-2">PTLS</h3>
             <p class="text-primary font-semibold text-sm mb-4">Perusahaan Penunjang Operasional</p>
-            <p class="text-slate-600 leading-relaxed text-base">
+            <p class="narrative-text text-white leading-relaxed text-base">
               Pilar legalitas, pengawasan, dan tata kelola profesional yang memastikan seluruh aktivitas bisnis
               berjalan aman, legal, dan terlindungi.
             </p>
@@ -416,44 +888,44 @@
     </section>
 
     <!-- ===== Nilai-Nilai Utama ===== -->
-    <section id="nilai" class="py-24 bg-slate-50 border-t border-gray-100">
+    <section id="nilai" class="py-12 md:py-16 bg-slate-50 border-t border-gray-100">
       <div class="container mx-auto px-6">
-        <div class="text-center mb-16" data-aos="fade-up">
-          <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">Nilai-Nilai Utama Kami</h2>
-          <div class="w-24 h-1 bg-primary mx-auto mt-6"></div>
+        <div class="text-center mb-9" data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">Nilai-Nilai Utama <span>Kami</span></h2>
+          <div class="w-24 h-1 bg-primary mx-auto mt-4"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
           <div data-aos="fade-up" data-aos-delay="100"
-            class="bg-white p-8 lg:p-10 rounded-[32px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
-            <div class="w-16 h-16 bg-primary/10 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+            class="bg-white p-6 lg:p-7 rounded-[24px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
+            <div class="w-12 h-12 bg-primary/10 rounded-[24px] flex items-center justify-center mx-auto mb-4">
               <i class="fas fa-hand-holding-heart text-2xl text-primary"></i>
             </div>
             <h3 class="text-xl font-bold text-slate-800 tracking-tight">Ketulusan</h3>
             <p class="text-primary font-semibold text-sm mt-1 mb-4">Sincerity</p>
-            <p class="text-slate-600 leading-relaxed text-base">
+            <p class="narrative-text text-slate-600 leading-relaxed text-base">
               Setiap langkah dan kebijakan dirancang demi kebaikan bersama, bukan sekadar keuntungan sepihak.
             </p>
           </div>
           <div data-aos="fade-up" data-aos-delay="200"
-            class="bg-white p-8 lg:p-10 rounded-[32px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
-            <div class="w-16 h-16 bg-primary/10 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+            class="bg-white p-6 lg:p-7 rounded-[24px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
+            <div class="w-12 h-12 bg-primary/10 rounded-[24px] flex items-center justify-center mx-auto mb-4">
               <i class="fas fa-eye text-2xl text-primary"></i>
             </div>
             <h3 class="text-xl font-bold text-slate-800 tracking-tight">Transparansi</h3>
             <p class="text-primary font-semibold text-sm mt-1 mb-4">Transparency</p>
-            <p class="text-slate-600 leading-relaxed text-base">
+            <p class="narrative-text text-slate-600 leading-relaxed text-base">
               Keterbukaan dalam sistem, legalitas, dan skema kemitraan adalah fondasi utama kepercayaan kami.
             </p>
           </div>
           <div data-aos="fade-up" data-aos-delay="300"
-            class="bg-white p-8 lg:p-10 rounded-[32px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
-            <div class="w-16 h-16 bg-primary/10 rounded-[32px] flex items-center justify-center mx-auto mb-6">
+            class="bg-white p-6 lg:p-7 rounded-[24px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 text-center hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
+            <div class="w-12 h-12 bg-primary/10 rounded-[24px] flex items-center justify-center mx-auto mb-4">
               <i class="fas fa-people-group text-2xl text-primary"></i>
             </div>
             <h3 class="text-xl font-bold text-slate-800 tracking-tight">Pertumbuhan Bersama</h3>
             <p class="text-primary font-semibold text-sm mt-1 mb-4">Collective Growth</p>
-            <p class="text-slate-600 leading-relaxed text-base">
+            <p class="narrative-text text-slate-600 leading-relaxed text-base">
               Di ChenSora, keberhasilan satu orang adalah keberhasilan seluruh anggota komunitas.
             </p>
           </div>
@@ -462,27 +934,27 @@
     </section>
 
     <!-- ===== Pesan dari Pendiri ===== -->
-    <section id="pesan-pendiri" class="py-24 bg-white">
+    <section id="pesan-pendiri" class="py-12 md:py-16 bg-white">
       <div class="container mx-auto px-6">
-        <div class="text-center mb-12" data-aos="fade-up">
+        <div class="text-center mb-8" data-aos="fade-up">
           <p class="text-primary font-bold tracking-widest text-sm uppercase mb-3">Founder's Note</p>
-          <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">Pesan dari Pendiri</h2>
-          <div class="w-24 h-1 bg-primary mx-auto mt-6"></div>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">Pesan dari <span>Pendiri</span></h2>
+          <div class="w-24 h-1 bg-primary mx-auto mt-4"></div>
         </div>
         <figure data-aos="zoom-in"
-          class="max-w-4xl mx-auto bg-gradient-to-b from-white to-primary-50 rounded-[32px] p-10 md:p-14 border border-primary/10 shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex flex-col md:flex-row items-center gap-8 md:gap-12 text-center md:text-left">
+          class="max-w-4xl mx-auto bg-gradient-to-b from-white to-primary-50 rounded-[24px] p-6 md:p-8 border border-primary/10 shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex flex-col md:flex-row items-center gap-5 md:gap-8 text-center md:text-left">
           <div class="shrink-0">
             <img src="asset/img/chenmaria.webp" alt="Chen Maria, Pendiri ChenSora" loading="lazy"
-              class="w-36 h-36 md:w-44 md:h-44 rounded-full object-cover shadow-lg ring-4 ring-primary-light mx-auto" />
+              class="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover shadow-lg ring-4 ring-primary-light mx-auto" />
           </div>
           <div>
             <i class="fas fa-quote-left text-3xl text-primary/40 mb-4"></i>
-            <blockquote class="text-lg md:text-2xl text-slate-700 leading-relaxed" style="font-weight:400">
+            <blockquote class="text-lg md:text-xl text-slate-700 leading-relaxed" style="font-weight:400">
               "SOCA dan ChenSora hadir bukan untuk dinikmati sendiri, melainkan untuk mengalirkan keberkahan ke lebih
               banyak rumah dan keluarga. Kami mengundang Anda untuk tidak hanya menjadi penonton, tetapi menjadi bagian
               dari perjalanan tulus ini."
             </blockquote>
-            <figcaption class="mt-6">
+            <figcaption class="mt-4">
               <p class="text-xl font-bold text-slate-800">Chen Maria</p>
               <p class="text-primary font-semibold text-sm">Pendiri &amp; Owner ChenSora</p>
             </figcaption>
@@ -493,41 +965,42 @@
 
     <!-- ===== Ajakan: Mari Bertumbuh Bersama ===== -->
     <!-- Gambar: aplikasi SOCA (latar yang sama dengan bagian SOCA di beranda) -->
-    <section id="gabung" class="py-24 relative overflow-hidden" style="background:#020b1c;">
+    <section id="gabung" class="py-12 md:py-16 relative overflow-hidden" style="background:#020b1c;">
       <div class="absolute inset-0 w-full h-full soca-bg-banner"
-        style="background-image:url('asset/img/soca banner.jpeg');background-size:cover;background-repeat:no-repeat;">
+        style="background-image:url('asset/img/content 1.webp');background-size:cover;background-repeat:no-repeat;">
       </div>
       <div class="absolute inset-0 w-full h-full"
         style="background:linear-gradient(160deg,rgba(10,22,40,0.88) 0%,rgba(12,45,94,0.80) 50%,rgba(2,11,28,0.92) 100%);">
       </div>
       <div class="container mx-auto px-6 relative z-10 text-center" data-aos="fade-up">
-        <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white">Mari Bertumbuh Bersama</h2>
-        <p class="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white">Mari Bertumbuh <span>Bersama</span></h2>
+        <p class="narrative-text mt-4 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
           Ingin merasakan manfaat produk kami atau mulai membangun potensi penghasilan bersama ekosistem ChenSora &amp;
           SOCA?
         </p>
-        <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-5">
+        <div class="mt-7 flex flex-col sm:flex-row justify-center items-center gap-5">
           <a href="index.html#produk"
-            class="bg-white/10 backdrop-blur-md border border-white/40 hover:bg-white/20 text-white font-semibold text-lg py-4 px-10 rounded-full hover:-translate-y-1 transition-all duration-300">
+            class="bg-white/10 backdrop-blur-md border border-white/40 hover:bg-white/20 text-white font-semibold text-lg py-3 px-7 rounded-full hover:-translate-y-1 transition-all duration-300">
             Jelajahi Produk Kami
           </a>
-          <a href="https://wa.me/6289653515912?text=Halo,%20saya%20ingin%20bergabung%20dengan%20komunitas%20ChenSora."
-            target="_blank"
-            class="bg-primary hover:bg-primary-dark text-white font-semibold text-lg py-4 px-10 rounded-full shadow-[0_4px_14px_0_rgba(82,179,221,0.39)] hover:-translate-y-1 transition-all duration-300">
-            Bergabung dengan Komunitas
-          </a>
+
         </div>
-        <p class="mt-8 text-sm text-slate-400">Hasil setiap orang dapat berbeda.</p>
+
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
-    <div class="container mx-auto px-6 text-center">
-      <p>© <span id="footer-year">2024</span> ChenSora. All Rights Reserved.</p>
-    </div>
-  </footer>
+  <footer class="site-footer" id="kontak">
+  <div class="site-footer-grid">
+    <div class="site-footer-brand"><img src="asset/logo/LOGO CHENSORA PNG web.PNG" alt="ChenSora" width="200" height="64" /><h2>Bertumbuh bersama,<br />mengalirkan keberkahan.</h2></div>
+    <div><h3>Kantor Pusat</h3><p>Graha S.A., Lantai 3, Unit 302<br />Surabaya, Jawa Timur<br />Indonesia</p><a href="https://maps.app.goo.gl/KY4nC5NSqBrxwAvC6" target="_blank" rel="noopener noreferrer">Buka di Google Maps</a></div>
+    <div><h3>Hubungi Kami</h3><a href="tel:+6289653515912">+62 896 5351 5912</a><a href="mailto:chensora.official@gmail.com">chensora.official@gmail.com</a><a href="https://wa.me/6289653515912" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+    <div><h3>Informasi</h3><a href="tentang.html">Tentang ChenSora</a><a href="index.html#produk">Produk Kami</a><a href="soca.html">SOCA</a></div>
+    <div><h3>Ikuti Kami</h3><a href="https://www.instagram.com/chensora.official/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.facebook.com/profile.php?id=61564119424539" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.youtube.com/@ChensoraOfficial" target="_blank" rel="noopener noreferrer">YouTube</a><a href="https://www.tiktok.com/@chensoraofficial" target="_blank" rel="noopener noreferrer">TikTok</a></div>
+  </div>
+  <div class="site-footer-bottom">&copy; <span id="footer-year">2026</span> ChenSora. All Rights Reserved.</div>
+</footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
@@ -535,6 +1008,38 @@
       AOS.init({ duration: 800, once: true });
 
       document.getElementById("footer-year").textContent = new Date().getFullYear();
+
+      // --- Timeline: garis terisi & dot menyala mengikuti scroll ---
+      const timeline = document.getElementById("timeline");
+      const timelineFill = document.getElementById("timeline-fill");
+      const timelineDots = timeline ? timeline.querySelectorAll(".tl-dot") : [];
+      function updateTimeline() {
+        if (!timeline || !timelineFill) return;
+        const trigger = window.innerHeight * 0.6;
+        const rect = timeline.getBoundingClientRect();
+        const progress = Math.min(Math.max((trigger - rect.top) / rect.height, 0), 1);
+        timelineFill.style.transform = `scaleY(${progress})`;
+        timelineDots.forEach((dot) => {
+          dot.classList.toggle("is-active", dot.getClientRects().length > 0 && dot.getBoundingClientRect().top < trigger);
+        });
+      }
+      const historyToggle = document.getElementById("tl-history-toggle");
+      const historyPanel = document.getElementById("tl-history");
+      historyToggle.addEventListener("click", () => {
+        const expanded = historyToggle.getAttribute("aria-expanded") !== "true";
+        historyToggle.setAttribute("aria-expanded", String(expanded));
+        historyPanel.hidden = !expanded;
+        historyToggle.querySelector("span").textContent = expanded
+          ? "Sembunyikan perjalanan sebelum 2024"
+          : "Selengkapnya: perjalanan sebelum 2024";
+        requestAnimationFrame(() => {
+          AOS.refresh();
+          updateTimeline();
+        });
+      });
+      window.addEventListener("scroll", updateTimeline, { passive: true });
+      window.addEventListener("resize", updateTimeline);
+      updateTimeline();
 
       // Menu mobile
       const btn = document.getElementById("mobile-menu-button");
@@ -568,4 +1073,3 @@
 </body>
 
 </html>
-
