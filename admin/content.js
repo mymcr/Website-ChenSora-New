@@ -15,7 +15,17 @@
   async function load() {
     try {
       const result = await request(api + '?admin=1'); data = result.data; csrf = result.csrf; version = result.version;
-      $('workspace').hidden = false; $('login-panel').hidden = true; $('logout').hidden = false; render(); return true;
+      $('workspace').hidden = false; $('login-panel').hidden = true; $('logout').hidden = false;
+      const readiness = result.deployment;
+      if (readiness) {
+        const problems = [];
+        if (!readiness.storage_writable) problems.push('folder penyimpanan belum writable');
+        if (!readiness.uploads_writable) problems.push('folder unggahan belum writable');
+        if (!readiness.post_size_sufficient) problems.push('post_max_size PHP perlu minimal 8M untuk unggahan 5 MB');
+        $('deployment-status').textContent = problems.length ? 'Periksa hosting: ' + problems.join('; ') + '.' : 'Penyimpanan dan unggah gambar siap digunakan pada server ini.';
+        $('deployment-status').classList.toggle('error', problems.length > 0);
+      }
+      render(); return true;
     } catch (error) { if (error.status === 401) { $('login-panel').hidden = false; $('workspace').hidden = true; $('logout').hidden = true; } else message(error.message,true); return false; }
   }
   function render() {

@@ -73,7 +73,7 @@
         font-family: "Roboto", sans-serif;
         font-weight: 700;
       }
-      
+
       .nav-link {
         position: relative;
       }
@@ -108,7 +108,7 @@
       .soca-nav-link.active::after {
         display: none;
       }
-      
+
       /* Card Hover Effects */
       .card-app {
         transition: all 0.3s ease-in-out;
@@ -120,7 +120,7 @@
         box-shadow: 0 20px 40px rgba(82, 179, 221, 0.2);
         border-color: #52b3dd;
       }
-      
+
       /* Hero background with gradient depth */
       .hero-bg {
         background: linear-gradient(160deg, #ffffff 0%, #f0f9ff 55%, #e0f2fe 100%);
@@ -217,13 +217,13 @@
     >
       <a href="index.html" class="flex items-center space-x-3 text-2xl font-bold">
         <img
-          src="asset/logo/LOGO CHENSORA PNG web.png"
+          src="asset/logo/LOGO CHENSORA PNG web.PNG"
           alt="Logo ChenSora"
           class="h-10 w-auto object-contain"
           style="aspect-ratio: 375/94;"
         />
       </a>
-      
+
       <!-- Desktop Navigation -->
       <nav class="hidden xl:flex items-center space-x-6">
         <a href="index.html" class="nav-link text-slate-600 hover:text-primary transition duration-300">Beranda</a>
@@ -271,7 +271,7 @@
       <section id="soca-hero" class="soca-page-hero pt-32 pb-24 hero-bg relative overflow-hidden min-h-screen flex items-center">
         <div class="soca-page-container container mx-auto px-6 relative z-10">
           <div class="soca-page-grid flex flex-col lg:flex-row items-center gap-16">
-            
+
             <!-- Text Content -->
             <div class="soca-page-copy lg:w-7/12 text-center lg:text-left" data-aos="fade-right">
               <div class="inline-flex items-center gap-2 bg-white border border-primary/20 rounded-full py-1.5 px-4 shadow-sm mb-6">
@@ -287,7 +287,7 @@
               <p class="narrative-text mt-6 text-lg md:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                 Platform loyalty eksklusif untuk member ChenSora. Belanja produk favorit Anda seperti Yorokobi, Pyon Pyon, atau Kakkoi dan kumpulkan cashback langsung di genggaman Anda.
               </p>
-              
+
               <div id="download" class="store-badges" aria-label="App Store dan Google Play"><img src="asset/logo/download-app-store.svg" alt="Download on the App Store" width="180" height="54" loading="lazy" /><img class="google-play-badge" src="asset/logo/get-google-play.png" alt="Get it on Google Play" width="200" height="77" loading="lazy" /></div>
               <div class="mt-10 flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-5">
                 <a href="#download" class="btn-gradient w-full sm:w-auto inline-flex items-center justify-center font-bold text-lg py-4 px-8 rounded-xl hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
@@ -297,20 +297,20 @@
                   Lihat Produk
                 </a>
               </div>
-              
+
               <div class="mt-10 flex items-center justify-center lg:justify-start gap-6 text-slate-500 text-sm font-medium">
                 <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> Pendaftaran Gratis</div>
                 <div class="flex items-center gap-2"><i class="fas fa-bolt text-yellow-500"></i> Cashback Instan</div>
               </div>
             </div>
-            
+
             <!-- Mockup Image -->
             <div class="soca-page-visual lg:w-5/12 flex justify-center" data-aos="fade-up" data-aos-delay="200">
               <div class="soca-page-device relative w-full max-w-md">
                 <div class="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent rounded-full blur-3xl transform -translate-y-10 scale-110"></div>
-                <img 
-                  src="asset/img/soca_mockup.png" 
-                  alt="SOCA App Mockup" 
+                <img
+                  src="asset/img/soca mockup.WEBP"
+                  alt="SOCA App Mockup"
                   class="relative z-10 w-full drop-shadow-2xl floating-mockup object-contain rounded-3xl"
                   style="max-height: 700px;"
                 />
@@ -378,7 +378,7 @@
             <!-- Decorative circles -->
             <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
             <div class="absolute bottom-0 left-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-            
+
             <h2 class="text-3xl md:text-5xl font-extrabold mb-6 relative z-10 tracking-tight">Siap Untuk Mulai Menghemat?</h2>
             <p class="narrative-text text-xl opacity-90 mb-10 max-w-2xl mx-auto relative z-10 leading-relaxed text-base md:text-lg">
               Unduh aplikasi Sora Cashback sekarang dan nikmati reward melimpah dari setiap pembelanjaan Anda.
@@ -416,7 +416,7 @@
 
         window.addEventListener("scroll", () => {
           const currentScrollY = window.scrollY;
-          
+
           if (currentScrollY <= 10) {
             // Initial state: floating, attached to top edge, inset margins, rounded bottom
             navbar.classList.remove("-translate-y-full", "left-0", "right-0", "rounded-none");
@@ -429,7 +429,7 @@
             navbar.classList.remove("-translate-y-full", "left-4", "right-4", "lg:left-12", "lg:right-12", "rounded-b-2xl");
             navbar.classList.add("left-0", "right-0", "rounded-none");
           }
-          
+
           lastScrollY = currentScrollY;
         });
 

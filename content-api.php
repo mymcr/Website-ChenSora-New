@@ -6,6 +6,18 @@ header('Cache-Control: no-store');
 header('X-Content-Type-Options: nosniff');
 function respond($data, $code = 200) { http_response_code($code); echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); exit; }
 function fail($message, $code = 400) { respond(['status' => 'error', 'message' => $message], $code); }
+function content_deployment($dataDirectory, $store) {
+    $postLimit = trim(ini_get('post_max_size'));
+    $number = (float)$postLimit;
+    $unit = strtolower(substr($postLimit, -1));
+    $bytes = $number * ($unit === 'g' ? 1073741824 : ($unit === 'm' ? 1048576 : ($unit === 'k' ? 1024 : 1)));
+    $uploads = __DIR__ . '/uploads/content';
+    return [
+        'storage_writable' => is_dir($dataDirectory) && is_writable($dataDirectory) && (!is_file($store) || is_writable($store)),
+        'uploads_writable' => is_dir($uploads) ? is_writable($uploads) : (is_dir(dirname($uploads)) ? is_writable(dirname($uploads)) : is_writable(__DIR__)),
+        'post_size_sufficient' => $bytes === 0.0 || $bytes >= 8000000,
+    ];
+}
 function content_url($value) {
     return $value === '' || (bool)preg_match('~^(https?://[^\s]+|asset/[A-Za-z0-9_./% -]+|uploads/content/[A-Za-z0-9_.-]+)$~i', $value);
 }
@@ -45,7 +57,7 @@ if ($method === 'GET') {
     $data = is_file($store) ? json_decode(file_get_contents($store), true) : $seed;
     if (!is_array($data)) fail('Konten tidak dapat dibaca.', 500);
     $data = array_replace($seed, $data);
-    respond(['status' => 'success', 'data' => $data, 'csrf' => $_SESSION['content_csrf'], 'user' => $_SESSION['content_admin'], 'version' => hash('sha256', json_encode($data))]);
+    respond(['status' => 'success', 'data' => $data, 'csrf' => $_SESSION['content_csrf'], 'user' => $_SESSION['content_admin'], 'version' => hash('sha256', json_encode($data)), 'deployment' => content_deployment($dataDirectory, $store)]);
 }
 if ($method !== 'POST') fail('Metode tidak didukung.', 405);
 if ((int)($_SERVER['CONTENT_LENGTH'] ?? 0) > 8000000) fail('Berkas terlalu besar.', 413);
@@ -76,6 +88,7 @@ if ($action === 'save') {
     $clean['updated_at'] = gmdate('c');
 }
 // One lock covers read, conflict check, and write to avoid concurrent lost updates.
+if (!is_dir($dataDirectory) || !is_writable($dataDirectory) || (is_file($store) && !is_writable($store))) fail('Penyimpanan belum siap. Pastikan folder content-data dan store.json dapat ditulis oleh PHP.', 503);
 $lock = fopen($dataDirectory . '/write.lock', 'c');
 if (!$lock || !flock($lock, LOCK_EX)) fail('Penyimpanan tidak dapat dikunci.', 500);
 $data = is_file($store) ? json_decode(file_get_contents($store), true) : $seed;

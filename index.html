@@ -1450,163 +1450,900 @@
     }
 
     /* Compact SOCA panels; merchant collection retains its dark background. */
-    .soca-benefit, .soca-benefit:nth-child(2) { background: #0e192a; padding: 32px clamp(24px, 4vw, 64px) 36px; }
-    .soca-benefit > img { max-width: 340px; margin-bottom: 20px; }
-    .soca-benefit h2 { font-size: clamp(23px, 2vw, 30px); max-width: 490px; }
-    .soca-benefit p { font-size: 15px; line-height: 1.7; margin: 16px 0 22px; }
-    .merchant-logo, .merchant-tiktokshop .merchant-logo, .merchant-tokopedia .merchant-logo, .merchant-traveloka .merchant-logo { background: #fff; }
-    .management-controls { display: none; }
-    .management-member[hidden] { display: none; }
-    @keyframes management-pop { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
-    @media (max-width: 767px) {
-      .management-gallery { display: block; overflow: visible; min-height: 0; padding: 8px 0; }
-      .management-member.is-selected { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: start; gap: 16px; width: 100%; animation: management-pop .4s ease both; }
-      .management-member.is-selected .management-photo { width: 100%; height: auto; aspect-ratio: 3 / 4; }
-      .management-info { width: auto; min-width: 0; }
-      .management-controls { display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 20px; }
-      .management-controls button { width: 44px; height: 44px; border: 1px solid #d1d5db; border-radius: 50%; color: #100f12; background: #fff; font-size: 22px; }
-      .management-controls button:focus-visible { outline: 3px solid #52b3dd; outline-offset: 3px; }
-      .management-controls span { color: #64748b; font-size: 14px; }
+    .soca-benefit,
+    .soca-benefit:nth-child(2) {
+      background: #0e192a;
+      padding: 32px clamp(24px, 4vw, 64px) 36px;
     }
-    @media (prefers-reduced-motion: reduce) { .management-member.is-selected { animation: none; } }
+
+    .soca-benefit>img {
+      max-width: 340px;
+      margin-bottom: 20px;
+    }
+
+    .soca-benefit h2 {
+      font-size: clamp(23px, 2vw, 30px);
+      max-width: 490px;
+    }
+
+    .soca-benefit p {
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 16px 0 22px;
+    }
+
+    .merchant-logo,
+    .merchant-tiktokshop .merchant-logo,
+    .merchant-tokopedia .merchant-logo,
+    .merchant-traveloka .merchant-logo {
+      background: #fff;
+    }
+
+    .management-controls {
+      display: none;
+    }
+
+    .management-member[hidden] {
+      display: none;
+    }
+
+    @keyframes management-pop {
+      from {
+        opacity: 0;
+        transform: scale(.94);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .management-gallery {
+        display: block;
+        overflow: visible;
+        min-height: 0;
+        padding: 8px 0;
+      }
+
+      .management-member.is-selected {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        align-items: start;
+        gap: 16px;
+        width: 100%;
+        animation: management-pop .4s ease both;
+      }
+
+      .management-member.is-selected .management-photo {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 4;
+      }
+
+      .management-info {
+        width: auto;
+        min-width: 0;
+      }
+
+      .management-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        margin-top: 20px;
+      }
+
+      .management-controls button {
+        width: 44px;
+        height: 44px;
+        border: 1px solid #d1d5db;
+        border-radius: 50%;
+        color: #100f12;
+        background: #fff;
+        font-size: 22px;
+      }
+
+      .management-controls button:focus-visible {
+        outline: 3px solid #52b3dd;
+        outline-offset: 3px;
+      }
+
+      .management-controls span {
+        color: #64748b;
+        font-size: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .management-member.is-selected {
+        animation: none;
+      }
+    }
 
     /* Compact collections and a portrait collage. */
-    .merchant-section { background: #fff; max-width: none; padding-inline: max(24px, calc((100vw - 1232px) / 2)); }
-    .merchant-section > h2, .merchant-card h3, #marketing-plan .merchant-card p { color: #100f12; }
-    .soca-benefit { padding: 24px clamp(24px, 4vw, 56px) 28px; }
-    .soca-benefit > img { max-width: 260px; margin-bottom: 14px; }
-    .soca-benefit h2 { font-size: clamp(22px, 1.8vw, 27px); }
-    .soca-benefit p { font-size: 14px; line-height: 1.65; max-width: 480px; margin: 14px 0 18px; }
-    .soca-benefit > a { padding: 11px 20px; font-size: 14px; }
-    .product-showcase { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 20px; max-width: 1200px; }
-    .product-showcase-card { grid-template-columns: 1fr; gap: 10px; }
-    #produk .product-showcase-image { aspect-ratio: 1; border-radius: 20px; }
-    .product-showcase-card h3 { grid-column: 1; grid-row: auto; font-size: 19px; }
-    .product-showcase-card p { grid-column: 1; grid-row: auto; font-size: 13px; }
-    .product-showcase-link { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 4px; }
-    .soca-guard-art { display: flex; flex-direction: column; gap: 18px; align-items: center; justify-content: center; color: #100f12; }
-    .soca-guard-art i { font-size: 56px; color: #52b3dd; }
-    .soca-guard-art span { font-size: 22px; font-weight: 700; }
-    .expert-collage-section { position: relative; max-width: 1440px; margin-inline: auto; padding: 210px 24px 56px; background: #fff; }
-    .expert-collage { position: absolute; inset: 20px 24px auto; height: 310px; display: grid; grid-template-columns: repeat(11,minmax(0,1fr)); gap: 14px; align-items: start; }
-    .expert-portrait { position: relative; margin: 0; border-radius: 12px; height: 135px; min-width: 0; }
-    .expert-portrait:nth-child(3n+1) { margin-top: 60px; }
-    .expert-portrait:nth-child(3n+2) { margin-top: 12px; }
-    .expert-portrait:nth-child(5), .expert-portrait:nth-child(6), .expert-portrait:nth-child(7) { height: 105px; }
-    .expert-portrait:first-child, .expert-portrait:last-child { margin-top: 170px; }
-    .expert-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 12px; }
-    .expert-portrait figcaption { position: absolute; left: -20px; right: -20px; top: calc(100% + 6px); padding: 8px; background: #100f12; color: #fff; border-radius: 8px; font-size: 11px; text-align: center; opacity: 0; pointer-events: none; z-index: 5; }
-    .expert-portrait small { display: block; font-size: 10px; opacity: .75; }
-    .expert-portrait:hover figcaption, .expert-portrait:focus figcaption { opacity: 1; }
-    .expert-collage-copy { position: relative; max-width: 640px; margin: 0 auto; text-align: center; }
-    .expert-eyebrow { display: inline-block; font-size: 11px; padding: 5px 12px; background: #f5f5f5; border-radius: 99px; margin-bottom: 14px; }
-    .expert-collage-copy h2 { font-size: clamp(26px,3vw,40px); font-weight: 700; line-height: 1.2; letter-spacing: -.03em; color: #100f12; }
-    .expert-collage-copy h2 span { color: #888; }
-    .expert-collage-copy p { font-size: 15px; line-height: 1.7; margin: 18px auto 22px; max-width: 490px; }
-    .expert-collage-copy > a { display: inline-flex; gap: 12px; background: #100f12; color: #fff; padding: 12px 20px; border-radius: 99px; font-size: 13px; }
-    #jadwal-acara { background: white; }
-    .news-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 28px; max-width: 1280px; margin: 0 auto; }
-    .news-card { min-width: 0; }
-    .news-card > img { width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in; }
-    .news-date { color: #888; font-size: 12px; margin: 16px 0 8px; }
-    .news-card h3 { font-size: 19px; line-height: 1.5; font-weight: 500; color: #333; }
-    .news-excerpt { color: #777; line-height: 1.7; font-size: 14px; margin: 14px 0 20px; }
-    .news-card > a { color: #444; font-size: 12px; letter-spacing: .08em; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
-    .news-grid > div:only-child { grid-column: 1 / -1; }
-    @media (max-width: 1023px) {
-      .product-showcase, .news-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
-      .expert-collage { gap: 8px; }
-      .expert-portrait { height: 100px; }
+    .merchant-section {
+      background: #fff;
+      max-width: none;
+      padding-inline: max(24px, calc((100vw - 1232px) / 2));
     }
-    @media (max-width: 767px) {
-      .product-showcase { max-width: none; gap: 24px 14px; }
-      .product-showcase-card h3 { font-size: 17px; }
-      .product-showcase-link { font-size: 10px; padding: 9px 10px; }
-      .expert-collage-section { padding-top: 28px; }
-      .expert-collage { position: static; height: auto; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 8px; margin-bottom: 28px; }
-      .expert-portrait:nth-child(n) { margin-top: 0; height: auto; aspect-ratio: 3/4; }
-      .expert-collage-copy h2 { font-size: 28px; }
-      .soca-benefit > img { max-width: 230px; }
-      .news-grid { gap: 28px 16px; }
-      .news-card h3 { font-size: 16px; }
-    }
-    @media (max-width: 420px) { .news-grid { grid-template-columns: 1fr; } }
-    .news-details summary { display: flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: .08em; cursor: pointer; min-height: 44px; color: #444; }
-    .news-details > div { padding: 14px; background: #f8fafc; border-radius: 12px; font-size: 14px; line-height: 1.7; }
-    .news-details a { text-decoration: underline; }
 
-    .section-eyebrow { display:inline-block;padding:6px 16px;border-radius:999px;background:#f5f5f5;color:#475569;font-size:13px;margin-bottom:18px; }
-    .editorial-title { font-size:clamp(32px,4vw,54px);line-height:1.15;font-weight:700;letter-spacing:-.04em;color:#100f12; }
-    .editorial-title span { color:#8a8a8a; }
-    .soca-benefit { display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:24px;text-align:left;align-items:center;padding:32px; }
-    .soca-benefit > img { width:100%;margin:0; }
-    .soca-benefit-copy h2 { font-size:clamp(22px,1.8vw,27px); }
-    #marketing-plan .soca-benefit-copy p { text-align:left; }
-    .soca-benefit-copy > a { display:inline-flex;gap:12px;border-radius:99px;background:#fff;color:#100f12;padding:11px 18px;font-size:13px;font-weight:600; }
-    .news-image-caption { font-size:11px;color:#777;margin-top:6px; }
-    @media(max-width:1023px) { .soca-benefit-grid { grid-template-columns:1fr; } .soca-benefit { padding:28px; } }
-    @media(max-width:480px) { .soca-benefit { grid-template-columns:1fr;gap:20px; } .soca-benefit > img { max-width:230px;margin-inline:auto; } }
-    .expert-collage-section.expert-grid-expanded { padding-top:32px; }
-    .expert-grid-expanded .expert-collage { position:static;height:auto;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));margin-bottom:28px; }
-    .expert-grid-expanded .expert-portrait:nth-child(n) { margin-top:0;height:auto;aspect-ratio:3/4; }
+    .merchant-section>h2,
+    .merchant-card h3,
+    #marketing-plan .merchant-card p {
+      color: #100f12;
+    }
+
+    .soca-benefit {
+      padding: 24px clamp(24px, 4vw, 56px) 28px;
+    }
+
+    .soca-benefit>img {
+      max-width: 260px;
+      margin-bottom: 14px;
+    }
+
+    .soca-benefit h2 {
+      font-size: clamp(22px, 1.8vw, 27px);
+    }
+
+    .soca-benefit p {
+      font-size: 14px;
+      line-height: 1.65;
+      max-width: 480px;
+      margin: 14px 0 18px;
+    }
+
+    .soca-benefit>a {
+      padding: 11px 20px;
+      font-size: 14px;
+    }
+
+    .product-showcase {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+    }
+
+    .product-showcase-card {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    #produk .product-showcase-image {
+      aspect-ratio: 1;
+      border-radius: 20px;
+    }
+
+    .product-showcase-card h3 {
+      grid-column: 1;
+      grid-row: auto;
+      font-size: 19px;
+    }
+
+    .product-showcase-card p {
+      grid-column: 1;
+      grid-row: auto;
+      font-size: 13px;
+    }
+
+    .product-showcase-link {
+      grid-column: 1;
+      grid-row: auto;
+      justify-self: start;
+      margin-top: 4px;
+    }
+
+    .soca-guard-art {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: center;
+      justify-content: center;
+      color: #100f12;
+    }
+
+    .soca-guard-art i {
+      font-size: 56px;
+      color: #52b3dd;
+    }
+
+    .soca-guard-art span {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .expert-collage-section {
+      position: relative;
+      max-width: 1440px;
+      margin-inline: auto;
+      padding: 210px 24px 56px;
+      background: #fff;
+    }
+
+    .expert-collage {
+      position: absolute;
+      inset: 20px 24px auto;
+      height: 310px;
+      display: grid;
+      grid-template-columns: repeat(11, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    .expert-portrait {
+      position: relative;
+      margin: 0;
+      border-radius: 12px;
+      height: 135px;
+      min-width: 0;
+    }
+
+    .expert-portrait:nth-child(3n+1) {
+      margin-top: 60px;
+    }
+
+    .expert-portrait:nth-child(3n+2) {
+      margin-top: 12px;
+    }
+
+    .expert-portrait:nth-child(5),
+    .expert-portrait:nth-child(6),
+    .expert-portrait:nth-child(7) {
+      height: 105px;
+    }
+
+    .expert-portrait:first-child,
+    .expert-portrait:last-child {
+      margin-top: 170px;
+    }
+
+    .expert-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 12px;
+    }
+
+    .expert-portrait figcaption {
+      position: absolute;
+      left: -20px;
+      right: -20px;
+      top: calc(100% + 6px);
+      padding: 8px;
+      background: #100f12;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 11px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .expert-portrait small {
+      display: block;
+      font-size: 10px;
+      opacity: .75;
+    }
+
+    .expert-portrait:hover figcaption,
+    .expert-portrait:focus figcaption {
+      opacity: 1;
+    }
+
+    .expert-collage-copy {
+      position: relative;
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .expert-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      padding: 5px 12px;
+      background: #f5f5f5;
+      border-radius: 99px;
+      margin-bottom: 14px;
+    }
+
+    .expert-collage-copy h2 {
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -.03em;
+      color: #100f12;
+    }
+
+    .expert-collage-copy h2 span {
+      color: #888;
+    }
+
+    .expert-collage-copy p {
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 18px auto 22px;
+      max-width: 490px;
+    }
+
+    .expert-collage-copy>a {
+      display: inline-flex;
+      gap: 12px;
+      background: #100f12;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 99px;
+      font-size: 13px;
+    }
+
+    #jadwal-acara {
+      background: white;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 28px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .news-card {
+      min-width: 0;
+    }
+
+    .news-card>img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      cursor: zoom-in;
+    }
+
+    .news-date {
+      color: #888;
+      font-size: 12px;
+      margin: 16px 0 8px;
+    }
+
+    .news-card h3 {
+      font-size: 19px;
+      line-height: 1.5;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .news-excerpt {
+      color: #777;
+      line-height: 1.7;
+      font-size: 14px;
+      margin: 14px 0 20px;
+    }
+
+    .news-card>a {
+      color: #444;
+      font-size: 12px;
+      letter-spacing: .08em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+    }
+
+    .news-grid>div:only-child {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 1023px) {
+
+      .product-showcase,
+      .news-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .expert-collage {
+        gap: 8px;
+      }
+
+      .expert-portrait {
+        height: 100px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .product-showcase {
+        max-width: none;
+        gap: 24px 14px;
+      }
+
+      .product-showcase-card h3 {
+        font-size: 17px;
+      }
+
+      .product-showcase-link {
+        font-size: 10px;
+        padding: 9px 10px;
+      }
+
+      .expert-collage-section {
+        padding-top: 28px;
+      }
+
+      .expert-collage {
+        position: static;
+        height: auto;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 28px;
+      }
+
+      .expert-portrait:nth-child(n) {
+        margin-top: 0;
+        height: auto;
+        aspect-ratio: 3/4;
+      }
+
+      .expert-collage-copy h2 {
+        font-size: 28px;
+      }
+
+      .soca-benefit>img {
+        max-width: 230px;
+      }
+
+      .news-grid {
+        gap: 28px 16px;
+      }
+
+      .news-card h3 {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .news-details summary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      letter-spacing: .08em;
+      cursor: pointer;
+      min-height: 44px;
+      color: #444;
+    }
+
+    .news-details>div {
+      padding: 14px;
+      background: #f8fafc;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .news-details a {
+      text-decoration: underline;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: #f5f5f5;
+      color: #475569;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .editorial-title {
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: -.04em;
+      color: #100f12;
+    }
+
+    .editorial-title span {
+      color: #8a8a8a;
+    }
+
+    .soca-benefit {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: 24px;
+      text-align: left;
+      align-items: center;
+      padding: 32px;
+    }
+
+    .soca-benefit>img {
+      width: 100%;
+      margin: 0;
+    }
+
+    .soca-benefit-copy h2 {
+      font-size: clamp(22px, 1.8vw, 27px);
+    }
+
+    #marketing-plan .soca-benefit-copy p {
+      text-align: left;
+    }
+
+    .soca-benefit-copy>a {
+      display: inline-flex;
+      gap: 12px;
+      border-radius: 99px;
+      background: #fff;
+      color: #100f12;
+      padding: 11px 18px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .news-image-caption {
+      font-size: 11px;
+      color: #777;
+      margin-top: 6px;
+    }
+
+    @media(max-width:1023px) {
+      .soca-benefit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .soca-benefit {
+        padding: 28px;
+      }
+    }
+
+    @media(max-width:480px) {
+      .soca-benefit {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .soca-benefit>img {
+        max-width: 230px;
+        margin-inline: auto;
+      }
+    }
+
+    .expert-collage-section.expert-grid-expanded {
+      padding-top: 32px;
+    }
+
+    .expert-grid-expanded .expert-collage {
+      position: static;
+      height: auto;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      margin-bottom: 28px;
+    }
+
+    .expert-grid-expanded .expert-portrait:nth-child(n) {
+      margin-top: 0;
+      height: auto;
+      aspect-ratio: 3/4;
+    }
 
     /* Mesh gradients shared by both SOCA benefit panels. */
-    .soca-benefit, .soca-benefit:nth-child(2) {
-      background-color:#100f12;
-      background-image:radial-gradient(ellipse at 15% 15%,rgba(16,79,172,.85),transparent 60%),radial-gradient(ellipse at 90% 85%,rgba(16,79,172,.55),transparent 60%),linear-gradient(135deg,#100f12,#10223d 55%,#100f12);
+    .soca-benefit,
+    .soca-benefit:nth-child(2) {
+      background-color: #100f12;
+      background-image: radial-gradient(ellipse at 15% 15%, rgba(16, 79, 172, .85), transparent 60%), radial-gradient(ellipse at 90% 85%, rgba(16, 79, 172, .55), transparent 60%), linear-gradient(135deg, #100f12, #10223d 55%, #100f12);
     }
-    .soca-benefit:nth-child(2) { background-position:center;background-image:radial-gradient(ellipse at 80% 10%,rgba(16,79,172,.8),transparent 60%),radial-gradient(ellipse at 10% 90%,rgba(16,79,172,.5),transparent 60%),linear-gradient(145deg,#100f12,#10223d 55%,#100f12); }
-    .news-media { position:relative; }
-    .news-media > img, .news-image-empty { display:block;width:100%;aspect-ratio:1;object-fit:cover; }
-    .news-image-empty { background:#f1f5f9; }
-    .news-media > img { cursor:zoom-in; }
-    .news-slide-controls { display:none; }
-    .news-card[hidden] { display:none; }
+
+    .soca-benefit:nth-child(2) {
+      background-position: center;
+      background-image: radial-gradient(ellipse at 80% 10%, rgba(16, 79, 172, .8), transparent 60%), radial-gradient(ellipse at 10% 90%, rgba(16, 79, 172, .5), transparent 60%), linear-gradient(145deg, #100f12, #10223d 55%, #100f12);
+    }
+
+    .news-media {
+      position: relative;
+    }
+
+    .news-media>img,
+    .news-image-empty {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    .news-image-empty {
+      background: #f1f5f9;
+    }
+
+    .news-media>img {
+      cursor: zoom-in;
+    }
+
+    .news-slide-controls {
+      display: none;
+    }
+
+    .news-card[hidden] {
+      display: none;
+    }
+
     @media(max-width:767px) {
-      .news-grid { display:block;max-width:440px; }
-      .news-slide-controls { position:absolute;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;pointer-events:none; }
-      .news-slide-controls button { pointer-events:auto;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1px solid #e5e7eb;background:white;color:#100f12;font-size:32px;line-height:1;box-shadow:0 2px 10px #0002; }
-      .news-slide-controls button:focus-visible { outline:3px solid #52b3dd;outline-offset:3px; }
-      .news-slide-controls button:disabled { opacity:.45; }
-      .merchant-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 10px;overflow:visible;padding-bottom:0; }
-      .merchant-card { min-width:0;flex:auto;text-align:center; }
-      .merchant-logo { width:100%;height:auto;aspect-ratio:3/4;border-radius:12px;overflow:hidden;background:#f6f7f9; }
-      .merchant-logo img { width:70%;height:65%;object-fit:contain; }
-      .merchant-shopeefood .merchant-logo img { width:90%;height:65%; }
-      .merchant-card h3 { font-size:12px;line-height:1.4;margin-top:8px; }
-      #marketing-plan .merchant-card p { text-align:center;font-size:11px;line-height:1.5; }
+      .news-grid {
+        display: block;
+        max-width: 440px;
+      }
+
+      .news-slide-controls {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        display: flex;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+
+      .news-slide-controls button {
+        pointer-events: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid #e5e7eb;
+        background: white;
+        color: #100f12;
+        font-size: 32px;
+        line-height: 1;
+        box-shadow: 0 2px 10px #0002;
+      }
+
+      .news-slide-controls button:focus-visible {
+        outline: 3px solid #52b3dd;
+        outline-offset: 3px;
+      }
+
+      .news-slide-controls button:disabled {
+        opacity: .45;
+      }
+
+      .merchant-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px 10px;
+        overflow: visible;
+        padding-bottom: 0;
+      }
+
+      .merchant-card {
+        min-width: 0;
+        flex: auto;
+        text-align: center;
+      }
+
+      .merchant-logo {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3/4;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #f6f7f9;
+      }
+
+      .merchant-logo img {
+        width: 70%;
+        height: 65%;
+        object-fit: contain;
+      }
+
+      .merchant-shopeefood .merchant-logo img {
+        width: 90%;
+        height: 65%;
+      }
+
+      .merchant-card h3 {
+        font-size: 12px;
+        line-height: 1.4;
+        margin-top: 8px;
+      }
+
+      #marketing-plan .merchant-card p {
+        text-align: center;
+        font-size: 11px;
+        line-height: 1.5;
+      }
     }
-    .editorial-title { font-size:clamp(26px,3vw,40px); }
+
+    .editorial-title {
+      font-size: clamp(26px, 3vw, 40px);
+    }
+
     @media(max-width:767px) {
-      .editorial-title { font-size:28px; }
-      .soca-benefit, .soca-benefit:nth-child(2) { background:#05082b; }
-      .soca-benefit-copy { text-align:center; }
-      #marketing-plan .soca-benefit-copy p { text-align:center;text-align-last:auto; }
+      .editorial-title {
+        font-size: 28px;
+      }
+
+      .soca-benefit,
+      .soca-benefit:nth-child(2) {
+        background: #05082b;
+      }
+
+      .soca-benefit-copy {
+        text-align: center;
+      }
+
+      #marketing-plan .soca-benefit-copy p {
+        text-align: center;
+        text-align-last: auto;
+      }
     }
-    .soca-benefit, .soca-benefit:nth-child(2) { background:#05082b; }
-    @media(max-width:360px) { .product-showcase { grid-template-columns:1fr; } .management-member.is-selected { gap:10px; } .management-info h3 { font-size:16px; } }
-    #soca-app .soca-split-layout { max-width:1152px;margin-inline:auto;padding-inline:24px;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:64px; }
-    #soca-app .soca-split-copy { text-align:left; }
-    #soca-app .soca-split-copy h2 { font-size:clamp(32px,3.5vw,48px);font-weight:700;line-height:1.2; }
-    #soca-app .soca-split-copy p { max-width:500px;margin:20px 0 24px;font-size:17px;line-height:1.8; }
-    .soca-split-visual { display:flex;align-items:center;justify-content:center; }
-    .soca-split-visual img { width:100%;max-width:380px;height:auto;max-height:480px;object-fit:contain;filter:drop-shadow(0 20px 36px #0003); }
+
+    .soca-benefit,
+    .soca-benefit:nth-child(2) {
+      background: #05082b;
+    }
+
+    @media(max-width:360px) {
+      .product-showcase {
+        grid-template-columns: 1fr;
+      }
+
+      .management-member.is-selected {
+        gap: 10px;
+      }
+
+      .management-info h3 {
+        font-size: 16px;
+      }
+    }
+
+    #soca-app .soca-split-layout {
+      max-width: 1152px;
+      margin-inline: auto;
+      padding-inline: 24px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      align-items: center;
+      gap: 64px;
+    }
+
+    #soca-app .soca-split-copy {
+      text-align: left;
+    }
+
+    #soca-app .soca-split-copy h2 {
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    #soca-app .soca-split-copy p {
+      max-width: 500px;
+      margin: 20px 0 24px;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .soca-split-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .soca-split-visual img {
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+      max-height: 480px;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 36px #0003);
+    }
+
     @media(max-width:767px) {
-      #soca-app .soca-split-layout { grid-template-columns:1fr;gap:28px; }
-      #soca-app .soca-split-copy h2 { font-size:34px; }
-      #soca-app .soca-split-copy p { font-size:16px; }
-      .soca-split-visual img { max-width:300px;max-height:360px; }
+      #soca-app .soca-split-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      #soca-app .soca-split-copy h2 {
+        font-size: 34px;
+      }
+
+      #soca-app .soca-split-copy p {
+        font-size: 16px;
+      }
+
+      .soca-split-visual img {
+        max-width: 300px;
+        max-height: 360px;
+      }
     }
-    .store-badges { display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-top:22px; }
-    .store-badges img { display:block;height:48px;width:auto;max-width:180px;object-fit:contain; }
-    .store-badges .google-play-badge { height:70px;max-width:200px;margin:-11px; }
-    .soca-split-visual img { max-width:460px;max-height:600px;width:100%;height:auto; }
-    .soca-benefit > img { width:100%;max-width:360px;height:auto;aspect-ratio:auto;object-fit:contain;align-self:center; }
-    @media(max-width:767px) { .soca-split-visual img { max-width:360px;max-height:500px; } .soca-benefit > img { max-width:320px; } }
-    @media(max-width:380px) { .store-badges { gap:8px; } .store-badges img { height:40px;max-width:148px; } .store-badges .google-play-badge { height:58px;max-width:166px;margin:-9px; } }
-    #beranda[hidden], .hero-arrow[hidden], .hero-dots[hidden] { display:none!important; }
-    #expert-medis { padding-bottom:20px; }
-    #manajemen { padding-top:24px; }
+
+    .store-badges {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .store-badges img {
+      display: block;
+      height: 48px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+    }
+
+    .store-badges .google-play-badge {
+      height: 70px;
+      max-width: 200px;
+      margin: -11px;
+    }
+
+    .soca-split-visual img {
+      max-width: 460px;
+      max-height: 600px;
+      width: 100%;
+      height: auto;
+    }
+
+    .soca-benefit>img {
+      width: 100%;
+      max-width: 360px;
+      height: auto;
+      aspect-ratio: auto;
+      object-fit: contain;
+      align-self: center;
+    }
+
+    @media(max-width:767px) {
+      .soca-split-visual img {
+        max-width: 360px;
+        max-height: 500px;
+      }
+
+      .soca-benefit>img {
+        max-width: 320px;
+      }
+    }
+
+    @media(max-width:380px) {
+      .store-badges {
+        gap: 8px;
+      }
+
+      .store-badges img {
+        height: 40px;
+        max-width: 148px;
+      }
+
+      .store-badges .google-play-badge {
+        height: 58px;
+        max-width: 166px;
+        margin: -9px;
+      }
+    }
+
+    #beranda[hidden],
+    .hero-arrow[hidden],
+    .hero-dots[hidden] {
+      display: none !important;
+    }
+
+    #expert-medis {
+      padding-bottom: 20px;
+    }
+
+    #manajemen {
+      padding-top: 24px;
+    }
+    @media (max-width:767px) { #beranda .hero-slide img { object-position:right center; } }
   </style>
 
   <link rel="stylesheet" href="asset/site-footer.css" />
@@ -1620,7 +2357,7 @@
 
     <!-- Bagian Kiri: Logo -->
     <a href="#beranda" class="nav-logo">
-      <img src="asset/logo/LOGO CHENSORA PNG web.png" alt="Logo ChenSora" />
+      <img src="asset/logo/LOGO CHENSORA PNG web.PNG" alt="Logo ChenSora" />
     </a>
 
     <!-- Bagian Tengah: Menu Tautan -->
@@ -1694,22 +2431,22 @@
 
       <!-- Slide 1 -->
       <div class="hero-slide active">
-        <img src="asset/img/content 1.webp" alt="ChenSora - Membangun Masa Depan Sehat" />
+        <img src="asset/img/content 1-lounge.WEBP" alt="ChenSora - Membangun Masa Depan Sehat" />
         <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-800/50"></div>
       </div>
       <!-- Slide 2 -->
       <div class="hero-slide">
-        <img src="asset/img/content 2.jpg" alt="ChenSora - Produk Kesehatan Inovatif" />
+        <img src="asset/img/allproduk.WEBP" alt="ChenSora - Produk Kesehatan Inovatif" />
         <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-800/50"></div>
       </div>
       <!-- Slide 3 -->
       <div class="hero-slide">
-        <img src="asset/img/content 3.jpg" alt="ChenSora - Bisnis Menjanjikan" />
+        <img src="asset/img/bisnisuntung.WEBP" alt="ChenSora - Bisnis Menjanjikan" />
         <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-800/50"></div>
       </div>
       <!-- Slide 4 -->
       <div class="hero-slide">
-        <img src="asset/img/content 4.jpg" alt="ChenSora - Komunitas Solid" />
+        <img src="asset/img/komunitas solid.WEBP" alt="ChenSora - Komunitas Solid" />
         <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-800/50"></div>
       </div>
 
@@ -1784,8 +2521,14 @@
         <div class="product-showcase">
           <!-- Product Card 1: Yorokobi Koffie -->
           <div class="product-showcase-card" data-aos="fade-up" data-aos-delay="100">
-<button type="button" class="product-flip product-showcase-image" aria-pressed="false" aria-label="Lihat gambar belakang Yorokobi Koffie" data-product-name="Yorokobi Koffie"><span class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img src="asset/produk/yorokobikoffie.WEBP" alt="Yorokobi Koffie, gambar utama" loading="lazy" /></span><span class="product-face product-back" aria-hidden="true"><img src="asset/produk/yorokobikoffie behind.WEBP" alt="Yorokobi Koffie, gambar belakang" loading="lazy" /></span></span></button>
-<h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Yorokobi Koffie</h3>
+            <button type="button" class="product-flip product-showcase-image" aria-pressed="false"
+              aria-label="Lihat gambar belakang Yorokobi Koffie" data-product-name="Yorokobi Koffie"><span
+                class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img
+                    src="asset/produk/yorokobikoffie.WEBP" alt="Yorokobi Koffie, gambar utama"
+                    loading="lazy" /></span><span class="product-face product-back" aria-hidden="true"><img
+                    src="asset/produk/yorokobikoffie behind.WEBP" alt="Yorokobi Koffie, gambar belakang"
+                    loading="lazy" /></span></span></button>
+            <h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Yorokobi Koffie</h3>
             <p class="mt-3 text-slate-600 flex-grow leading-relaxed text-base md:text-lg">
               Kopi stamina dan antioksidan pertama di Indonesia dengan Panax Ginseng, Guarana, dan Daun Kelor.
             </p>
@@ -1801,8 +2544,13 @@
 
           <!-- Product Card 2: Pyon Pyon -->
           <div class="product-showcase-card" data-aos="fade-up" data-aos-delay="200">
-<button type="button" class="product-flip product-showcase-image" aria-pressed="false" aria-label="Lihat gambar belakang Pyon Pyon Jelly" data-product-name="Pyon Pyon Jelly"><span class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img src="asset/produk/pyonpyon.WEBP" alt="Pyon Pyon Jelly, gambar utama" loading="lazy" /></span><span class="product-face product-back" aria-hidden="true"><img src="asset/produk/pyonpyon behind.WEBP" alt="Pyon Pyon Jelly, gambar belakang" loading="lazy" /></span></span></button>
-<h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Pyon Pyon Jelly</h3>
+            <button type="button" class="product-flip product-showcase-image" aria-pressed="false"
+              aria-label="Lihat gambar belakang Pyon Pyon Jelly" data-product-name="Pyon Pyon Jelly"><span
+                class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img
+                    src="asset/produk/pyonpyon.WEBP" alt="Pyon Pyon Jelly, gambar utama" loading="lazy" /></span><span
+                  class="product-face product-back" aria-hidden="true"><img src="asset/produk/pyonpyon behind.WEBP"
+                    alt="Pyon Pyon Jelly, gambar belakang" loading="lazy" /></span></span></button>
+            <h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Pyon Pyon Jelly</h3>
             <p class="mt-3 text-slate-600 flex-grow leading-relaxed text-base md:text-lg">
               Jelly Fiber dengan rasa lezat untuk memenuhi nutrisi harian dan mendukung tumbuh kembang anak.
             </p>
@@ -1818,8 +2566,13 @@
 
           <!-- Product Card 3: Kakkoi -->
           <div class="product-showcase-card" data-aos="fade-up" data-aos-delay="300">
-<button type="button" class="product-flip product-showcase-image" aria-pressed="false" aria-label="Lihat gambar belakang Kakkoi" data-product-name="Kakkoi"><span class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img src="asset/produk/kakkoi.WEBP" alt="Kakkoi, gambar utama" loading="lazy" /></span><span class="product-face product-back" aria-hidden="true"><img src="asset/produk/kakkoi behind.WEBP" alt="Kakkoi, gambar belakang" loading="lazy" /></span></span></button>
-<h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Kakkoi</h3>
+            <button type="button" class="product-flip product-showcase-image" aria-pressed="false"
+              aria-label="Lihat gambar belakang Kakkoi" data-product-name="Kakkoi"><span
+                class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img
+                    src="asset/produk/kakkoi.WEBP" alt="Kakkoi, gambar utama" loading="lazy" /></span><span
+                  class="product-face product-back" aria-hidden="true"><img src="asset/produk/kakkoi behind.WEBP"
+                    alt="Kakkoi, gambar belakang" loading="lazy" /></span></span></button>
+            <h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Kakkoi</h3>
             <p class="mt-3 text-slate-600 flex-grow leading-relaxed text-base md:text-lg">
               Minuman gel detox dan kecantikan dengan kolagen untuk meregenerasi sel dan mencerahkan kulit dari dalam.
             </p>
@@ -1833,10 +2586,19 @@
             </a>
           </div>
           <div class="product-showcase-card" data-aos="fade-up">
-<button type="button" class="product-flip product-showcase-image" aria-pressed="false" aria-label="Lihat gambar belakang SOCA Guard" data-product-name="SOCA Guard"><span class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img src="asset/produk/socaguard.WEBP" alt="SOCA Guard, gambar utama" loading="lazy" /></span><span class="product-face product-back" aria-hidden="true"><img src="asset/produk/socaguard behind.WEBP" alt="SOCA Guard, gambar belakang" loading="lazy" /></span></span></button>
-<h3>SOCA Guard</h3>
-            <p>SOCA GUARD adalah perlindungan antimikroba serbaguna berbasis air (water-based) yang aman, ramah lingkungan, dan dirancang khusus untuk melindungi berbagai permukaan dari mikroorganisme berbahaya serta bau tak sedap.</p>
-            <a href="https://socaofficial.co.id/" target="_blank" rel="noopener noreferrer" class="product-showcase-link" aria-label="Pelajari SOCA Guard"><span>Pelajari Lebih Lanjut</span><span aria-hidden="true">&#8594;</span></a>
+            <button type="button" class="product-flip product-showcase-image" aria-pressed="false"
+              aria-label="Lihat gambar belakang SOCA Guard" data-product-name="SOCA Guard"><span
+                class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img
+                    src="asset/produk/socaguard.WEBP" alt="SOCA Guard, gambar utama" loading="lazy" /></span><span
+                  class="product-face product-back" aria-hidden="true"><img src="asset/produk/socaguard behind.WEBP"
+                    alt="SOCA Guard, gambar belakang" loading="lazy" /></span></span></button>
+            <h3>SOCA Guard</h3>
+            <p>SOCA GUARD adalah perlindungan antimikroba serbaguna berbasis air (water-based) yang aman, ramah
+              lingkungan, dan dirancang khusus untuk melindungi berbagai permukaan dari mikroorganisme berbahaya serta
+              bau tak sedap.</p>
+            <a href="https://socaofficial.co.id/" target="_blank" rel="noopener noreferrer"
+              class="product-showcase-link" aria-label="Pelajari SOCA Guard"><span>Pelajari Lebih Lanjut</span><span
+                aria-hidden="true">&#8594;</span></a>
           </div>
         </div>
       </div>
@@ -1845,30 +2607,68 @@
     <!-- Section 1.5: Expert Medis -->
     <section id="expert-medis" class="expert-collage-section">
       <div class="expert-collage" aria-label="Para expert medis ChenSora">
-        <figure class="expert-portrait expert-portrait-1" tabindex="0"><img src="asset/img/drdhan.webp" alt="dr. Dhany Akbar" loading="lazy" width="160" height="200" /><figcaption>dr. Dhany Akbar<small>Expert Medis ChenSora</small></figcaption></figure>
-        <figure class="expert-portrait expert-portrait-2" tabindex="0"><img src="asset/img/drdiva.webp" alt="dr. Nadiva Rully" loading="lazy" width="160" height="200" /><figcaption>dr. Nadiva Rully<small>Expert Medis ChenSora</small></figcaption></figure>
-        <figure class="expert-portrait expert-portrait-3" tabindex="0"><img src="asset/img/drfin.webp" alt="dr. Fin Endriana" loading="lazy" width="160" height="200" /><figcaption>dr. Fin Endriana<small>Expert Medis ChenSora</small></figcaption></figure>
-        <figure class="expert-portrait expert-portrait-4" tabindex="0"><img src="asset/img/drnov.webp" alt="dr. Novi Yuliana" loading="lazy" width="160" height="200" /><figcaption>dr. Novi Yuliana<small>Expert Medis ChenSora</small></figcaption></figure>
-        <figure class="expert-portrait expert-portrait-5" tabindex="0"><img src="asset/img/drheni.webp" alt="dr. Heni Susi" loading="lazy" width="160" height="200" /><figcaption>dr. Heni Susi<small>Expert Medis ChenSora</small></figcaption></figure>
-        <figure class="expert-portrait expert-portrait-6" tabindex="0"><img src="asset/img/drindri.webp" alt="dr. Indri Buchari" loading="lazy" width="160" height="200" /><figcaption>dr. Indri Buchari<small>Expert Medis ChenSora</small></figcaption></figure>
-        <figure class="expert-portrait expert-portrait-7" tabindex="0"><img src="https://placehold.co/300x300/a5f3fc/0e7490?text=dr.agnestity" alt="dr. Agnes Tity" loading="lazy" width="160" height="200" /><figcaption>dr. Agnes Tity<small>Expert Medis ChenSora</small></figcaption></figure>
-        <figure class="expert-portrait expert-portrait-8" tabindex="0"><img src="asset/img/dryohan.webp" alt="dr. Yohana M.R Maryorie" loading="lazy" width="160" height="200" /><figcaption>dr. Yohana M.R Maryorie<small>Expert Medis ChenSora</small></figcaption></figure>
-        <figure class="expert-portrait expert-portrait-9" tabindex="0"><img src="asset/img/drrob.webp" alt="dr. Roberto Augustino, M.Biomed AAM" loading="lazy" width="160" height="200" /><figcaption>dr. Roberto Augustino, M.Biomed AAM<small>Expert Medis ChenSora</small></figcaption></figure>
-        <figure class="expert-portrait expert-portrait-10" tabindex="0"><img src="asset/img/drlucky.webp" alt="dr. Lucky Rahardjo R" loading="lazy" width="160" height="200" /><figcaption>dr. Lucky Rahardjo R<small>Expert Medis ChenSora</small></figcaption></figure>
-        <figure class="expert-portrait expert-portrait-11" tabindex="0"><img src="asset/img/drvid.webp" alt="dr. Viedya Soesetyo" loading="lazy" width="160" height="200" /><figcaption>dr. Viedya Soesetyo<small>Expert Medis ChenSora</small></figcaption></figure>
+        <figure class="expert-portrait expert-portrait-1" tabindex="0"><img src="asset/img/drdhan.webp"
+            alt="dr. Dhany Akbar" loading="lazy" width="160" height="200" />
+          <figcaption>dr. Dhany Akbar<small>Expert Medis ChenSora</small></figcaption>
+        </figure>
+        <figure class="expert-portrait expert-portrait-2" tabindex="0"><img src="asset/img/drdiva.webp"
+            alt="dr. Nadiva Rully" loading="lazy" width="160" height="200" />
+          <figcaption>dr. Nadiva Rully<small>Expert Medis ChenSora</small></figcaption>
+        </figure>
+        <figure class="expert-portrait expert-portrait-3" tabindex="0"><img src="asset/img/drfin.webp"
+            alt="dr. Fin Endriana" loading="lazy" width="160" height="200" />
+          <figcaption>dr. Fin Endriana<small>Expert Medis ChenSora</small></figcaption>
+        </figure>
+        <figure class="expert-portrait expert-portrait-4" tabindex="0"><img src="asset/img/drnov.webp"
+            alt="dr. Novi Yuliana" loading="lazy" width="160" height="200" />
+          <figcaption>dr. Novi Yuliana<small>Expert Medis ChenSora</small></figcaption>
+        </figure>
+        <figure class="expert-portrait expert-portrait-5" tabindex="0"><img src="asset/img/drheni.webp"
+            alt="dr. Heni Susi" loading="lazy" width="160" height="200" />
+          <figcaption>dr. Heni Susi<small>Expert Medis ChenSora</small></figcaption>
+        </figure>
+        <figure class="expert-portrait expert-portrait-6" tabindex="0"><img src="asset/img/drindri.webp"
+            alt="dr. Indri Buchari" loading="lazy" width="160" height="200" />
+          <figcaption>dr. Indri Buchari<small>Expert Medis ChenSora</small></figcaption>
+        </figure>
+        <figure class="expert-portrait expert-portrait-7" tabindex="0"><img
+            src="https://placehold.co/300x300/a5f3fc/0e7490?text=dr.agnestity" alt="dr. Agnes Tity" loading="lazy"
+            width="160" height="200" />
+          <figcaption>dr. Agnes Tity<small>Expert Medis ChenSora</small></figcaption>
+        </figure>
+        <figure class="expert-portrait expert-portrait-8" tabindex="0"><img src="asset/img/dryohan.webp"
+            alt="dr. Yohana M.R Maryorie" loading="lazy" width="160" height="200" />
+          <figcaption>dr. Yohana M.R Maryorie<small>Expert Medis ChenSora</small></figcaption>
+        </figure>
+        <figure class="expert-portrait expert-portrait-9" tabindex="0"><img src="asset/img/drrob.webp"
+            alt="dr. Roberto Augustino, M.Biomed AAM" loading="lazy" width="160" height="200" />
+          <figcaption>dr. Roberto Augustino, M.Biomed AAM<small>Expert Medis ChenSora</small></figcaption>
+        </figure>
+        <figure class="expert-portrait expert-portrait-10" tabindex="0"><img src="asset/img/drlucky.webp"
+            alt="dr. Lucky Rahardjo R" loading="lazy" width="160" height="200" />
+          <figcaption>dr. Lucky Rahardjo R<small>Expert Medis ChenSora</small></figcaption>
+        </figure>
+        <figure class="expert-portrait expert-portrait-11" tabindex="0"><img src="asset/img/drvid.webp"
+            alt="dr. Viedya Soesetyo" loading="lazy" width="160" height="200" />
+          <figcaption>dr. Viedya Soesetyo<small>Expert Medis ChenSora</small></figcaption>
+        </figure>
       </div>
-      <div class="expert-collage-copy" data-aos="fade-up"><span class="expert-eyebrow">Expert Medis ChenSora</span><h2>ChenSora Didukung oleh<br /><span>Para Expert Medis</span></h2><p>
-            ChenSora didukung Oleh para Expert Medis dalam menyebarkan Edukasi
-            Kesehatan untuk membantu Anda melawan penyakit dengan cara yang
-            Paling Tepat!
-          </p></div>
+      <div class="expert-collage-copy" data-aos="fade-up"><span class="expert-eyebrow">Expert Medis ChenSora</span>
+        <h2>ChenSora Didukung oleh<br /><span>Para Expert Medis</span></h2>
+        <p>
+          ChenSora didukung Oleh para Expert Medis dalam menyebarkan Edukasi
+          Kesehatan untuk membantu Anda melawan penyakit dengan cara yang
+          Paling Tepat!
+        </p>
+      </div>
     </section>
 
     <!-- Section 2: Manajemen (Management) -->
     <section id="manajemen" class="py-12 md:py-16 bg-white">
       <div class="container mx-auto px-6">
         <div class="text-center mb-9" data-aos="fade-up">
-          <span class="section-eyebrow">Tim ChenSora</span><h2 class="editorial-title">Tim Manajemen <span>Kami</span></h2>
+          <span class="section-eyebrow">Tim ChenSora</span>
+          <h2 class="editorial-title">Tim Manajemen <span>Kami</span></h2>
           <div class="w-24 h-1 bg-primary mx-auto mt-6 mb-4"></div>
           <p class="text-lg text-slate-600 leading-relaxed">
             Para pemimpin di balik visi dan kesuksesan ChenSora.
@@ -1932,7 +2732,9 @@
             </div>
           </article>
         </div>
-        <div class="management-controls"><button id="management-prev" type="button" aria-label="Anggota sebelumnya">&#8592;</button><button id="management-next" type="button" aria-label="Anggota berikutnya">&#8594;</button></div>
+        <div class="management-controls"><button id="management-prev" type="button"
+            aria-label="Anggota sebelumnya">&#8592;</button><button id="management-next" type="button"
+            aria-label="Anggota berikutnya">&#8594;</button></div>
       </div>
     </section>
 
@@ -1957,15 +2759,23 @@
         <div class="soca-split-copy" data-aos="fade-right"><span
             class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full text-sm font-bold mb-4 shadow-lg bg-gradient-to-r from-blue-500 to-cyan-400 text-white">
             <img src="asset/logo/soca icon.webp" alt="SOCA" class="h-5 w-auto object-contain" /> SOCA
-          </span><h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4">
+          </span>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4">
             Belanja Mudah,<br class="hidden md:block" /> Cuan Melimpah
-          </h2><p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
+          </h2>
+          <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
             Dapatkan cashback otomatis setiap belanja online. Ubah pengeluaranmu menjadi pendapatan bersama SOCA.
           </p><a href="https://socaofficial.co.id/" target="_blank"
             class="inline-block bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-bold text-lg py-3 px-12 rounded-full shadow-[0_8px_30px_rgba(59,130,246,0.4)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.5)] hover:-translate-y-1 transition-all duration-300">
             Coba Sekarang
-          </a><div class="store-badges" aria-label="App Store dan Google Play"><img src="asset/logo/download-app-store.svg" alt="Download on the App Store" width="180" height="54" loading="lazy" /><img class="google-play-badge" src="asset/logo/get-google-play.png" alt="Get it on Google Play" width="200" height="77" loading="lazy" /></div></div>
-        <div class="soca-split-visual" data-aos="fade-left"><img src="asset/img/soca_mockup.png" alt="Tampilan aplikasi SOCA di ponsel" width="640" height="800" loading="lazy" /></div>
+          </a>
+          <div class="store-badges" aria-label="App Store dan Google Play"><img src="asset/logo/download-app-store.svg"
+              alt="Download on the App Store" width="180" height="54" loading="lazy" /><img class="google-play-badge"
+              src="asset/logo/get-google-play.png" alt="Get it on Google Play" width="200" height="77" loading="lazy" />
+          </div>
+        </div>
+        <div class="soca-split-visual" data-aos="fade-left"><img src="asset/img/soca mockup.WEBP"
+            alt="Tampilan aplikasi SOCA di ponsel" width="640" height="800" loading="lazy" /></div>
       </div>
     </section>
 
@@ -1974,23 +2784,28 @@
       <div class="soca-benefit-grid">
         <article class="soca-benefit" data-aos="fade-up">
           <div class="soca-benefit-art"><img src="asset/img/soca-shopping-travel.png"
-            alt="Ilustrasi belanja dan perjalanan dengan hadiah serta koin cashback" loading="lazy" width="1536"
-            height="1024" /></div><div class="soca-benefit-copy">
-          <h2>Belanja harian dan rencana liburan, kini lebih bernilai</h2>
-          <p>Temukan pilihan merchant untuk kebutuhan sehari-hari hingga perjalanan berikutnya. Mulai lewat SOCA dan
-            nikmati peluang cashback dari transaksi yang memenuhi ketentuan.</p>
-          <a href="https://socaofficial.co.id/" target="_blank" rel="noopener noreferrer">Jelajahi SOCA <span
-              aria-hidden="true">&#8594;</span></a>
-        </div></article>
+              alt="Ilustrasi belanja dan perjalanan dengan hadiah serta koin cashback" loading="lazy" width="1536"
+              height="1024" /></div>
+          <div class="soca-benefit-copy">
+            <h2>Belanja harian dan rencana liburan, kini lebih bernilai</h2>
+            <p>Temukan pilihan merchant untuk kebutuhan sehari-hari hingga perjalanan berikutnya. Mulai lewat SOCA dan
+              nikmati peluang cashback dari transaksi yang memenuhi ketentuan.</p>
+            <a href="https://socaofficial.co.id/" target="_blank" rel="noopener noreferrer">Jelajahi SOCA <span
+                aria-hidden="true">&#8594;</span></a>
+          </div>
+        </article>
         <article class="soca-benefit" data-aos="fade-up" data-aos-delay="100">
-          <div class="soca-benefit-art"><img src="asset/img/soca-cashback-rewards.png" alt="Ilustrasi ponsel dengan koin, hadiah, dan trofi cashback"
-            loading="lazy" width="1536" height="1024" /></div><div class="soca-benefit-copy">
-          <h2>Ubah kebiasaan belanja menjadi kesempatan mendapat lebih</h2>
-          <p>Satu tempat untuk menemukan penawaran dan mengenal program cashback SOCA. Cek promo yang tersedia, pilih
-            merchant favorit, lalu ikuti langkahnya sebelum bertransaksi.</p>
-          <a href="https://app.socaofficial.co.id/login" target="_blank" rel="noopener noreferrer">Mulai dengan SOCA <span
-              aria-hidden="true">&#8594;</span></a>
-        </div></article>
+          <div class="soca-benefit-art"><img src="asset/img/soca-cashback-rewards.png"
+              alt="Ilustrasi ponsel dengan koin, hadiah, dan trofi cashback" loading="lazy" width="1536"
+              height="1024" /></div>
+          <div class="soca-benefit-copy">
+            <h2>Ubah kebiasaan belanja menjadi kesempatan mendapat lebih</h2>
+            <p>Satu tempat untuk menemukan penawaran dan mengenal program cashback SOCA. Cek promo yang tersedia, pilih
+              merchant favorit, lalu ikuti langkahnya sebelum bertransaksi.</p>
+            <a href="https://app.socaofficial.co.id/login" target="_blank" rel="noopener noreferrer">Mulai dengan SOCA
+              <span aria-hidden="true">&#8594;</span></a>
+          </div>
+        </article>
       </div>
       <div class="merchant-section">
         <h2 data-aos="fade-up">Merchant Populer</h2>
@@ -2033,7 +2848,8 @@
     <section id="jadwal-acara" class="py-12 md:py-16 bg-slate-50 border-t border-gray-100">
       <div class="container mx-auto px-6">
         <div class="text-center mb-9" data-aos="fade-up">
-          <span class="section-eyebrow">Kabar ChenSora</span><h2 class="editorial-title">Latest <span>News</span></h2>
+          <span class="section-eyebrow">Kabar ChenSora</span>
+          <h2 class="editorial-title">Latest <span>News</span></h2>
           <div class="w-24 h-1 bg-primary mx-auto mt-6 mb-4"></div>
           <p class="text-lg text-slate-600 leading-relaxed">
             Kabar terbaru, kegiatan, dan informasi dari ChenSora.
@@ -2062,15 +2878,36 @@
 
   <!-- Footer -->
   <footer class="site-footer" id="kontak">
-  <div class="site-footer-grid">
-    <div class="site-footer-brand"><img src="asset/logo/LOGO CHENSORA PNG web.PNG" alt="ChenSora" width="200" height="64" /><h2>Bertumbuh bersama,<br />mengalirkan keberkahan.</h2></div>
-    <div><h3>Kantor Pusat</h3><p>Graha S.A., Lantai 3, Unit 302<br />Surabaya, Jawa Timur<br />Indonesia</p><a href="https://maps.app.goo.gl/KY4nC5NSqBrxwAvC6" target="_blank" rel="noopener noreferrer">Buka di Google Maps</a></div>
-    <div><h3>Hubungi Kami</h3><a href="tel:+6289653515912">+62 896 5351 5912</a><a href="mailto:chensora.official@gmail.com">chensora.official@gmail.com</a><a href="https://wa.me/6289653515912" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
-    <div><h3>Informasi</h3><a href="tentang.html">Tentang ChenSora</a><a href="index.html#produk">Produk Kami</a><a href="soca.html">SOCA</a></div>
-    <div><h3>Ikuti Kami</h3><a href="https://www.instagram.com/chensora.official/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.facebook.com/profile.php?id=61564119424539" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.youtube.com/@ChensoraOfficial" target="_blank" rel="noopener noreferrer">YouTube</a><a href="https://www.tiktok.com/@chensoraofficial" target="_blank" rel="noopener noreferrer">TikTok</a></div>
-  </div>
-  <div class="site-footer-bottom">&copy; <span id="footer-year">2026</span> ChenSora. All Rights Reserved.</div>
-</footer>
+    <div class="site-footer-grid">
+      <div class="site-footer-brand"><img src="asset/logo/LOGO CHENSORA PNG web.PNG" alt="ChenSora" width="200"
+          height="64" />
+        <h2>Bertumbuh bersama,<br />mengalirkan keberkahan.</h2>
+      </div>
+      <div>
+        <h3>Kantor Pusat</h3>
+        <p>Graha S.A., Lantai 3, Unit 302<br />Surabaya, Jawa Timur<br />Indonesia</p><a
+          href="https://maps.app.goo.gl/KY4nC5NSqBrxwAvC6" target="_blank" rel="noopener noreferrer">Buka di Google
+          Maps</a>
+      </div>
+      <div>
+        <h3>Hubungi Kami</h3><a href="tel:+6289653515912">+62 896 5351 5912</a><a
+          href="mailto:chensora.official@gmail.com">chensora.official@gmail.com</a><a href="https://wa.me/6289653515912"
+          target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <div>
+        <h3>Informasi</h3><a href="tentang.html">Tentang ChenSora</a><a href="index.html#produk">Produk Kami</a><a
+          href="soca.html">SOCA</a>
+      </div>
+      <div>
+        <h3>Ikuti Kami</h3><a href="https://www.instagram.com/chensora.official/" target="_blank"
+          rel="noopener noreferrer">Instagram</a><a href="https://www.facebook.com/profile.php?id=61564119424539"
+          target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.youtube.com/@ChensoraOfficial"
+          target="_blank" rel="noopener noreferrer">YouTube</a><a href="https://www.tiktok.com/@chensoraofficial"
+          target="_blank" rel="noopener noreferrer">TikTok</a>
+      </div>
+    </div>
+    <div class="site-footer-bottom">&copy; <span id="footer-year">2026</span> ChenSora. All Rights Reserved.</div>
+  </footer>
 
   <!-- Back to Top Button -->
   <button id="back-to-top"

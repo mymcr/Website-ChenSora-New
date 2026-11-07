@@ -225,7 +225,7 @@
       "name": "Membangun Masa Depan Sehat bersama",
       "accent": "ChenSora",
       "description": "Kami berdedikasi untuk meningkatkan kualitas hidup Anda melalui produk kesehatan inovatif dan peluang bisnis yang terpercaya.",
-      "image": "asset/img/content 1.webp",
+      "image": "asset/img/content 1-lounge.WEBP",
       "order": 0,
       "published": true
     },
@@ -234,7 +234,7 @@
       "name": "Produk Kesehatan",
       "accent": "Inovatif & Terpercaya",
       "description": "Setiap produk ChenSora didukung oleh para ahli medis dan telah teruji memberikan manfaat nyata bagi kesehatan Anda.",
-      "image": "asset/img/content 2.jpg",
+      "image": "asset/img/allproduk.WEBP",
       "order": 1,
       "published": true
     },
@@ -243,7 +243,7 @@
       "name": "Bisnis Menjanjikan,",
       "accent": "Masa Depan Cerah",
       "description": "Raih kebebasan finansial melalui skema bisnis yang adil, transparan, dan terbukti menghasilkan bersama ChenSora.",
-      "image": "asset/img/content 3.jpg",
+      "image": "asset/img/bisnisuntung.WEBP",
       "order": 2,
       "published": true
     },
@@ -252,7 +252,7 @@
       "name": "Komunitas Solid,",
       "accent": "Anda Tidak Sendiri",
       "description": "Bergabunglah dengan komunitas positif yang saling mendukung. Bersama kami, perjalanan menuju sukses terasa lebih mudah.",
-      "image": "asset/img/content 4.jpg",
+      "image": "asset/img/komunitas solid.WEBP",
       "order": 3,
       "published": true
     }
