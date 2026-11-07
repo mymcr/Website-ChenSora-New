@@ -13,11 +13,12 @@ $method = $_SERVER['REQUEST_METHOD'];
 $seed = json_decode(file_get_contents(__DIR__ . '/asset/content-seed.json'), true);
 $dataDirectory = getenv('CONTENT_DATA_DIR') ?: __DIR__ . '/content-data';
 $store = $dataDirectory . '/store.json';
-$groups = ['products', 'experts', 'merchants', 'news'];
+$groups = ['products', 'experts', 'merchants', 'news', 'hero'];
 if (!is_array($seed)) fail('Konten awal tidak tersedia.', 500);
 if ($method === 'GET' && !isset($_GET['admin'])) {
     $data = is_file($store) ? json_decode(file_get_contents($store), true) : $seed;
     if (!is_array($data)) fail('Konten tidak dapat dibaca.', 500);
+    $data = array_replace($seed, $data);
     foreach ($groups as $group) {
         $data[$group] = array_values(array_filter($data[$group] ?? [], fn($item) => !empty($item['published'])));
         usort($data[$group], fn($a, $b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
@@ -43,6 +44,7 @@ if ($method === 'GET') {
     $_SESSION['content_csrf'] = $_SESSION['content_csrf'] ?? bin2hex(random_bytes(32));
     $data = is_file($store) ? json_decode(file_get_contents($store), true) : $seed;
     if (!is_array($data)) fail('Konten tidak dapat dibaca.', 500);
+    $data = array_replace($seed, $data);
     respond(['status' => 'success', 'data' => $data, 'csrf' => $_SESSION['content_csrf'], 'user' => $_SESSION['content_admin'], 'version' => hash('sha256', json_encode($data))]);
 }
 if ($method !== 'POST') fail('Metode tidak didukung.', 405);
@@ -59,12 +61,12 @@ $item = $input['item'] ?? [];
 if ($action === 'save') {
     if (trim((string)($item['name'] ?? '')) === '') fail('Nama atau judul wajib diisi.');
     $clean = [];
-    foreach (['name'=>200, 'description'=>3000, 'body'=>30000, 'image'=>2000, 'url'=>2000, 'source'=>200, 'date'=>10, 'image_caption'=>500] as $field=>$limit) {
+    foreach (['name'=>200, 'accent'=>200, 'description'=>3000, 'body'=>30000, 'image'=>2000, 'image_back'=>2000, 'url'=>2000, 'source'=>200, 'date'=>10, 'image_caption'=>500] as $field=>$limit) {
         $value = trim((string)($item[$field] ?? ''));
         if (strlen($value) > $limit * 4) fail('Kolom ' . $field . ' terlalu panjang.');
         $clean[$field] = $value;
     }
-    foreach (['image', 'url'] as $field) if (!content_url($clean[$field]) || str_contains($clean[$field], '..')) fail('URL ' . $field . ' tidak valid.');
+    foreach (['image', 'image_back', 'url'] as $field) if (!content_url($clean[$field]) || str_contains($clean[$field], '..')) fail('URL ' . $field . ' tidak valid.');
     if ($group === 'news' && (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $clean['date']) || date('Y-m-d', strtotime($clean['date'])) !== $clean['date'])) fail('Tanggal artikel tidak valid.');
     $clean['order'] = max(0, min(9999, (int)($item['order'] ?? 0)));
     $clean['published'] = ($item['published'] ?? false) === true;
@@ -78,6 +80,7 @@ $lock = fopen($dataDirectory . '/write.lock', 'c');
 if (!$lock || !flock($lock, LOCK_EX)) fail('Penyimpanan tidak dapat dikunci.', 500);
 $data = is_file($store) ? json_decode(file_get_contents($store), true) : $seed;
 if (!is_array($data)) fail('Data tersimpan tidak valid.', 500);
+    $data = array_replace($seed, $data);
 if (!hash_equals(hash('sha256', json_encode($data)), (string)($input['version'] ?? ''))) fail('Konten telah berubah. Muat ulang daftar sebelum menyimpan.', 409);
 if ($action === 'save' && !empty($input['file'])) {
     $file = $input['file'];

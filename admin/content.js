@@ -1,7 +1,7 @@
 (() => {
   const $ = id => document.getElementById(id);
   const api = new URL('../content-api.php', location.href);
-  const labels = {products:'Katalog Produk',experts:'Expert Medis',merchants:'Merchant Populer',news:'Latest News'};
+  const labels = {hero:'Hero Section',products:'Katalog Produk',experts:'Expert Medis',merchants:'Merchant Populer',news:'Latest News'};
   let data, csrf, version, group = 'products', dirty = false;
   function message(text, error = false) { $('message').textContent = text; $('message').classList.toggle('error', error); }
   function imageUrl(value) { return /^(https?:\/\/|asset\/|uploads\/content\/)/i.test(value || '') && !value.includes('..') ? new URL(value, new URL('../', location.href)).href : ''; }
@@ -40,7 +40,14 @@
     if (dirty && !confirm('Abaikan perubahan yang belum disimpan?')) return;
     $('editor').reset(); $('item-id').value = item.id || '';
     for(const key of ['name','description','image','url','date','source','body','order']) $(key).value = item[key] ?? (key === 'order' ? (data[group] || []).length : '');
+    $('image-back').value = item.image_back || '';
+    document.querySelector('.product-fields').hidden = group !== 'products';
     $('image-caption').value = item.image_caption || ''; $('published').checked = item.published ?? true;
+    document.querySelector('.hero-fields').hidden = group !== 'hero';
+    $('accent').value = item.accent || '';
+    $('name-label').textContent = group === 'hero' ? 'Headline utama' : 'Nama / judul';
+    $('description-label').textContent = group === 'hero' ? 'Deskripsi Hero' : 'Keterangan singkat';
+    $('url').closest('label').hidden = group === 'hero' || group === 'experts' || group === 'merchants';
     document.querySelector('.news-fields').hidden = group !== 'news'; $('date').required = group === 'news';
     if(group==='news' && !item.date) $('date').value = new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Jakarta'});
     $('editor-title').textContent = (item.id ? 'Edit ' : 'Tambah ') + labels[group]; $('editor').hidden = false; dirty = false;
@@ -69,7 +76,7 @@
   $('editor').addEventListener('submit',async event=>{
     event.preventDefault();const button=event.submitter;button.disabled=true;
     try{
-      const item={id:$('item-id').value,published:$('published').checked,order:Number($('order').value),image_caption:$('image-caption').value};
+      const item={image_back:$('image-back').value,accent:$('accent').value,id:$('item-id').value,published:$('published').checked,order:Number($('order').value),image_caption:$('image-caption').value};
       for(const key of ['name','description','image','url','date','source','body'])item[key]=$(key).value;
       let file;const selected=$('file').files[0];if(selected){if(selected.size>5000000)throw Error('Gambar maksimum 5 MB.');const dataURL=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(selected);});file={base64:dataURL.split(',')[1]};}
       await mutate({action:'save',group,item,file});dirty=false;$('editor').hidden=true;await load();message('Konten tersimpan. Perubahan dapat dilihat di website.');

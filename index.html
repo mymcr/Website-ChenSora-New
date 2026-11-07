@@ -1604,9 +1604,14 @@
     .soca-benefit > img { width:100%;max-width:360px;height:auto;aspect-ratio:auto;object-fit:contain;align-self:center; }
     @media(max-width:767px) { .soca-split-visual img { max-width:360px;max-height:500px; } .soca-benefit > img { max-width:320px; } }
     @media(max-width:380px) { .store-badges { gap:8px; } .store-badges img { height:40px;max-width:148px; } .store-badges .google-play-badge { height:58px;max-width:166px;margin:-9px; } }
+    #beranda[hidden], .hero-arrow[hidden], .hero-dots[hidden] { display:none!important; }
+    #expert-medis { padding-bottom:20px; }
+    #manajemen { padding-top:24px; }
   </style>
 
   <link rel="stylesheet" href="asset/site-footer.css" />
+  <link rel="stylesheet" href="asset/soca-layout.css" />
+  <link rel="stylesheet" href="asset/product-gallery.css" />
 </head>
 
 <body class="text-slate-800">
@@ -1779,10 +1784,8 @@
         <div class="product-showcase">
           <!-- Product Card 1: Yorokobi Koffie -->
           <div class="product-showcase-card" data-aos="fade-up" data-aos-delay="100">
-            <img src="asset/poster/Yorokobi-Koffie.jpg" sizes="(max-width:768px) 100vw, 33vw" width="960" height="640"
-              alt="Yorokobi Koffie, kopi stamina dengan Panax Ginseng dan daun kelor" loading="lazy" decoding="async"
-              class="clickable-image product-showcase-image" />
-            <h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Yorokobi Koffie</h3>
+<button type="button" class="product-flip product-showcase-image" aria-pressed="false" aria-label="Lihat gambar belakang Yorokobi Koffie" data-product-name="Yorokobi Koffie"><span class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img src="asset/produk/yorokobikoffie.WEBP" alt="Yorokobi Koffie, gambar utama" loading="lazy" /></span><span class="product-face product-back" aria-hidden="true"><img src="asset/produk/yorokobikoffie behind.WEBP" alt="Yorokobi Koffie, gambar belakang" loading="lazy" /></span></span></button>
+<h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Yorokobi Koffie</h3>
             <p class="mt-3 text-slate-600 flex-grow leading-relaxed text-base md:text-lg">
               Kopi stamina dan antioksidan pertama di Indonesia dengan Panax Ginseng, Guarana, dan Daun Kelor.
             </p>
@@ -1798,10 +1801,8 @@
 
           <!-- Product Card 2: Pyon Pyon -->
           <div class="product-showcase-card" data-aos="fade-up" data-aos-delay="200">
-            <img src="asset/poster/BROSURPYON.webp" sizes="(max-width:768px) 100vw, 33vw" width="960" height="640"
-              alt="Pyon Pyon Jelly Fiber dengan rasa lezat untuk memenuhi nutrisi harian dan mendukung tumbuh kembang anak."
-              loading="lazy" decoding="async" class="clickable-image product-showcase-image" />
-            <h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Pyon Pyon Jelly</h3>
+<button type="button" class="product-flip product-showcase-image" aria-pressed="false" aria-label="Lihat gambar belakang Pyon Pyon Jelly" data-product-name="Pyon Pyon Jelly"><span class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img src="asset/produk/pyonpyon.WEBP" alt="Pyon Pyon Jelly, gambar utama" loading="lazy" /></span><span class="product-face product-back" aria-hidden="true"><img src="asset/produk/pyonpyon behind.WEBP" alt="Pyon Pyon Jelly, gambar belakang" loading="lazy" /></span></span></button>
+<h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Pyon Pyon Jelly</h3>
             <p class="mt-3 text-slate-600 flex-grow leading-relaxed text-base md:text-lg">
               Jelly Fiber dengan rasa lezat untuk memenuhi nutrisi harian dan mendukung tumbuh kembang anak.
             </p>
@@ -1817,10 +1818,8 @@
 
           <!-- Product Card 3: Kakkoi -->
           <div class="product-showcase-card" data-aos="fade-up" data-aos-delay="300">
-            <img src="asset/poster/BROSURKK.webp" sizes="(max-width:768px) 100vw, 33vw" width="960" height="640"
-              alt="KAKKOI Minuman gel detox dan kecantikan dengan kolagen" loading="lazy" decoding="async"
-              class="clickable-image product-showcase-image" />
-            <h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Kakkoi</h3>
+<button type="button" class="product-flip product-showcase-image" aria-pressed="false" aria-label="Lihat gambar belakang Kakkoi" data-product-name="Kakkoi"><span class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img src="asset/produk/kakkoi.WEBP" alt="Kakkoi, gambar utama" loading="lazy" /></span><span class="product-face product-back" aria-hidden="true"><img src="asset/produk/kakkoi behind.WEBP" alt="Kakkoi, gambar belakang" loading="lazy" /></span></span></button>
+<h3 class="text-2xl font-bold text-slate-800 mt-6 tracking-tight">Kakkoi</h3>
             <p class="mt-3 text-slate-600 flex-grow leading-relaxed text-base md:text-lg">
               Minuman gel detox dan kecantikan dengan kolagen untuk meregenerasi sel dan mencerahkan kulit dari dalam.
             </p>
@@ -1834,8 +1833,8 @@
             </a>
           </div>
           <div class="product-showcase-card" data-aos="fade-up">
-            <div class="product-showcase-image soca-guard-art" role="img" aria-label="SOCA Guard"><i class="fas fa-shield-halved" aria-hidden="true"></i><span>SOCA Guard</span></div>
-            <h3>SOCA Guard</h3>
+<button type="button" class="product-flip product-showcase-image" aria-pressed="false" aria-label="Lihat gambar belakang SOCA Guard" data-product-name="SOCA Guard"><span class="product-flip-inner"><span class="product-face product-front" aria-hidden="false"><img src="asset/produk/socaguard.WEBP" alt="SOCA Guard, gambar utama" loading="lazy" /></span><span class="product-face product-back" aria-hidden="true"><img src="asset/produk/socaguard behind.WEBP" alt="SOCA Guard, gambar belakang" loading="lazy" /></span></span></button>
+<h3>SOCA Guard</h3>
             <p>SOCA GUARD adalah perlindungan antimikroba serbaguna berbasis air (water-based) yang aman, ramah lingkungan, dan dirancang khusus untuk melindungi berbagai permukaan dari mikroorganisme berbahaya serta bau tak sedap.</p>
             <a href="https://socaofficial.co.id/" target="_blank" rel="noopener noreferrer" class="product-showcase-link" aria-label="Pelajari SOCA Guard"><span>Pelajari Lebih Lanjut</span><span aria-hidden="true">&#8594;</span></a>
           </div>
@@ -1862,7 +1861,7 @@
             ChenSora didukung Oleh para Expert Medis dalam menyebarkan Edukasi
             Kesehatan untuk membantu Anda melawan penyakit dengan cara yang
             Paling Tepat!
-          </p><a href="#kontak">Kenali ChenSora Lebih Dekat <span aria-hidden="true">&#8594;</span></a></div>
+          </p></div>
     </section>
 
     <!-- Section 2: Manajemen (Management) -->
@@ -1890,13 +1889,13 @@
           </article>
           <article class="management-member">
             <button type="button" class="management-photo" aria-expanded="false" aria-controls="management-info-1"
-              aria-label="Lihat profil Eko Wibowo">
-              <img src="asset/img/pakeko.webp" alt="Eko Wibowo" loading="lazy" width="300" height="400" />
+              aria-label="Lihat profil Freddy Wowor">
+              <img src="asset/img/pakfred.webp" alt="Freddy Wowor" loading="lazy" width="300" height="400" />
             </button>
             <div class="management-info" id="management-info-1" hidden>
               <div class="management-accent" aria-hidden="true"></div>
-              <h3>Eko Wibowo</h3>
-              <p>General Manager</p>
+              <h3>Freddy Wowor</h3>
+              <p>Business Development</p>
             </div>
           </article>
           <article class="management-member is-selected">
@@ -1974,9 +1973,9 @@
     <section id="marketing-plan" aria-label="Manfaat SOCA dan merchant populer">
       <div class="soca-benefit-grid">
         <article class="soca-benefit" data-aos="fade-up">
-          <img src="asset/img/soca-shopping-travel.png"
+          <div class="soca-benefit-art"><img src="asset/img/soca-shopping-travel.png"
             alt="Ilustrasi belanja dan perjalanan dengan hadiah serta koin cashback" loading="lazy" width="1536"
-            height="1024" /><div class="soca-benefit-copy">
+            height="1024" /></div><div class="soca-benefit-copy">
           <h2>Belanja harian dan rencana liburan, kini lebih bernilai</h2>
           <p>Temukan pilihan merchant untuk kebutuhan sehari-hari hingga perjalanan berikutnya. Mulai lewat SOCA dan
             nikmati peluang cashback dari transaksi yang memenuhi ketentuan.</p>
@@ -1984,8 +1983,8 @@
               aria-hidden="true">&#8594;</span></a>
         </div></article>
         <article class="soca-benefit" data-aos="fade-up" data-aos-delay="100">
-          <img src="asset/img/soca-cashback-rewards.png" alt="Ilustrasi ponsel dengan koin, hadiah, dan trofi cashback"
-            loading="lazy" width="1536" height="1024" /><div class="soca-benefit-copy">
+          <div class="soca-benefit-art"><img src="asset/img/soca-cashback-rewards.png" alt="Ilustrasi ponsel dengan koin, hadiah, dan trofi cashback"
+            loading="lazy" width="1536" height="1024" /></div><div class="soca-benefit-copy">
           <h2>Ubah kebiasaan belanja menjadi kesempatan mendapat lebih</h2>
           <p>Satu tempat untuk menemukan penawaran dan mengenal program cashback SOCA. Cek promo yang tersedia, pilih
             merchant favorit, lalu ikuti langkahnya sebelum bertransaksi.</p>
@@ -2109,22 +2108,39 @@
       // Manual mobile gallery: one portrait and profile at a time.
       const managementGallery = document.querySelector('.management-gallery');
       const members = [...managementGallery.querySelectorAll('.management-member')];
-      const sequence = ['chenmaria.webp', 'jessica.webp', 'pakeko.webp', 'dokfest.webp', 'valentine.webp'];
+      const sequence = ['chenmaria.webp', 'jessica.webp', 'pakfred.webp', 'dokfest.webp', 'valentine.webp'];
       const orderedMembers = sequence.map(file => members.find(item => item.querySelector('img').getAttribute('src').endsWith(file)));
       orderedMembers.forEach(item => managementGallery.appendChild(item));
       const mobileMedia = window.matchMedia('(max-width: 767px)');
+      const managementHover = window.matchMedia('(any-hover: hover) and (any-pointer: fine)');
       let selectedIndex = 0;
-      function showManagement(index) {
-        selectedIndex = (index + orderedMembers.length) % orderedMembers.length;
+      function renderManagement(index) {
+        const displayedIndex = (index + orderedMembers.length) % orderedMembers.length;
         orderedMembers.forEach((item, i) => {
-          const active = i === selectedIndex;
+          const active = i === displayedIndex;
           item.hidden = mobileMedia.matches && !active;
           item.classList.toggle('is-selected', active);
           item.querySelector('button').setAttribute('aria-expanded', String(active));
           item.querySelector('.management-info').hidden = !active;
         });
       }
-      orderedMembers.forEach((item, i) => item.querySelector('button').addEventListener('click', () => showManagement(i)));
+      function showManagement(index) {
+        selectedIndex = (index + orderedMembers.length) % orderedMembers.length;
+        renderManagement(selectedIndex);
+      }
+      orderedMembers.forEach((item, i) => {
+        const photo = item.querySelector('button');
+        photo.addEventListener('click', event => {
+          if (!mobileMedia.matches && managementHover.matches && event.pointerType === 'mouse' && event.detail > 0) return;
+          showManagement(i);
+        });
+        photo.addEventListener('pointerenter', event => {
+          if (!mobileMedia.matches && managementHover.matches && event.pointerType !== 'touch') renderManagement(i);
+        });
+        item.addEventListener('pointerleave', event => {
+          if (!mobileMedia.matches && managementHover.matches && event.pointerType !== 'touch') renderManagement(selectedIndex);
+        });
+      });
       document.getElementById('management-prev').addEventListener('click', () => showManagement(selectedIndex - 1));
       document.getElementById('management-next').addEventListener('click', () => showManagement(selectedIndex + 1));
       mobileMedia.addEventListener('change', () => showManagement(selectedIndex));
@@ -2296,74 +2312,11 @@
         lastScrollY = currentScrollY;
       });
 
-      // ---- Hero Slider Logic ----
-      const heroSlideData = [
-        {
-          title: 'Membangun Masa Depan Sehat bersama<br/><span class="text-primary-300" style="color:#7cd0ef">ChenSora</span>',
-          desc: 'Kami berdedikasi untuk meningkatkan kualitas hidup Anda melalui produk kesehatan inovatif dan peluang bisnis yang terpercaya.'
-        },
-        {
-          title: 'Produk Kesehatan<br/><span style="color:#7cd0ef">Inovatif & Terpercaya</span>',
-          desc: 'Setiap produk ChenSora didukung oleh para ahli medis dan telah teruji memberikan manfaat nyata bagi kesehatan Anda.'
-        },
-        {
-          title: 'Bisnis Menjanjikan,<br/><span style="color:#7cd0ef">Masa Depan Cerah</span>',
-          desc: 'Raih kebebasan finansial melalui skema bisnis yang adil, transparan, dan terbukti menghasilkan bersama ChenSora.'
-        },
-        {
-          title: 'Komunitas Solid,<br/><span style="color:#7cd0ef">Anda Tidak Sendiri</span>',
-          desc: 'Bergabunglah dengan komunitas positif yang saling mendukung. Bersama kami, perjalanan menuju sukses terasa lebih mudah.'
-        }
-      ];
 
-      let heroCurrentIndex = 0;
-      let heroAutoplay;
-
-      const heroSlides = document.querySelectorAll('.hero-slide');
-      const heroDots = document.querySelectorAll('.hero-dot');
-      const heroTextEl = document.getElementById('hero-slide-text');
-
-      function heroGoTo(index) {
-        heroSlides[heroCurrentIndex].classList.remove('active');
-        heroDots[heroCurrentIndex].classList.remove('active');
-        heroCurrentIndex = (index + heroSlides.length) % heroSlides.length;
-        heroSlides[heroCurrentIndex].classList.add('active');
-        heroDots[heroCurrentIndex].classList.add('active');
-        const d = heroSlideData[heroCurrentIndex];
-        heroTextEl.innerHTML = `
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight" style="text-align:left;">${d.title}</h1>
-          <p class="mt-6 text-lg md:text-xl text-slate-200 max-w-2xl leading-relaxed" style="text-align:left;">${d.desc}</p>
-        `;
-      }
-
-      // Init first slide text
-      heroGoTo(0);
-
-      document.getElementById('hero-prev').addEventListener('click', () => {
-        clearInterval(heroAutoplay);
-        heroGoTo(heroCurrentIndex - 1);
-        heroAutoplay = setInterval(() => heroGoTo(heroCurrentIndex + 1), 5000);
-      });
-
-      document.getElementById('hero-next').addEventListener('click', () => {
-        clearInterval(heroAutoplay);
-        heroGoTo(heroCurrentIndex + 1);
-        heroAutoplay = setInterval(() => heroGoTo(heroCurrentIndex + 1), 5000);
-      });
-
-      heroDots.forEach(dot => {
-        dot.addEventListener('click', () => {
-          clearInterval(heroAutoplay);
-          heroGoTo(parseInt(dot.dataset.index));
-          heroAutoplay = setInterval(() => heroGoTo(heroCurrentIndex + 1), 5000);
-        });
-      });
-
-      heroAutoplay = setInterval(() => heroGoTo(heroCurrentIndex + 1), 5000);
-      // ---- End Hero Slider Logic ----
 
     });
   </script>
+  <script src="asset/hero-slider.js" defer></script>
   <script src="asset/content-public.js" defer></script>
 </body>
 

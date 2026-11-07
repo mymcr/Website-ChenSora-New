@@ -46,3 +46,11 @@ Berita awal adalah ringkasan asli singkat, bukan salinan artikel. Tanggal mengik
 ## Konfigurasi database hosting
 
 Kredensial database tidak disimpan di source code. Sebelum memakai dashboard database lama di hosting, tetapkan `DB_HOST`, `DB_USER`, `DB_PASSWORD`, dan `DB_NAME` melalui konfigurasi environment hosting/PHP-FPM. Dashboard konten tetap dapat menggunakan `CONTENT_ADMIN_EMAIL` dan `CONTENT_ADMIN_PASSWORD_HASH` tanpa MySQL. Jangan menaruh password atau file konfigurasi rahasia di Git.
+
+## Hero Section
+
+Tab **Hero Section** mengelola tiap slide: headline utama (`name`), baris kedua berwarna biru (`accent`, opsional), deskripsi, gambar, urutan, dan status publikasi. Data tersimpan lama otomatis dilengkapi dengan slide awal bila kategori Hero belum ada. Jika semua slide dijadikan draft, bagian Hero disembunyikan. Keterangan dan URL merchant kini bersifat informatif; kartu merchant tidak membuka tautan.
+
+## Gambar produk dua sisi
+
+Katalog mendukung `image` (gambar utama) dan `image_back` (gambar kedua). Editor produk menyediakan kolom path/URL untuk gambar belakang. Arahkan kursor pada gambar produk untuk melihat sisi belakang; keluar dari area gambar untuk kembali. Pada perangkat sentuh, ketuk gambar untuk membalik kartu. Enter/Spasi tetap didukung untuk navigasi keyboard. Popup gambar tetap digunakan untuk berita, bukan untuk produk. Aset di `asset/produk/` memakai ekstensi `.WEBP` sesuai nama file aslinya, termasuk kata `behind` untuk sisi kedua.

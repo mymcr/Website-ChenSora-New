@@ -4,37 +4,41 @@
       "id": "product-0",
       "name": "Yorokobi Koffie",
       "description": "Kopi stamina dan antioksidan pertama di Indonesia dengan Panax Ginseng, Guarana, dan Daun Kelor.",
-      "image": "asset/poster/Yorokobi-Koffie.jpg",
+      "image": "asset/produk/yorokobikoffie.WEBP",
       "url": "http://www.yorokobikoffie.com",
       "order": 0,
-      "published": true
+      "published": true,
+      "image_back": "asset/produk/yorokobikoffie behind.WEBP"
     },
     {
       "id": "product-1",
       "name": "Pyon Pyon Jelly",
       "description": "Jelly Fiber dengan rasa lezat untuk memenuhi nutrisi harian dan mendukung tumbuh kembang anak.",
-      "image": "asset/poster/BROSURPYON.webp",
+      "image": "asset/produk/pyonpyon.WEBP",
       "url": "http://pyonpyonjelly.com",
       "order": 1,
-      "published": true
+      "published": true,
+      "image_back": "asset/produk/pyonpyon behind.WEBP"
     },
     {
       "id": "product-2",
       "name": "Kakkoi",
       "description": "Minuman gel detox dan kecantikan dengan kolagen untuk meregenerasi sel dan mencerahkan kulit dari dalam.",
-      "image": "asset/poster/BROSURKK.webp",
+      "image": "asset/produk/kakkoi.WEBP",
       "url": "http://kakkoi.id",
       "order": 2,
-      "published": true
+      "published": true,
+      "image_back": "asset/produk/kakkoi behind.WEBP"
     },
     {
       "id": "product-3",
       "name": "SOCA Guard",
       "description": "SOCA GUARD adalah perlindungan antimikroba serbaguna berbasis air (water-based) yang aman, ramah lingkungan, dan dirancang khusus untuk melindungi berbagai permukaan dari mikroorganisme berbahaya serta bau tak sedap.",
-      "image": "",
+      "image": "asset/produk/socaguard.WEBP",
       "url": "https://socaofficial.co.id/",
       "order": 3,
-      "published": true
+      "published": true,
+      "image_back": "asset/produk/socaguard behind.WEBP"
     }
   ],
   "experts": [
@@ -212,6 +216,44 @@
       "image": "asset/img/chensora lounge.webp",
       "image_caption": "Ilustrasi: lounge ChenSora.",
       "order": 2,
+      "published": true
+    }
+  ],
+  "hero": [
+    {
+      "id": "hero-0",
+      "name": "Membangun Masa Depan Sehat bersama",
+      "accent": "ChenSora",
+      "description": "Kami berdedikasi untuk meningkatkan kualitas hidup Anda melalui produk kesehatan inovatif dan peluang bisnis yang terpercaya.",
+      "image": "asset/img/content 1.webp",
+      "order": 0,
+      "published": true
+    },
+    {
+      "id": "hero-1",
+      "name": "Produk Kesehatan",
+      "accent": "Inovatif & Terpercaya",
+      "description": "Setiap produk ChenSora didukung oleh para ahli medis dan telah teruji memberikan manfaat nyata bagi kesehatan Anda.",
+      "image": "asset/img/content 2.jpg",
+      "order": 1,
+      "published": true
+    },
+    {
+      "id": "hero-2",
+      "name": "Bisnis Menjanjikan,",
+      "accent": "Masa Depan Cerah",
+      "description": "Raih kebebasan finansial melalui skema bisnis yang adil, transparan, dan terbukti menghasilkan bersama ChenSora.",
+      "image": "asset/img/content 3.jpg",
+      "order": 2,
+      "published": true
+    },
+    {
+      "id": "hero-3",
+      "name": "Komunitas Solid,",
+      "accent": "Anda Tidak Sendiri",
+      "description": "Bergabunglah dengan komunitas positif yang saling mendukung. Bersama kami, perjalanan menuju sukses terasa lebih mudah.",
+      "image": "asset/img/content 4.jpg",
+      "order": 3,
       "published": true
     }
   ]

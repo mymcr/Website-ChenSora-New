@@ -5,3 +5,4 @@
 /content-data/write.lock
 /uploads/content/*
 !/uploads/content/.htaccess
+/scratch/restore-backup-*/

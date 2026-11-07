@@ -1,6 +1,6 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const base = 'http://127.0.0.1:8081/content-api.php';
+const base = process.env.CONTENT_TEST_BASE || 'http://127.0.0.1:8081/content-api.php';
 let cookie = '', state;
 async function call(path='', body, authenticated=true) {
   const response = await fetch(base+path, {method:body?'POST':'GET',headers:{...(authenticated&&cookie?{Cookie:cookie}:{}),...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined});
@@ -16,10 +16,10 @@ async function mutate(payload){return call('',{csrf:state.csrf,version:state.ver
   const login=await call('?action=login',{email:'cms-test@localhost',password:'local-integration-test-only'});assert.equal(login.status,'success');
   await reload();
   assert.equal((await call('',{action:'save',group:'products',item:{name:'No CSRF'}})).code,403);
-  for(const group of ['products','experts','merchants','news']){
-    const item={id:'integration-'+group,name:'Integration test',description:'Test description',image:'',url:'https://example.com',date:'2026-11-06',order:99,published:false};
+  for(const group of ['products','experts','merchants','news','hero']){
+    const item={id:'integration-'+group,name:'Integration test',description:'Test description',accent:'Blue headline',image:'',url:'https://example.com',date:'2026-11-06',order:99,published:false};
     assert.equal((await mutate({action:'save',group,item})).status,'success');
-    let admin=await reload();assert.ok(admin[group].some(row=>row.id===item.id));
+    let admin=await reload();assert.ok(admin[group].some(row=>row.id===item.id));if(group==='hero')assert.equal(admin[group].find(row=>row.id===item.id).accent,'Blue headline');
     assert.ok(!(await call()).data[group].some(row=>row.id===item.id));
     const stale=state.version;
     item.published=true;item.name='Updated '+group;
@@ -36,8 +36,8 @@ async function mutate(payload){return call('',{csrf:state.csrf,version:state.ver
   const uploaded=(await reload()).products.find(row=>row.id==='integration-image').image;
   assert.ok(uploaded.startsWith('uploads/content/'));assert.ok(fs.existsSync(uploaded));
   await mutate({action:'delete',group:'products',item:{id:'integration-image'}});await reload();fs.unlinkSync(uploaded);
-  assert.equal((await fetch('http://127.0.0.1:8081/content-data/store.json')).status,403);
+  assert.equal((await fetch(new URL('content-data/store.json',base))).status,403);
   assert.equal((await mutate({action:'logout'})).status,'success');
   assert.equal((await call('?admin=1')).code,401);
-  console.log('Passed: authentication, CSRF, four-group CRUD, drafts, publication, conflict prevention, URL/date/upload validation, image upload, protected storage, logout.');
+  console.log('Passed: authentication, CSRF, five-group CRUD including Hero, drafts, publication, conflict prevention, URL/date/upload validation, image upload, protected storage, logout.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

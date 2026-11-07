@@ -1,0 +1,157 @@
+/* Shared edge-aligned SOCA layouts. Keep the original page colors and copy. */
+#soca-app {
+  padding-block: 0;
+}
+#soca-app .soca-split-layout {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0;
+  align-items: stretch;
+}
+#soca-app .soca-split-copy {
+  min-width: 0;
+  align-self: center;
+  padding: clamp(32px, 5vw, 88px);
+}
+#soca-app .soca-split-visual {
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1;
+  align-self: end;
+  align-items: flex-end;
+  overflow: hidden;
+}
+#soca-app .soca-split-visual > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: none;
+  border-radius: 0;
+}
+#soca-hero {
+  display: block;
+  padding-top: 96px;
+  padding-bottom: 0;
+  min-height: 0;
+}
+#soca-hero .soca-page-container {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+}
+#soca-hero .soca-page-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  max-width: none;
+  gap: 0;
+  margin: 0;
+}
+#soca-hero .soca-page-copy {
+  width: 100%;
+  min-width: 0;
+  align-self: center;
+  text-align: left;
+  padding: clamp(32px, 5vw, 88px);
+}
+#soca-hero .soca-page-visual {
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1;
+  align-self: end;
+  align-items: flex-end;
+}
+#soca-hero .soca-page-device {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+}
+#soca-hero .floating-mockup {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: none !important;
+  object-fit: contain;
+  object-position: center bottom;
+  border-radius: 0;
+  animation: none;
+  filter: none;
+}
+#marketing-plan .soca-benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+}
+#marketing-plan .soca-benefit {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  padding: 0;
+  align-items: stretch;
+}
+.soca-benefit-art {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1;
+  align-self: start;
+  overflow: hidden;
+}
+.soca-benefit-art > img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  border-radius: 0;
+}
+#marketing-plan .soca-benefit-copy {
+  min-width: 0;
+  padding: clamp(20px, 2vw, 36px);
+  align-self: center;
+  text-align: left;
+}
+#marketing-plan .soca-benefit-copy h2 {
+  font-size: clamp(20px, 1.65vw, 27px);
+}
+#marketing-plan .soca-benefit-copy p {
+  text-align: left;
+  text-align-last: auto;
+  font-size: clamp(13px, .95vw, 16px);
+  line-height: 1.6;
+  margin: 16px 0 20px;
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  #marketing-plan .soca-benefit-grid { grid-template-columns: 1fr; }
+  #marketing-plan .soca-benefit-copy { padding: 32px; }
+}
+@media (max-width: 767px) {
+  #soca-app .soca-split-layout,
+  #soca-hero .soca-page-grid { grid-template-columns: minmax(0, 1fr); }
+  #soca-app .soca-split-copy,
+  #soca-hero .soca-page-copy { padding: 32px 24px; }
+  #soca-app .soca-split-visual,
+  #soca-hero .soca-page-visual { aspect-ratio: 1; margin: 0; }
+  #soca-hero { padding-top: 88px; }
+  #soca-hero .store-badges { justify-content: flex-start; }
+  #marketing-plan .soca-benefit-grid { grid-template-columns: minmax(0, 1fr); }
+  #marketing-plan .soca-benefit,
+  #marketing-plan .soca-benefit:nth-child(2) { grid-template-columns: minmax(0, 1fr); }
+  .soca-benefit-art { width: calc(100% - 48px); aspect-ratio: 3 / 2; min-height: 0; max-width: 320px; margin: 24px auto 0; align-self: center; border-radius: 20px; }
+  .soca-benefit-art > img { object-fit: contain; }
+  #marketing-plan .soca-benefit:nth-child(2) .soca-benefit-art { order: 0; }
+  #marketing-plan .soca-benefit-copy { box-sizing: border-box; width: calc(100% - 48px); max-width: 320px; margin-inline: auto; padding: 20px 0 28px; text-align: left; }
+  #marketing-plan .soca-benefit-copy h2 { font-size: clamp(19px, 4vw, 25px); }
+  #marketing-plan .soca-benefit-copy p { font-size: 13px; }
+  #marketing-plan .soca-benefit-copy > a { display: flex; box-sizing: border-box; width: 100%; align-items: center; justify-content: center; font-size: 12px; padding: 11px 14px; }
+}
